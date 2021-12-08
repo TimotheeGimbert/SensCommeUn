@@ -11,7 +11,11 @@
   </head>
 
   <body>
-    <%=render "partials/navbars/visitor"%>
+    <% if admin_signed_in?%>
+      <%=render "admin/partials/navbar"%>
+    <%else%>
+      <%=render "partials/navbars/visitor"%>
+    <%end%>
     <%= yield %>
     <%=render "partials/footers/visitor"%>
   </body>
