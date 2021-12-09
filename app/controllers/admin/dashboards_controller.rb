@@ -2,7 +2,9 @@ class Admin::DashboardsController < ApplicationController
   before_action :has_admin_rights? #That is a double security, as this controller's access is already locked by the devise_scope
 
   def index
+    @sidebar_links = ["Gestions des utilisateurs","Gestion des Organisations", "Création d'une organisation",'Messagerie']
     @render_view = ""
+
     if params[:panel] == "Gestions des utilisateurs"
       @render_view = "user/partials/list"
       @users = User.all
