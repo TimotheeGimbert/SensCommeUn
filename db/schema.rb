@@ -61,6 +61,27 @@ ActiveRecord::Schema.define(version: 2021_12_09_150449) do
     t.index ["stakeholder_category_id"], name: "index_external_stakeholders_on_stakeholder_category_id"
   end
 
+  create_table "join_messages_recipients", force: :cascade do |t|
+    t.bigint "private_message_id", null: false
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["private_message_id"], name: "index_join_messages_recipients_on_private_message_id"
+    t.index ["recipient_type", "recipient_id"], name: "index_join_messages_recipients_on_recipient"
+  end
+
+  create_table "legal_reps", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "organization_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_legal_reps_on_organization_id"
+    t.index ["user_id"], name: "index_legal_reps_on_user_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name"
     t.string "nickname"
@@ -83,6 +104,16 @@ ActiveRecord::Schema.define(version: 2021_12_09_150449) do
     t.index ["activity_sector_id"], name: "index_organizations_on_activity_sector_id"
     t.index ["city_id"], name: "index_organizations_on_city_id"
     t.index ["status_id"], name: "index_organizations_on_status_id"
+  end
+
+  create_table "private_messages", force: :cascade do |t|
+    t.string "object"
+    t.text "content"
+    t.string "author_type", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_private_messages_on_author"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -125,6 +156,9 @@ ActiveRecord::Schema.define(version: 2021_12_09_150449) do
   add_foreign_key "activities", "organizations"
   add_foreign_key "external_stakeholders", "organizations"
   add_foreign_key "external_stakeholders", "stakeholder_categories"
+  add_foreign_key "join_messages_recipients", "private_messages"
+  add_foreign_key "legal_reps", "organizations"
+  add_foreign_key "legal_reps", "users"
   add_foreign_key "organizations", "activity_sectors"
   add_foreign_key "organizations", "cities"
   add_foreign_key "organizations", "statuses"

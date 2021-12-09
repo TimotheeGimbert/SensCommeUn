@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :join_messages_recipients
+  resources :private_messages
   resources :stakeholder_categories
   resources :external_stakeholders
   resources :legal_reps

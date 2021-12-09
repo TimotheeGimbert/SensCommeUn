@@ -1,0 +1,2 @@
+module JoinMessagesRecipientsHelper
+end
