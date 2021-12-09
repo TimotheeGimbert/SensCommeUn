@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :profiles
+  resources :cities
   root "pages#index"
   get 'pages/presentation'
   get 'pages/contact'
