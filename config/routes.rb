@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   
   resources :join_messages_recipients
   resources :private_messages
+  resources :activities
+  resources :organizations
+  resources :statuses
+  resources :activity_sectors
   resources :profiles
   resources :cities
   root "pages#index"

@@ -1,0 +1,2 @@
+class ActivitySector < ApplicationRecord
+end
