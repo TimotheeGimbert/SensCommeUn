@@ -3,15 +3,14 @@
   <span class="text-end"><b><%=current_user.email%></b></span>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-      <%@sidebar_links.each do |current|%>
-        <li class="nav-item">
-          <%= link_to "#{current}", user_authenticated_root_path(panel: current), class:"nav-link sidebar-item" %>
-        </li>
-      <%end%>
+    <%@sidebar_links.each do |current|%>
+      <li class="nav-item">
+        <%= link_to "#{current}", user_authenticated_root_path(panel: current), class:"nav-link sidebar-item" %>
+      </li>
+    <%end%>
   </ul>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-    
     <li class="nav-item">
       <%= link_to "Éditer mon profile", user_authenticated_root_path(panel: "Editer mon profile"), class:"nav-link sidebar-item" %>
     </li>
