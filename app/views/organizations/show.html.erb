@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @organization.name %>
+</p>
+
+<p>
+  <strong>Nickname:</strong>
+  <%= @organization.nickname %>
+</p>
+
+<p>
+  <strong>Creation date:</strong>
+  <%= @organization.creation_date %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @organization.address %>
+</p>
+
+<p>
+  <strong>Address complement:</strong>
+  <%= @organization.address_complement %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @organization.zip_code %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @organization.city_id %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @organization.email %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @organization.phone_number %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @organization.status_id %>
+</p>
+
+<p>
+  <strong>Siren:</strong>
+  <%= @organization.siren %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @organization.description %>
+</p>
+
+<p>
+  <strong>Activity sector:</strong>
+  <%= @organization.activity_sector_id %>
+</p>
+
+<p>
+  <strong>Naf ape:</strong>
+  <%= @organization.naf_ape %>
+</p>
+
+<p>
+  <strong>Logo url:</strong>
+  <%= @organization.logo_url %>
+</p>
+
+<p>
+  <strong>Website url:</strong>
+  <%= @organization.website_url %>
+</p>
+
+<%= link_to 'Edit', edit_organization_path(@organization) %> |
+<%= link_to 'Back', organizations_path %>

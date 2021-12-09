@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  resources :activities
+  resources :organizations
+  resources :statuses
+  resources :activity_sectors
   resources :profiles
   resources :cities
   root "pages#index"
