@@ -10,6 +10,7 @@ User.destroy_all
 Admin.destroy_all
 ActivitySector.destroy_all
 Activity.destroy_all
+ExternalStakeholder.destroy_all
 Organization.destroy_all
 
 
@@ -50,12 +51,42 @@ puts "statut créés"
 end 
 puts "Secteur d'activités créés"
 
+
 10.times do 
-  Activity.create(name: Faker::Company.type, description: Faker::Lorem.paragraph(sentence_count: 5), activity_sector_id: ActivitySector.all.sample(1).first, organization_id: Organization.all.sample(1).first)
+  orga= Organization.create(
+    name: Faker::Company.name, 
+    nickname: Faker::Name.initials, 
+    creation_date: Faker::Date.in_date_period, 
+    address: Faker::Address.street_address, 
+    address_complement: Faker::Address.secondary_address, 
+    zip_code: Faker::Address.zip_code, 
+    city: City.all.sample(1).first, 
+    email: Faker::Internet.email, 
+    phone_number: "06 25 47 13 09", 
+    status: Status.all.sample(1).first, 
+    siren: Faker::Company.french_siren_number, 
+    description: Faker::Lorem.paragraph(sentence_count: 5), 
+    activity_sector: ActivitySector.all.sample(1).first, 
+    naf_ape: "a completer", 
+    logo_url: Faker::Company.logo, 
+    website_url: Faker::Internet.url)
+  puts orga
+end 
+puts "10 organisations créés"
+
+10.times do 
+  Activity.create(name: Faker::Company.type, description: Faker::Lorem.paragraph(sentence_count: 5), activity_sector: ActivitySector.all.sample(1).first, organization: Organization.all.sample(1).first)
 end 
 puts "10 activités créés"
 
-10.times do 
-  Organization.create(name: Faker::Company.name, nickname: Faker::Name.initials, creation_date: Faker::Date.in_date_period, address: Faker::Address.street_address, address_complement: Faker::Address.secondary_address, zip_code: Faker::Address.zip_code, city: City.all.sample(1).first, email: Faker::Internet.email, phone_number: "06 25 47 13 09", status_id: Status.all.sample(1).first, siren: Faker::Company.french_siren_number, description: Faker::Lorem.paragraph(sentence_count: 5), activity_sector_id: ActivitySector.all.sample(1).first, naf_ape: "a completer", logo_url: Faker::Company.logo, website_url: Faker::Internet.url)
-end 
-puts "10 organisations créés"
+['client','fournisseur','financeur'].each do |category|
+  StakeholderCategory.create(name: category)
+end
+puts "categories de pp crees"
+
+Organization.all.each do |organization|
+  3..5.times do 
+    ExternalStakeholder.create(name: Faker::Name.first_name, organization: organization, stakeholder_category: StakeholderCategory.all.sample(1).first, email: Faker::Internet.email)
+  end
+end
+puts "Organizations crees"
