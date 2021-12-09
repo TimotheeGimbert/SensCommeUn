@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_150449) do
+ActiveRecord::Schema.define(version: 2021_12_09_165430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +57,10 @@ ActiveRecord::Schema.define(version: 2021_12_09_150449) do
     t.bigint "stakeholder_category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["organization_id"], name: "index_external_stakeholders_on_organization_id"
     t.index ["stakeholder_category_id"], name: "index_external_stakeholders_on_stakeholder_category_id"
+    t.index ["user_id"], name: "index_external_stakeholders_on_user_id"
   end
 
   create_table "join_messages_recipients", force: :cascade do |t|

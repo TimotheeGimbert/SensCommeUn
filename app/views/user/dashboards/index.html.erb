@@ -1,2 +1,12 @@
 <h1>User::Dashboards#index</h1>
 <p>Find me in app/views/user/dashboards/index.html.erb</p>
+<div class="d-flex">
+  <div class="d-flex flex-column">
+    <h3 class="navbar">
+      <%= render "user/partials/navbar_lateral"%>
+    </h3>
+  </div>
+  <div class="d-flex flex-column">
+    <%= render "#{@render_view}"%>
+  </div>
+</div>
