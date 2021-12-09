@@ -1,8 +1,0 @@
-<div class="d-flex flex-column align-items-center bg-white" >
-  <h2 class="m-5">ADMINISTRATION DU SITE</h2>
-  <div class="d-flex flex-row justify-content-evenly" style='width:100%'>
-    <%["Mes Organisations","Les dernières actualités",'Messagerie','Editer mon profile'].each do |current|%>
-      <%= link_to "#{current}", user_authenticated_root_path(panel: current), class:"btn btn-success category-link" %>
-    <%end%>
-  </div>
-</div>

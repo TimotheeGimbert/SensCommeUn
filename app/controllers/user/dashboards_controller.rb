@@ -1,6 +1,9 @@
 class User::DashboardsController < ApplicationController
   def index
+
+    @sidebar_links = ["Mes Organisations","Les dernières actualités",'Messagerie']
     @render_view = ""
+
     if params[:panel] == "Mes Organisations"
       @render_view = "organizations/list"
       @organizations = current_user.organizations
@@ -15,8 +18,4 @@ class User::DashboardsController < ApplicationController
       @organizations = current_user.organizations
     end
   end
-
-  
-
-
 end
