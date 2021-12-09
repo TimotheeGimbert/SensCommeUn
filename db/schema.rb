@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_082216) do
+ActiveRecord::Schema.define(version: 2021_12_09_114617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,26 @@ ActiveRecord::Schema.define(version: 2021_12_09_082216) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "join_messages_recipients", force: :cascade do |t|
+    t.bigint "private_message_id", null: false
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["private_message_id"], name: "index_join_messages_recipients_on_private_message_id"
+    t.index ["recipient_type", "recipient_id"], name: "index_join_messages_recipients_on_recipient"
+  end
+
+  create_table "private_messages", force: :cascade do |t|
+    t.string "object"
+    t.text "content"
+    t.string "author_type", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_private_messages_on_author"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -57,6 +77,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_082216) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "join_messages_recipients", "private_messages"
   add_foreign_key "profiles", "cities"
   add_foreign_key "profiles", "users"
 end

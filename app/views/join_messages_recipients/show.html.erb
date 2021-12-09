@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Private message:</strong>
+  <%= @join_messages_recipient.private_message_id %>
+</p>
+
+<p>
+  <strong>Recipient:</strong>
+  <%= @join_messages_recipient.recipient_id %>
+</p>
+
+<%= link_to 'Edit', edit_join_messages_recipient_path(@join_messages_recipient) %> |
+<%= link_to 'Back', join_messages_recipients_path %>

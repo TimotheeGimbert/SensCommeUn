@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Join Messages Recipients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Private message</th>
+      <th>Recipient</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @join_messages_recipients.each do |join_messages_recipient| %>
+      <tr>
+        <td><%= join_messages_recipient.private_message_id %></td>
+        <td><%= join_messages_recipient.recipient_id %></td>
+        <td><%= link_to 'Show', join_messages_recipient %></td>
+        <td><%= link_to 'Edit', edit_join_messages_recipient_path(join_messages_recipient) %></td>
+        <td><%= link_to 'Destroy', join_messages_recipient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Join Messages Recipient', new_join_messages_recipient_path %>
