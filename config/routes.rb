@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :stakeholder_categories
+  resources :external_stakeholders
   resources :legal_reps
   resources :activities
   resources :organizations
