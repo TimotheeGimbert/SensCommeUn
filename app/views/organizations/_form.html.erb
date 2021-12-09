@@ -1,0 +1,28 @@
+
+<%= simple_form_for(@organization) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :nickname %>
+    <%= f.input :creation_date %>
+    <%= f.input :address %>
+    <%= f.input :address_complement %>
+    <%= f.input :zip_code %>
+    <%= f.association :city %>
+    <%= f.input :email %>
+    <%= f.input :phone_number %>
+    <%= f.association :status %>
+    <%= f.input :siren %>
+    <%= f.input :description %>
+    <%= f.association :activity_sector %>
+    <%= f.input :naf_ape %>
+    <%= f.input :logo_url %>
+    <%= f.input :website_url %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
