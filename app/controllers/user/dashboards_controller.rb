@@ -16,7 +16,7 @@ class User::DashboardsController < ApplicationController
     end
   end
 
-  
-
-
+  def organizations
+    @organizations = Organization.all
+  end
 end
