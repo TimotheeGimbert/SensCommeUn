@@ -1,0 +1,22 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+  <h3><%=link_to "DASHBOARD", user_authenticated_root_path, class:"mb-3 mb-md-0 me-md-auto text-white text-decoration-none"%></h3>
+  <span class="text-end"><b><%=current_user.email%></b></span>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+      <%@sidebar_links.each do |current|%>
+        <li class="nav-item">
+          <%= link_to "#{current}", user_authenticated_root_path(panel: current), class:"nav-link sidebar-item" %>
+        </li>
+      <%end%>
+  </ul>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    
+    <li class="nav-item">
+      <%= link_to "Éditer mon profile", user_authenticated_root_path(panel: "Editer mon profile"), class:"nav-link sidebar-item" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Éditer mes identifiants", edit_user_registration_path, class:"nav-link sidebar-item" %>
+    </li>
+  </ul>
+</div>
