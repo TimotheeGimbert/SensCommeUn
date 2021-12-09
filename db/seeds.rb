@@ -3,15 +3,15 @@
 #
 JoinMessagesRecipient.destroy_all
 PrivateMessage.destroy_all
-
+Activity.destroy_all
+ExternalStakeholder.destroy_all
+Organization.destroy_all
+ActivitySector.destroy_all
 Profile.destroy_all
 City.destroy_all
 User.destroy_all
 Admin.destroy_all
-ActivitySector.destroy_all
-Activity.destroy_all
-ExternalStakeholder.destroy_all
-Organization.destroy_all
+
 
 
 Admin.create(email: "admin@admin.com", password: "azerty")
@@ -86,7 +86,7 @@ puts "categories de pp crees"
 
 Organization.all.each do |organization|
   3..5.times do 
-    ExternalStakeholder.create(name: Faker::Name.first_name, organization: organization, stakeholder_category: StakeholderCategory.all.sample(1).first, email: Faker::Internet.email)
+    ExternalStakeholder.create(name: Faker::Name.first_name, organization: organization, stakeholder_category: StakeholderCategory.all.sample(1).first, email: Faker::Internet.email, user: User.all.sample(1).first)
   end
 end
 puts "Organizations crees"
