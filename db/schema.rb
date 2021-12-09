@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_102343) do
+ActiveRecord::Schema.define(version: 2021_12_09_150449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 2021_12_09_102343) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "external_stakeholders", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.string "name"
+    t.string "email"
+    t.bigint "stakeholder_category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_external_stakeholders_on_organization_id"
+    t.index ["stakeholder_category_id"], name: "index_external_stakeholders_on_stakeholder_category_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name"
     t.string "nickname"
@@ -86,6 +97,12 @@ ActiveRecord::Schema.define(version: 2021_12_09_102343) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "stakeholder_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "statuses", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -106,6 +123,8 @@ ActiveRecord::Schema.define(version: 2021_12_09_102343) do
 
   add_foreign_key "activities", "activity_sectors"
   add_foreign_key "activities", "organizations"
+  add_foreign_key "external_stakeholders", "organizations"
+  add_foreign_key "external_stakeholders", "stakeholder_categories"
   add_foreign_key "organizations", "activity_sectors"
   add_foreign_key "organizations", "cities"
   add_foreign_key "organizations", "statuses"
