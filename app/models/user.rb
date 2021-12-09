@@ -4,6 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :PrivateMessages, as: :author
-  has_many :PrivateMessages, as: :recipient, through: :join_messages_recipients
+  has_many :sent_messages, as: :author, class_name: 'PrivateMessage'
+  has_many :join_messages_recipients, as: :recipient
+  has_many :received_messages, through: :join_messages_recipients, source: :private_message
+
+  def private_messages
+    sent_messages + received_messages
+  end
 end
