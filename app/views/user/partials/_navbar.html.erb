@@ -10,11 +10,15 @@
         <li class="nav-item">
          <%=link_to 'Dashboard', user_authenticated_root_path, class:"nav-link" %>
         </li>
-
+        <li class="nav-item">
+          <%=link_to 'Organisations', user_dashboards_organizations_path, class:"nav-link" %>
+        </li>
+      </ul>
+      <div class="d-flex">
         <li class="nav-item">
          <%=link_to 'Déconnexion', destroy_user_session_path, method: :delete, class:"nav-link" %>
         </li>
-      </ul>
+      </div>
     </div>
   </div>
 </nav>

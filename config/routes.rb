@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     authenticated :user do
       namespace :user do
         get 'dashboards/index', as: :authenticated_root
+        get 'dashboards/organizations', as: :dashboards_organizations
       end
     end
   end

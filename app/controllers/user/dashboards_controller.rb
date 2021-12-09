@@ -20,6 +20,12 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations
+    @sidebar_links = []
+    ActivitySector.all.each do |sector|
+       @sidebar_links.push({id:sector.id, label:sector.name})
+    end
+    puts "#" *60
+    p @sidebar_links
     @organizations = Organization.all
   end
 end
