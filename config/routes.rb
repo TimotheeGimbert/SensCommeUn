@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   resources :join_messages_recipients
   resources :private_messages
+  resources :legal_reps
   resources :activities
   resources :organizations
   resources :statuses

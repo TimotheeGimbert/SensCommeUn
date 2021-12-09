@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @legal_rep.user_id %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @legal_rep.organization_id %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @legal_rep.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @legal_rep.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_legal_rep_path(@legal_rep) %> |
+<%= link_to 'Back', legal_reps_path %>
