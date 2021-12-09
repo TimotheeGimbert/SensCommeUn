@@ -1,6 +1,6 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: %i[ show edit update destroy ]
-  before_action :is_admin?, only: %i[ show edit update destroy ]
+  before_action :has_admin_rights?, only: %i[ show edit update destroy ]
 
   # GET /cities or /cities.json
   def index
