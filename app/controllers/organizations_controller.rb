@@ -1,5 +1,7 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[ show edit update destroy ]
+  before_action :has_user_rights?, only: %i[ index show ]
+  before_action :has_admin_rights?, only: %i[ edit create update destroy ]
 
   # GET /organizations or /organizations.json
   def index

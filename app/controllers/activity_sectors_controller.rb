@@ -1,5 +1,7 @@
 class ActivitySectorsController < ApplicationController
   before_action :set_activity_sector, only: %i[ show edit update destroy ]
+  before_action :has_user_rights?, only: %i[ index show ]
+  before_action :has_admin_rights?, only: %i[ edit create update destroy ]
 
   # GET /activity_sectors or /activity_sectors.json
   def index
