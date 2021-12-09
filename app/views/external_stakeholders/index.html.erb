@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>External Stakeholders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Organization</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Stakeholder category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @external_stakeholders.each do |external_stakeholder| %>
+      <tr>
+        <td><%= external_stakeholder.organization_id %></td>
+        <td><%= external_stakeholder.name %></td>
+        <td><%= external_stakeholder.email %></td>
+        <td><%= external_stakeholder.stakeholder_category_id %></td>
+        <td><%= link_to 'Show', external_stakeholder %></td>
+        <td><%= link_to 'Edit', edit_external_stakeholder_path(external_stakeholder) %></td>
+        <td><%= link_to 'Destroy', external_stakeholder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New External Stakeholder', new_external_stakeholder_path %>
