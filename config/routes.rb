@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :legal_reps
   resources :activities
   resources :organizations
   resources :statuses
