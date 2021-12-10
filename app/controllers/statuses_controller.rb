@@ -1,5 +1,7 @@
 class StatusesController < ApplicationController
   before_action :set_status, only: %i[ show edit update destroy ]
+  before_action :has_legal_rep_rights?, only %i[ index show new create ]
+  before_action :has_admin_rights?, only: %i[ edit update destroy ]
 
   # GET /statuses or /statuses.json
   def index

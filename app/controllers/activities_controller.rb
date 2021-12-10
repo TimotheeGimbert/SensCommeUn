@@ -1,5 +1,7 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: %i[ show edit update destroy ]
+  before_action :has_user_rights?, only: %i[ index show ]
+  before_action :has_admin_rights?, only: %i[ new edit create update destroy ]
 
   # GET /activities or /activities.json
   def index
