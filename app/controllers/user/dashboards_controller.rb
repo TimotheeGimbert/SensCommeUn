@@ -1,10 +1,10 @@
 class User::DashboardsController < ApplicationController
   def index
 
-    @sidebar_links = ["Mes Organisations","Les dernières actualités",'Messagerie']
+    @sidebar_links = ["Mes Participations","Les dernières actualités",'Messagerie']
     @render_view = ""
-
-    if params[:panel] == "Mes Organisations"
+    @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content"]
+    if params[:panel] == "Mes Participations"
       @render_view = "organizations/list"
       @organizations = current_user.organizations
     elsif params[:panel] == "Les dernières actualités"
@@ -24,6 +24,7 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations
+    @render_sidebar_specific_contents = ["user/partials/dashboards/organizations/sidebar_specific_content"]
     @sidebar_links = []
     sector_selected = params[:sector]
     organization_selected = params[:show]
@@ -42,5 +43,6 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations_legalreps
+    @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content","user/partials/dashboards/organizations_legal_reps/sidebar_specific_content"]
   end
 end

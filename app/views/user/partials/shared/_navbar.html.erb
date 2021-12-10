@@ -8,11 +8,18 @@
     <div class="collapse navbar-collapse" id="navbar_default">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-         <%=link_to 'Dashboard', user_dashboards_index_path, class:"nav-link" %>
+         <%=link_to 'Accueil', user_dashboards_index_path, class:"nav-link" %>
         </li>
         <li class="nav-item">
           <%=link_to 'Organisations', user_dashboards_organizations_path, class:"nav-link" %>
         </li>
+        <%unless current_user.managed_organizations.empty? %>
+        <%puts "#"*100%>
+        <%puts current_user.managed_organizations%>
+          <li class="nav-item">
+            <%=link_to 'Organisations', user_dashboards_organizations_legalreps_path, class:"nav-link" %>
+          </li>
+        <%end%>
       </ul>
       <div class="d-flex">
         <span class="nav-item">

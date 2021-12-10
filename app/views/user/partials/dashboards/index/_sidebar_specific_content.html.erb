@@ -1,0 +1,8 @@
+  <ul class="nav nav-pills flex-column mb-auto">
+    <%@sidebar_links.each do |current|%>
+      <li class="nav-item">
+        <%= link_to "#{current}", user_dashboards_index_path(panel: current), class:"nav-link sidebar-item" %>
+      </li>
+    <%end%>
+  </ul>
+  <hr>
