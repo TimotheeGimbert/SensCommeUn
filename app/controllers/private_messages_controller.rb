@@ -13,6 +13,16 @@ class PrivateMessagesController < ApplicationController
   # GET /private_messages/new
   def new
     @private_message = PrivateMessage.new
+    @users_email = []
+    User.all.each{|user|@users_email.push(user.email)}
+    # if user_signed_in?
+      # @private_message = PrivateMessage.new(author: current_user)
+
+      # @private_message.author = current_user
+    # elsif admin_signed_in?
+      # @private_message = PrivateMessage.new(author: current_admin)
+      # @private_message.author = current_admin
+    # end
   end
 
   # GET /private_messages/1/edit
@@ -22,7 +32,7 @@ class PrivateMessagesController < ApplicationController
   # POST /private_messages or /private_messages.json
   def create
     @private_message = PrivateMessage.new(private_message_params)
-
+    
     respond_to do |format|
       if @private_message.save
         format.html { redirect_to @private_message, notice: "Private message was successfully created." }
