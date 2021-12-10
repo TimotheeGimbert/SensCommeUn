@@ -53,7 +53,7 @@ puts "Secteur d'activités créés"
 
 
 10.times do 
-  orga= Organization.create(
+  orga = Organization.create(
     name: Faker::Company.name, 
     nickname: Faker::Name.initials, 
     creation_date: Faker::Date.in_date_period, 
@@ -69,15 +69,16 @@ puts "Secteur d'activités créés"
     activity_sector: ActivitySector.all.sample(1).first, 
     naf_ape: "a completer", 
     logo_url: Faker::Company.logo, 
-    website_url: Faker::Internet.url)
+    website_url: Faker::Internet.url
+  )
   puts orga
 end 
-puts "10 organisations créés"
+puts "10 organisations créées"
 
 10.times do 
   Activity.create(name: Faker::Company.type, description: Faker::Lorem.paragraph(sentence_count: 5), activity_sector: ActivitySector.all.sample(1).first, organization: Organization.all.sample(1).first)
 end 
-puts "10 activités créés"
+puts "10 activités créées"
 
 ['client','fournisseur','financeur'].each do |category|
   StakeholderCategory.create(name: category)
@@ -89,4 +90,14 @@ Organization.all.each do |organization|
     ExternalStakeholder.create(name: Faker::Name.first_name, organization: organization, stakeholder_category: StakeholderCategory.all.sample(1).first, email: Faker::Internet.email, user: User.all.sample(1).first)
   end
 end
-puts "Organizations crees"
+puts "Stakeholders crées"
+
+5.times do
+  legrep = LegalRep.create(
+    user: User.all.sample(1).first,
+    organization: Organization.all.sample(1).first,
+    start_date: Faker::Date.in_date_period,
+    end_date: Faker::Date.in_date_period  
+  )
+  puts legrep
+end
