@@ -1,0 +1,13 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+  <h3><%=link_to "DASHBOARD", admin_authenticated_root_path, class:"mb-3 mb-md-0 me-md-auto text-white text-decoration-none"%></h3>
+  <span class="text-end"><b><%=current_admin.email%></b></span>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <%@sidebar_links.each do |current|%>
+      <li class="nav-item">
+        <%= link_to "#{current}", admin_authenticated_root_path(panel: current), class:"btn btn-success category-link" %>
+      </li>
+    <%end%>
+  </ul>
+  <hr>
+</div>
