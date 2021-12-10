@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     authenticated :user do
       namespace :user do
-        get 'dashboards/index', as: :authenticated_root
+        get 'dashboards/index', as: :dashboards_index
+        get 'dashboards/organizations', as: :dashboards_organizations
+        get 'dashboards/organizations_legalreps', as: :dashboards_legalreps_index
       end
     end
   end
