@@ -1,16 +1,10 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-  <h3><%=link_to "ORGANISATIONS", user_dashboards_organizations_path, class:"mb-3 mb-md-0 me-md-auto text-white text-decoration-none"%></h3>
+  <h4><%=link_to "TABLEAU DE BORD", user_dashboards_index_path, class:"mb-3 mb-md-0 me-md-auto text-white text-decoration-none"%></h4>
   <span class="text-end"><b><%=current_user.email%></b></span>
   <hr>
-  <h4>Secteurs d'activité</h4>
-  <ul class="nav nav-pills flex-column mb-auto">
-      <%@sidebar_links.each do |link|%>
-        <li class="nav-item">
-          <%= link_to "#{link[:label]}", user_dashboards_organizations_path(sector: link[:id]), class:"nav-link sidebar-item fs-6" %>
-        </li>
-      <%end%>
-  </ul>
-  <hr>
+  <% @render_sidebar_specific_contents.each do |specific_content|%>
+    <%=render "#{specific_content}" %>
+  <% end %>
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
       <%= link_to "Éditer mon profile", user_dashboards_index_path(panel: "Editer mon profile"), class:"nav-link sidebar-item" %>

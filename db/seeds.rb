@@ -5,6 +5,7 @@ JoinMessagesRecipient.destroy_all
 PrivateMessage.destroy_all
 Activity.destroy_all
 ExternalStakeholder.destroy_all
+LegalRep.destroy_all
 Organization.destroy_all
 ActivitySector.destroy_all
 Profile.destroy_all
@@ -16,6 +17,7 @@ Admin.destroy_all
 
 Admin.create(email: "admin@admin.com", password: "azerty")
 User.create(email: "user@user.com", password: "azerty")
+User.create(email: "legalrep@legalrep.com", password: "azerty")
 
 10.times do
   User.create(email: Faker::Internet.unique.email, password: Faker::Lorem.characters(number: 10))
@@ -101,3 +103,6 @@ puts "Stakeholders crées"
   )
   puts legrep
 end
+puts "Organizations crees"
+
+LegalRep.create(user: User.find_by(email: "user@user.com"), organization: Organization.first)
