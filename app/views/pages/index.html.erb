@@ -1,15 +1,15 @@
 <div class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
   <div class="container d-flex justify-content-align bg-dark rounded my-auto"style="--bs-bg-opacity: .5;">
-    <div class="mx-auto my-2 text-center">
+    <div class="mx-auto my-2 text-center p-5">
       <h1 class="text-info">Bienvenue sur SENS·COMMUN</h1>
       <br>
-      <h4>Le premier site de relations entre organisations de l'économie sociale et solidaire</h4>
-      <p>Rejoigner dès maintenant différentes organisations et participer à leur évolutions</p>
+      <h4>Le premier site de mise en relation des organisations de l'économie sociale et solidaire</h4>
+      <p>Rejoignez dès maintenant différentes organisations et participez à leur évolution !</p>
     </div>
-    <div class="mx-auto my-2 d-flex flex-column justify-content-center align-items-center">
+    <div class="mx-auto my-2 pe-5 d-flex flex-column justify-content-center align-items-center">
       <% unless user_signed_in? %>
-      <h5><%=link_to 'Se connecter', new_user_session_path, class:"btn btn-primary" %></h5>
-      <h5> <%=link_to "S'inscrire", new_user_registration_path, class:"btn btn-secondary" %></h5>
+        <h5><%=link_to 'Connexion', new_user_session_path, class:"btn btn-success my-2" %></h5>
+        <h5> <%=link_to "Inscription", new_user_registration_path, class:"btn btn-warning" %></h5>
       <% end %>
     </div>
     
