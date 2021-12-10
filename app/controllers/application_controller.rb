@@ -9,11 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def has_legal_rep_rights?
-    redirect_back fallback_location: root_path unless is_legal_rep?(current_user) == true
-  end
-
-  def is_legal_rep?(user)
-   
+    redirect_back fallback_location: root_path unless current_user == LegalRep.all.find_by(user_id: current_user.id).user
   end
 
 end

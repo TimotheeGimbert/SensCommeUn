@@ -16,4 +16,5 @@ class User < ApplicationRecord
   def private_messages
     sent_messages + received_messages
   end
+  
 end
