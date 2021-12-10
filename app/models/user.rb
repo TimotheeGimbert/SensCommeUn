@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :sent_messages, as: :author, class_name: 'PrivateMessage'
   has_many :join_messages_recipients, as: :recipient
   has_many :received_messages, through: :join_messages_recipients, source: :private_message
+  has_many :legal_reps
+  has_many :organizations, through: :legal_reps, as: :executive
 
   def private_messages
     sent_messages + received_messages

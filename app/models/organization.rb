@@ -5,4 +5,5 @@ class Organization < ApplicationRecord
   has_many :external_stakeholders
   has_many :user, through: :external_stakeholders
   has_many :activities
+  #has_many :users, through: :legal_reps, as: :executive
 end

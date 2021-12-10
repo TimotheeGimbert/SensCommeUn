@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
     redirect_back fallback_location: root_path unless admin_signed_in? == true
   end
 
+  def is_legal_rep?
+    
+  end
+
 end

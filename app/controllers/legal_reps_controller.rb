@@ -1,6 +1,7 @@
 class LegalRepsController < ApplicationController
   before_action :set_legal_rep, only: %i[ show edit update destroy ]
-  before_action :has_admin_rights?, only: %i[ index show edit create update destroy ]
+  before_action :has_user_rights?, only: %i[ index show edit update destroy ]
+  before_action :has_admin_rights?, only: %i[ index new show edit create update destroy ]
 
   # GET /legal_reps or /legal_reps.json
   def index
