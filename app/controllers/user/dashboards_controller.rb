@@ -7,6 +7,10 @@ class User::DashboardsController < ApplicationController
     if params[:panel] == "Mes Organisations"
       @render_view = "organizations/list"
       @organizations = current_user.organizations
+    elsif params[:panel] == "Les dernières actualités"
+      @organizations = Organization.all.sort {|a, b| b.created_at <=> a.created_at}.first(3)
+      @render_view = "user/dashboards/news"
+      @render_view_first = "organizations/list"
     elsif params[:panel] == "Editer mon profile"
       @render_view = 'profiles/form'
       @profile = current_user.profile
