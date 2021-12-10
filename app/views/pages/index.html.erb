@@ -1,2 +1,15 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+<div class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
+  <div class="container d-flex justify-content-align bg-dark rounded my-auto"style="--bs-bg-opacity: .5;">
+    <div class="mx-auto my-2 text-center">
+      <h1 class="text-info">Bienvenue sur SENS·COMMUN</h1>
+      <br>
+      <h4>Le premier site de relations entre organisations de l'économie sociale et solidaire</h4>
+      <p>Rejoigner dès maintenant différentes organisations et participer à leur évolutions</p>
+    </div>
+    <div class="mx-auto my-2 d-flex flex-column justify-content-center align-items-center">
+      <h5><%=link_to 'Se connecter', new_user_session_path, class:"btn btn-primary" %></h5>
+      <h5> <%=link_to "S'inscrire", new_user_registration_path, class:"btn btn-secondary" %></h5>
+    </div>
+    
+  </div>
+</div>
