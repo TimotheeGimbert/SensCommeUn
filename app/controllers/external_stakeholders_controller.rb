@@ -1,6 +1,6 @@
 class ExternalStakeholdersController < ApplicationController
   before_action :set_external_stakeholder, only: %i[ show edit update destroy ]
-  before_action :has_admin_rights?, only: %i[ index show edit create update destroy ]
+  before_action :has_legal_rep_rights?, only: %i[ index show edit create update destroy]
 
   # GET /external_stakeholders or /external_stakeholders.json
   def index
