@@ -28,8 +28,7 @@ class User::DashboardsController < ApplicationController
     sector_selected = params[:sector]
     organization_selected = params[:show]
     ActivitySector.all.each {|sector| @sidebar_links.push({id:sector.id, label:sector.name})}
-    puts "#" * 100
-    puts 
+    @view_render = "organizations/list"
     if sector_selected != nil
       @view_render = "organizations/list"
       @organizations = Organization.all.reject{|organization| organization.activity_sector.id != sector_selected.to_i}    
