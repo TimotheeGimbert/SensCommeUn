@@ -1,20 +1,22 @@
 class User::DashboardsController < ApplicationController
-  def index
 
-    @sidebar_links = ["Mes Participations","Les dernières actualités",'Messagerie']
-    @render_view = ""
+  def index
+    # Display the specific sidebar
     @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content"]
-    if params[:panel] == "Mes Participations"
+
+    # Display the chosen partial through links clicked on the sidebar
+    case params[:clicked_link]
+    when "Mes Participations"
       @render_view = "organizations/list"
       @organizations = current_user.organizations
-    elsif params[:panel] == "Les dernières actualités"
+    when "Les dernières actualités"
       @organizations = Organization.all.sort {|a, b| b.created_at <=> a.created_at}.first(3)
       @render_view = "user/partials/dashboards/index/news"
       @render_view_first = "organizations/list"
-    elsif params[:panel] == "Editer mon profile"
+    when "Editer mon profile"
       @render_view = 'profiles/form'
       @profile = current_user.profile
-    elsif params[:panel] == "Messagerie"
+    when "Messagerie"
       @render_view = 'private_messages/list'
       @private_messages = current_user.private_messages
     else
@@ -25,10 +27,10 @@ class User::DashboardsController < ApplicationController
 
   def organizations
     @render_sidebar_specific_contents = ["user/partials/dashboards/organizations/sidebar_specific_content"]
-    @sidebar_links_dedicated = []
+    
     sector_selected = params[:sector]
     organization_selected = params[:show]
-    ActivitySector.all.each {|sector| @sidebar_links.push({id:sector.id, label:sector.name})}
+    
     @view_render = "organizations/list"
     if sector_selected != nil
       @view_render = "organizations/list"
