@@ -21,11 +21,14 @@ class User::DashboardsController < ApplicationController
 
   def organizations
     @sidebar_links = []
-    ActivitySector.all.each do |sector|
-       @sidebar_links.push({id:sector.id, label:sector.name})
+    sector_selected = params[:sector]
+    ActivitySector.all.each {|sector| @sidebar_links.push({id:sector.id, label:sector.name})}
+    puts "#" * 100
+    puts 
+    if sector_selected != nil
+      @organizations = Organization.all.reject{|organization| organization.activity_sector.id.to_s != sector_selected}    
+    else
+      @organizations = Organization.all
     end
-    puts "#" *60
-    p @sidebar_links
-    @organizations = Organization.all
   end
 end
