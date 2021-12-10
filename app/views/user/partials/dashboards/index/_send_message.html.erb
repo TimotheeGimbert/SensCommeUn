@@ -1,0 +1,10 @@
+<div class="d-flex">
+  <div class="d-flex flex-column">
+    <%= render "join_messages_recipients/form"%>
+    
+  </div>
+  <div class="d-flex flex-column">
+    <%=@private_message.author.email%>
+    <%= render "private_messages/form"%>
+  </div>
+</div>

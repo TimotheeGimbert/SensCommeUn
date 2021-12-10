@@ -4,8 +4,9 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.association :private_message %>
-    <%= f.association :recipient %>
+    <%= f.hidden_field :private_message_id , value: @private_message.id %>
+    <%= f.input :recipient_id , collection: @users_email,input_html: { multiple: true }%>
+    <%= f.hidden_field :recipient_type , value: "User" %>
   </div>
 
   <div class="form-actions">

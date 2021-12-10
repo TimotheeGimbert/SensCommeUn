@@ -13,8 +13,7 @@ class PrivateMessagesController < ApplicationController
   # GET /private_messages/new
   def new
     @private_message = PrivateMessage.new
-    @users_email = []
-    User.all.each{|user|@users_email.push(user.email)}
+    
     # if user_signed_in?
       # @private_message = PrivateMessage.new(author: current_user)
 
@@ -74,6 +73,6 @@ class PrivateMessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def private_message_params
-      params.require(:private_message).permit(:object, :content, :author_id, :author_type)
+      params.require(:private_message).permit(:object, :content, :author_id, :author_type, :recipient_emails)
     end
 end
