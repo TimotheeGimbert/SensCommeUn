@@ -1,10 +1,10 @@
 class User::DashboardsController < ApplicationController
   def index
 
-    @sidebar_links = ["Mes Organisations","Les dernières actualités",'Messagerie']
+    @sidebar_links = ["Mes Participations","Les dernières actualités",'Messagerie']
     @render_view = ""
-
-    if params[:panel] == "Mes Organisations"
+    @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content"]
+    if params[:panel] == "Mes Participations"
       @render_view = "organizations/list"
       @organizations = current_user.organizations
     elsif params[:panel] == "Les dernières actualités"
@@ -24,7 +24,8 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations
-    @sidebar_links = []
+    @render_sidebar_specific_contents = ["user/partials/dashboards/organizations/sidebar_specific_content"]
+    @sidebar_links_dedicated = []
     sector_selected = params[:sector]
     organization_selected = params[:show]
     ActivitySector.all.each {|sector| @sidebar_links.push({id:sector.id, label:sector.name})}
@@ -42,5 +43,15 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations_legalreps
+    @sidebar_links = ["Mes Participations","Les dernières actualités",'Messagerie']
+    @sidebar_links_dedicated = []
+    current_user.managed_organizations.each do |organization|
+      @sidebar_links_dedicated.push({label: organization.name, id: organization.id})
+    end
+    puts "#"*100
+    puts @sidebar_links_dedicated
+    @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content",
+                                         "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"
+                                        ]
   end
 end

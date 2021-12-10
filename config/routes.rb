@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       namespace :user do
         get 'dashboards/index', as: :dashboards_index
         get 'dashboards/organizations', as: :dashboards_organizations
-        get 'dashboards/organizations_legalreps', as: :dashboards_legalreps_index
+        get 'dashboards/organizations_legalreps', as: :dashboards_organizations_legalreps
       end
     end
   end
