@@ -13,7 +13,7 @@
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
-      <%= link_to "Éditer mon profile", user_authenticated_root_path(panel: "Editer mon profile"), class:"nav-link sidebar-item" %>
+      <%= link_to "Éditer mon profile", user_dashboards_index_path(panel: "Editer mon profile"), class:"nav-link sidebar-item" %>
     </li>
     <li class="nav-item">
       <%= link_to "Éditer mes identifiants", edit_user_registration_path, class:"nav-link sidebar-item" %>
