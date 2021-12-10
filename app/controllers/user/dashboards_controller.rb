@@ -9,7 +9,7 @@ class User::DashboardsController < ApplicationController
       @organizations = current_user.organizations
     elsif params[:panel] == "Les dernières actualités"
       @organizations = Organization.all.sort {|a, b| b.created_at <=> a.created_at}.first(3)
-      @render_view = "user/dashboards/news"
+      @render_view = "user/partials/dashboards/index/news"
       @render_view_first = "organizations/list"
     elsif params[:panel] == "Editer mon profile"
       @render_view = 'profiles/form'
@@ -39,5 +39,8 @@ class User::DashboardsController < ApplicationController
       @view_render = "organizations/show"
       @organization = Organization.find_by(id: organization_selected.to_i)
     end
+  end
+
+  def organizations_legalreps
   end
 end

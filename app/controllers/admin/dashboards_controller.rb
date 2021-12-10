@@ -6,7 +6,7 @@ class Admin::DashboardsController < ApplicationController
     @render_view = ""
 
     if params[:panel] == "Gestions des utilisateurs"
-      @render_view = "user/partials/list"
+      @render_view = "admin/partials/dashboards/index/list"
       @users = User.all
     elsif params[:panel] == "Gestion des Organisations"
       @render_view = "organizations/list"
