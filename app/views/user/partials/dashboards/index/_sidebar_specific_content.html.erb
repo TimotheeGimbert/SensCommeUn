@@ -1,12 +1,11 @@
-  
-  <% links = ["Mes Participations", "Les dernières actualités", "Messagerie"] %>
+<% links = ["Mes Participations", "Les dernières actualités", "Messagerie"] %>
 
-  <ul class="nav nav-pills flex-column mb-auto">
-    <% links.each do |link| %>
-      <li class="nav-item"> 
-        <%= link_to "#{link}", user_dashboards_index_path(clicked_link: link), class:"nav-link sidebar-item" %>
-      </li>
-    <% end %>
-  </ul>
+<ul class="nav nav-pills flex-column mb-auto">
+  <% links.each do |link| %>
+    <li class="nav-item"> 
+      <%= link_to "#{link}", user_dashboards_index_path(clicked_link: link), class:"nav-link sidebar-item" %>
+    </li>
+  <% end %>
+</ul>
 
-  <hr>
+<hr>

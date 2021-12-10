@@ -27,10 +27,10 @@ class User::DashboardsController < ApplicationController
 
   def organizations
     @render_sidebar_specific_contents = ["user/partials/dashboards/organizations/sidebar_specific_content"]
-    @sidebar_links_dedicated = []
+    
     sector_selected = params[:sector]
     organization_selected = params[:show]
-    ActivitySector.all.each {|sector| @sidebar_links.push({id:sector.id, label:sector.name})}
+    
     @view_render = "organizations/list"
     if sector_selected != nil
       @view_render = "organizations/list"
