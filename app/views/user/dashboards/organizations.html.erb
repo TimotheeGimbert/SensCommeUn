@@ -2,7 +2,7 @@
   <div class="d-flex flex-column" id="sidebar">
     <%= render "user/partials/sidebar_organizations"%>
   </div>
-  <div class="d-flex flex-column m-5" id="panel">
-    <%= render "organizations/list"%>
+  <div class="d-flex flex-column m-5" id="panel" style="width:100%">
+    <%= render "#{@view_render}"%>
   </div>
 </div>

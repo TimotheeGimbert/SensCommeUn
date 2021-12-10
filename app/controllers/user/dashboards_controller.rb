@@ -26,13 +26,19 @@ class User::DashboardsController < ApplicationController
   def organizations
     @sidebar_links = []
     sector_selected = params[:sector]
+    organization_selected = params[:show]
     ActivitySector.all.each {|sector| @sidebar_links.push({id:sector.id, label:sector.name})}
     puts "#" * 100
     puts 
     if sector_selected != nil
-      @organizations = Organization.all.reject{|organization| organization.activity_sector.id.to_s != sector_selected}    
+      @view_render = "organizations/list"
+      @organizations = Organization.all.reject{|organization| organization.activity_sector.id != sector_selected.to_i}    
     else
       @organizations = Organization.all
+    end
+    if organization_selected != nil
+      @view_render = "organizations/show"
+      @organization = Organization.find_by(id: organization_selected.to_i)
     end
   end
 end
