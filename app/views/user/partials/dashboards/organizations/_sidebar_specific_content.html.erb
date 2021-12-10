@@ -1,0 +1,9 @@
+  <h4>Secteurs d'activité</h4>
+  <ul class="nav nav-pills flex-column mb-auto">
+      <%@sidebar_links.each do |link|%>
+        <li class="nav-item" style="font-size:smaller">
+          <%= link_to "#{link[:label]}", user_dashboards_organizations_path(sector: link[:id]), class:"sidebar-item fs-6" %>
+        </li>
+      <%end%>
+  </ul>
+  <hr>
