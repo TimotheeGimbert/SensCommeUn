@@ -1,29 +1,14 @@
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <%= link_to 'SENS·COMMUN', root_path, class:'navbar-brand p-1'%>
-    <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_default" aria-controls="navbar_default" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-dark bg-dark p-3">
+  <h2> <%= link_to "SENS·COMMUN", root_path, class: "navbar-brand p-1 text-light mx-4" %> </h2>
+  <form class="form-inline">
+    <%= link_to "Infos/Contact", pages_contact_path, class: "text-light mx-3" %>
+    
+    <% if user_signed_in? %>
+      <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, class: "btn btn-outline-warning mx-3" %>
+    <% else %>
+      <%= link_to "Inscription", new_user_registration_path, class: "text-light btn btn-outline-primary mx-3" %>
+      <%= link_to "Connexion", new_user_session_path, class: "btn btn-outline-warning" %>  
+    <% end %>
 
-    <div class="collapse navbar-collapse" id="navbar_default">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-         <%=link_to 'Présentation', pages_presentation_path, class:"nav-link" %>
-        </li>
-        <li class="nav-item">
-         <%=link_to 'Contactez-nous', pages_contact_path, class:"nav-link" %>
-        </li>
-      </ul>
-      <div class="d-flex">
-        <span class="nav-item">
-          <%=link_to 'Espace Administrateur', new_admin_session_path, class:"nav-link text-danger" %>
-        </span>
-      </div>
-      <div class="d-flex">
-        <span class="nav-item">
-          <%=link_to 'Connexion', new_user_session_path, class:"nav-link my-3 mx-2 p-2 btn-warning" %>
-        </span>
-      </div>
-    </div>
-  </div>
+  </form>
 </nav>
