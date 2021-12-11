@@ -118,4 +118,4 @@ puts "Parties prenantes créées"
 end
 puts "Représentant légaux créés"
 
-LegalRep.create(user: User.find_by(email: "user@user.com"), organization: Organization.first)
+LegalRep.create(user: User.find_by(email: "legalrep@legalrep.com"), organization: Organization.first)

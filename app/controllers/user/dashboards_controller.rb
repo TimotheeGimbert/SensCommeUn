@@ -1,7 +1,7 @@
 class User::DashboardsController < ApplicationController
 
   def index
-    # Displays the initial sidebar for users
+    # Displays the dedicated sidebar for USER-Basic
     @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content"]
 
     # Displays the chosen partial through links clicked on the sidebar
