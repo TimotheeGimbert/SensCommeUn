@@ -15,13 +15,6 @@ Admin.destroy_all
 
 puts "ALL ENTRIES IN THE DATABASE HAS BEEN DESTROYED"
 
-admin = Admin.create(email: "admin@admin.com", password: "azerty")
-puts admin
-user = User.create(email: "user@user.com", password: "azerty")
-puts user
-legrep = User.create(email: "legalrep@legalrep.com", password: "azerty")
-puts legrep
-
 10.times do
   user = User.create(email: Faker::Internet.unique.email, password: Faker::Lorem.characters(number: 10))
   puts user
@@ -89,7 +82,11 @@ end
 puts "30 organisations créées"
 
 10.times do 
-  activity = Activity.create(name: Faker::Company.type, description: Faker::Lorem.paragraph(sentence_count: 5), activity_sector: ActivitySector.all.sample(1).first, organization: Organization.all.sample(1).first)
+  activity = Activity.create(
+    name: Faker::Company.type, 
+    description: Faker::Lorem.paragraph(sentence_count: 5), 
+    activity_sector: ActivitySector.all.sample(1).first, 
+    organization: Organization.all.sample(1).first)
   puts activity
 end 
 puts "10 activités créées"
@@ -101,7 +98,12 @@ puts "categories de pp crees"
 
 Organization.all.each do |organization|
   3..5.times do 
-    stakeholder = ExternalStakeholder.create(name: Faker::Name.first_name, organization: organization, stakeholder_category: StakeholderCategory.all.sample(1).first, email: Faker::Internet.email, user: User.all.sample(1).first)
+    stakeholder = ExternalStakeholder.create(
+      name: Faker::Name.first_name, 
+      organization: organization, 
+      stakeholder_category: StakeholderCategory.all.sample(1).first, 
+      email: Faker::Internet.email, 
+      user: User.all.sample(1).first)
     puts stakeholder
   end
 end
@@ -118,4 +120,45 @@ puts "Parties prenantes créées"
 end
 puts "Représentant légaux créés"
 
-LegalRep.create(user: User.find_by(email: "legalrep@legalrep.com"), organization: Organization.first)
+
+# Seeds dedicated to application tests and demo
+basic_user = User.create(email: "user@user.com", password: "azerty")
+  puts basic_user
+legrep_user = User.create(email: "legalrep@legalrep.com", password: "azerty")
+  puts legrep_user
+admin = Admin.create(email: "admin@admin.com", password: "azerty")
+  puts admin
+
+sens_commun = Organization.create(
+  name: "SENS-COMMUN", 
+  nickname: "sensC", 
+  creation_date: DateTime.new(2021,12,11,23,11,0), 
+  address: Faker::Address.street_address, 
+  address_complement: Faker::Address.secondary_address, 
+  zip_code: Faker::Address.zip_code, 
+  city: City.all.sample(1).first, 
+  email: "sens@sens.com", 
+  phone_number: "01 11 11 11 11", 
+  status: Status.all.sample(1).first, 
+  siren: Faker::Company.french_siren_number, 
+  description: "This company instance is serving a demonstration purpose, in order to test our app manually", 
+  activity_sector: ActivitySector.all.sample(1).first, 
+  naf_ape: "11111111", 
+  logo_url: Faker::Company.logo, 
+  website_url: Faker::Internet.url
+)
+puts sens_commun
+
+user_stakeholder = ExternalStakeholder.create(
+  name: "USER-Basic-PP", 
+  organization: sens_commun, 
+  stakeholder_category: StakeholderCategory.all.sample(1).first, 
+  email: "sensbasic@sens.com", 
+  user: basic_user
+)
+
+legalrep = LegalRep.create(
+  user: legrep_user, 
+  organization: sens_commun
+  )
+
