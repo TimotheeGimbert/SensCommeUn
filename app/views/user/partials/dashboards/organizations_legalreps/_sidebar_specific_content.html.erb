@@ -1,9 +1,16 @@
-  <h4>Organisations dirigées</h4>
-  <ul class="nav nav-pills flex-column mb-auto">
-      <%@sidebar_links_dedicated.each do |link|%>
-        <li class="nav-item" style="font-size:smaller">
-          <%= link_to "#{link[:label]}", user_dashboards_organizations_legalreps_path(organization_managed: link[:id]), class:"sidebar-item fs-6" %>
-        </li>
-      <%end%>
-  </ul>
-  <hr>
+<% links = [] %>
+<% current_user.managed_organizations.each do |organization| %>
+  <% links.push({label: organization.name, id: organization.id}) %>
+<% end %>
+
+<h4 class="text-success">Organisations gérées</h4>
+
+<ul class="nav nav-pills flex-column mb-auto">
+  <% links.each do |link| %>
+    <li class="nav-item" style="font-size:smaller">
+      <%= link_to "#{link[:label]}", user_dashboards_organizations_legalreps_path(organization_managed: link[:id]), class:"sidebar-item text-secondary text-decoration-none" %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>

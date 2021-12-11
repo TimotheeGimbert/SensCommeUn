@@ -1,7 +1,7 @@
 class User::DashboardsController < ApplicationController
 
   def index
-    # Displays the initial sidebar specific to User
+    # Displays the initial sidebar for users
     @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content"]
 
     # Displays the chosen partial through links clicked on the sidebar
@@ -52,13 +52,7 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations_legalreps
-    @sidebar_links = ["Mes Participations","Les dernières actualités",'Messagerie']
-    @sidebar_links_dedicated = []
-    current_user.managed_organizations.each do |organization|
-      @sidebar_links_dedicated.push({label: organization.name, id: organization.id})
-    end
-    puts "#"*100
-    puts @sidebar_links_dedicated
+    # Displays the sidebar for basic users followed by the dedicated section for legal representants
     @render_sidebar_specific_contents = 
       ["user/partials/dashboards/index/sidebar_specific_content",
       "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
