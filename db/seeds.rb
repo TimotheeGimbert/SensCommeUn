@@ -53,9 +53,8 @@ puts "statut créés"
 end 
 puts "Secteur d'activités créés"
 
-
-10.times do 
-  orga = Organization.create(
+30.times do 
+  organization = Organization.create(
     name: Faker::Company.name, 
     nickname: Faker::Name.initials, 
     creation_date: Faker::Date.in_date_period, 
@@ -75,7 +74,7 @@ puts "Secteur d'activités créés"
   )
   puts orga
 end 
-puts "10 organisations créées"
+puts "30 organisations créées"
 
 10.times do 
   Activity.create(name: Faker::Company.type, description: Faker::Lorem.paragraph(sentence_count: 5), activity_sector: ActivitySector.all.sample(1).first, organization: Organization.all.sample(1).first)
