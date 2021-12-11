@@ -1,19 +1,5 @@
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid p-2">
-    <%= link_to 'SENS·COMMUN', root_path, class:'navbar-brand p-1'%>
-    <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_default" aria-controls="navbar_default" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<%= render "partials/navbars/shared/start" %>
 
-    <div class="collapse navbar-collapse" id="navbar_default">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item my-auto">
-         <%=link_to 'Présentation de la plateforme', pages_presentation_path, class:"text-light text-decoration-none mx-3" %>
-        </li>
-        <li class="nav-item my-auto">
-          <%= link_to "Infos/Contact", pages_contact_path, class: "text-light text-decoration-none mx-3" %>
-        </li>
-      </ul>
       <div class="d-flex">
         <span class="nav-item">
           <%= link_to "Inscription", new_user_registration_path, class: "text-light btn btn-outline-primary mx-3" %>
@@ -21,9 +7,10 @@
       </div>
       <div class="d-flex">
         <span class="nav-item">
-          <%= link_to "Connexion", new_user_session_path, class: "btn btn-outline-warning" %> 
+          <%= link_to "Connexion", new_user_session_path, class: "btn btn-outline-warning mx-3" %> 
         </span>
       </div>
+      
     </div>
   </div>
 </nav>

@@ -12,9 +12,9 @@
 
   <body>
     <% if admin_signed_in?%>
-      <%=render "admin/partials/shared/navbar"%>
+      <%=render "admin/partials/navbar"%>
     <%elsif user_signed_in?%>
-      <%=render "user/partials/shared/navbar"%>
+      <%=render "user/partials/navbar"%>
     <%else%>
       <%=render "partials/navbars/visitor"%>
     <%end%>
