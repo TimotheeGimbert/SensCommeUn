@@ -16,7 +16,7 @@
     <%elsif user_signed_in?%>
       <%=render "user/partials/shared/navbar"%>
     <%else%>
-      <%=render "partials/visitor/navbar"%>
+      <%=render "partials/navbars/visitor"%>
     <%end%>
     <%= yield %>
   </body>
