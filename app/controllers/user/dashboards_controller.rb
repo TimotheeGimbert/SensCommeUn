@@ -7,21 +7,26 @@ class User::DashboardsController < ApplicationController
     # Displays the chosen partial through links clicked on the sidebar
     case params[:clicked_link]
     when "Mes Participations"
+      @render_title = "Les organisations auxquelles je participe en tant que partie prenante :"
       @render_view = "organizations/list"
       @organizations = current_user.organizations
-    when "Les dernières actualités"
-      @organizations = Organization.all.sort {|a, b| b.created_at <=> a.created_at}.first(3)
-      @render_view = "user/partials/dashboards/index/news"
-      @render_view_first = "organizations/list"
     when "Editer mon profile"
+      @render_title = "Mon profile"
       @render_view = 'profiles/form'
       @profile = current_user.profile
     when "Messagerie"
+      @render_title = "Mes messages"
       @render_view = 'private_messages/list'
       @private_messages = current_user.private_messages
-    else
-      @render_view = "organizations/list"
-      @organizations = current_user.organizations
+    else 
+      #news
+      @organizations = Organization.all.sort {|a, b| b.created_at <=> a.created_at}.first(3)
+      @render_view = "user/partials/dashboards/index/news"
+      @render_title_first = "Les dernières organisations connectées sur la plateforme :"
+      @render_view_first = "organizations/list"
+      @private_messages = current_user.received_messages.sort {|a, b| b.created_at <=> a.created_at}.first(3)
+      @render_title_second = "Mes derniers messages :"
+      @render_view_second = "private_messages/list"
     end
   end
 
