@@ -1,7 +1,6 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
 
   <h4><%=link_to "TABLEAU DE BORD", user_dashboards_index_path, class:"mb-3 mb-md-0 me-md-auto text-warning text-decoration-none"%></h4>
-  <span class="text-end"><b><%=current_user.email%></b></span>
   <hr>
 
   <% @render_sidebar_specific_contents.each do |specific_content| %>
@@ -9,8 +8,9 @@
   <% end %>
 
   <ul class="nav nav-pills flex-column mb-auto">
+    <span class="text-start mb-2"><b><%=current_user.email%></b></span>
     <li class="nav-item">
-      <%= link_to "Éditer mon profil", user_dashboards_index_path(panel: "Editer mon profil"), class:"nav-link sidebar-item" %>
+      <%= link_to "Éditer mon profil", user_dashboards_index_path(clicked_link: "Editer mon profile"), class:"nav-link sidebar-item" %>
     </li>
     <li class="nav-item">
       <%= link_to "Éditer mes identifiants", edit_user_registration_path, class:"nav-link sidebar-item" %>
