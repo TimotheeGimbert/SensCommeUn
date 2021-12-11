@@ -1,0 +1,7 @@
+<nav class="navbar navbar-dark bg-dark p-3">
+  <h2> <%= link_to "SENS·COMMUN", root_path, class: "navbar-brand p-1 text-light mx-4" %> </h2>
+  <form class="form-inline">
+    <%= link_to "Infos/Contact", pages_contact_path, class: "text-light mx-3" %>
+    <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, class: "btn btn-outline-warning mx-3" %>
+  </form>
+</nav>
