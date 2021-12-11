@@ -1,10 +1,10 @@
 class User::DashboardsController < ApplicationController
 
   def index
-    # Display the specific sidebar
+    # Displays the initial sidebar for users
     @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content"]
 
-    # Display the chosen partial through links clicked on the sidebar
+    # Displays the chosen partial through links clicked on the sidebar
     case params[:clicked_link]
     when "Mes Participations"
       @render_view = "organizations/list"
@@ -26,34 +26,36 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations
+    # Displays the sidebar dedicated to the organizations list filtered by activity sectors
     @render_sidebar_specific_contents = ["user/partials/dashboards/organizations/sidebar_specific_content"]
     
-    sector_selected = params[:sector]
+    # Gets user-selected sector_id and organisation through params from sidebar
+    sectorID_selected = params[:sectorID]
     organization_selected = params[:show]
-    
-    @view_render = "organizations/list"
-    if sector_selected != nil
-      @view_render = "organizations/list"
-      @organizations = Organization.all.reject{|organization| organization.activity_sector.id != sector_selected.to_i}    
+
+    # Displays by default the full list of organizations
+    @render_view = "organizations/list"
+
+    # Filters organizations if an activity sector is selected
+    if sectorID_selected != nil
+      @render_view = "organizations/list"
+      @organizations = Organization.all.reject{|organization| organization.activity_sector.id != sectorID_selected.to_i}    
     else
       @organizations = Organization.all
     end
+
+    # Displays an organization if selected by the Show eye-button
     if organization_selected != nil
-      @view_render = "organizations/show"
+      @render_view = "organizations/show"
       @organization = Organization.find_by(id: organization_selected.to_i)
     end
   end
 
   def organizations_legalreps
-    @sidebar_links = ["Mes Participations","Les dernières actualités",'Messagerie']
-    @sidebar_links_dedicated = []
-    current_user.managed_organizations.each do |organization|
-      @sidebar_links_dedicated.push({label: organization.name, id: organization.id})
-    end
-    puts "#"*100
-    puts @sidebar_links_dedicated
-    @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content",
-                                         "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"
-                                        ]
+    # Displays the sidebar for basic users followed by the dedicated section for legal representants
+    @render_sidebar_specific_contents = 
+      ["user/partials/dashboards/index/sidebar_specific_content",
+      "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
   end
+
 end

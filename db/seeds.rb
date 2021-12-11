@@ -13,42 +13,54 @@ City.destroy_all
 User.destroy_all
 Admin.destroy_all
 
+puts "ALL ENTRIES IN THE DATABASE HAS BEEN DESTROYED"
 
-
-Admin.create(email: "admin@admin.com", password: "azerty")
-User.create(email: "user@user.com", password: "azerty")
-User.create(email: "legalrep@legalrep.com", password: "azerty")
+admin = Admin.create(email: "admin@admin.com", password: "azerty")
+puts admin
+user = User.create(email: "user@user.com", password: "azerty")
+puts user
+legrep = User.create(email: "legalrep@legalrep.com", password: "azerty")
+puts legrep
 
 10.times do
-  User.create(email: Faker::Internet.unique.email, password: Faker::Lorem.characters(number: 10))
+  user = User.create(email: Faker::Internet.unique.email, password: Faker::Lorem.characters(number: 10))
+  puts user
 end
 
-['Paris', 'Marseille','Bordeaux', 'Nice' ,'Montréal'].each do |city| 
-  City.create(name: city)
+['Paris', 'Marseille', 'Bordeaux', 'Nice', 'Montréal'].each do |city| 
+  city = City.create(name: city)
+  puts city
 end
 
 User.all.each do |user|
-  Profile.create(user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  profile = Profile.create(user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  puts profile
 end
 
 10.times do 
-  PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: User.all.sample(1).first)
+  pm = PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: User.all.sample(1).first)
+  puts pm
 end
 
 PrivateMessage.all.each do |message|
   1..4.times do
-    JoinMessagesRecipient.create(private_message: message, recipient:User.all.sample(1).first)
+    jm = JoinMessagesRecipient.create(private_message: message, recipient:User.all.sample(1).first)
+    puts jm
   end
    0..1.times do 
-    JoinMessagesRecipient.create(private_message: message, recipient:Admin.all.sample(1).first)
+    jm = JoinMessagesRecipient.create(private_message: message, recipient:Admin.all.sample(1).first)
+    puts jm
   end
 end
-['non déterminé','Association','fondation','Société anonyme','Société à responsabilité limitée','Société par actions simplifiée'].each do |status|
+
+statuses = ['Association','fondation','Société anonyme','Société à responsabilité limitée','Société par actions simplifiée','Non-déterminé']
+statuses.each do |status|
   Status.create(name: status)
 end 
-puts "statut créés"
+puts "Statut créés"
 
-['non déterminé','Action sociale, crèches, petite enfance','Agriculture, agro-alimentaire','Commerce, commerce équitable, réparation de véhicules','Construction, BTP et activités immobilières','Culture','Enseignement, formation','Environnement, développement durable','Hébergement, restauration','Industrie, sous-traitance industrielle','Production artisanale, textile','Recyclage des déchets','Services à la personne','Services aux entreprises'].each do |activity_sectors|
+activity_sectors = ['Action sociale, crèches, petite enfance','Agriculture, agro-alimentaire','Commerce, commerce équitable, réparation de véhicules','Construction, BTP et activités immobilières','Culture','Enseignement, formation','Environnement, développement durable','Hébergement, restauration','Industrie, sous-traitance industrielle','Production artisanale, textile','Recyclage des déchets','Services à la personne','Services aux entreprises','Non-déterminé']
+activity_sectors.each do |activity_sectors|
   ActivitySector.create(name: activity_sectors)
 end 
 puts "Secteur d'activités créés"
@@ -72,12 +84,13 @@ puts "Secteur d'activités créés"
     logo_url: Faker::Company.logo, 
     website_url: Faker::Internet.url
   )
-  puts orga
+  puts organization
 end 
 puts "30 organisations créées"
 
 10.times do 
-  Activity.create(name: Faker::Company.type, description: Faker::Lorem.paragraph(sentence_count: 5), activity_sector: ActivitySector.all.sample(1).first, organization: Organization.all.sample(1).first)
+  activity = Activity.create(name: Faker::Company.type, description: Faker::Lorem.paragraph(sentence_count: 5), activity_sector: ActivitySector.all.sample(1).first, organization: Organization.all.sample(1).first)
+  puts activity
 end 
 puts "10 activités créées"
 
@@ -88,10 +101,11 @@ puts "categories de pp crees"
 
 Organization.all.each do |organization|
   3..5.times do 
-    ExternalStakeholder.create(name: Faker::Name.first_name, organization: organization, stakeholder_category: StakeholderCategory.all.sample(1).first, email: Faker::Internet.email, user: User.all.sample(1).first)
+    stakeholder = ExternalStakeholder.create(name: Faker::Name.first_name, organization: organization, stakeholder_category: StakeholderCategory.all.sample(1).first, email: Faker::Internet.email, user: User.all.sample(1).first)
+    puts stakeholder
   end
 end
-puts "Stakeholders crées"
+puts "Parties prenantes créées"
 
 5.times do
   legrep = LegalRep.create(
@@ -102,6 +116,6 @@ puts "Stakeholders crées"
   )
   puts legrep
 end
-puts "Organizations crees"
+puts "Représentant légaux créés"
 
 LegalRep.create(user: User.find_by(email: "user@user.com"), organization: Organization.first)
