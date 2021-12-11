@@ -65,7 +65,7 @@ activity_sectors.each do |activity_sectors|
 end 
 puts "Secteur d'activités créés"
 
-10.times do 
+30.times do 
   organization = Organization.create(
     name: Faker::Company.name, 
     nickname: Faker::Name.initials, 
@@ -86,7 +86,7 @@ puts "Secteur d'activités créés"
   )
   puts organization
 end 
-puts "10 organisations créées"
+puts "30 organisations créées"
 
 10.times do 
   activity = Activity.create(name: Faker::Company.type, description: Faker::Lorem.paragraph(sentence_count: 5), activity_sector: ActivitySector.all.sample(1).first, organization: Organization.all.sample(1).first)
