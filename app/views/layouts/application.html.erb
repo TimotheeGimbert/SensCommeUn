@@ -11,13 +11,17 @@
   </head>
 
   <body>
-    <% if admin_signed_in?%>
+
+    <%# Conditioned navbars rendering %>
+    <% if admin_signed_in? %>
       <%=render "admin/partials/navbar"%>
-    <%elsif user_signed_in?%>
+    <% elsif user_signed_in? %>
       <%=render "user/partials/navbar"%>
-    <%else%>
+    <% else %>
       <%=render "partials/navbars/visitor"%>
-    <%end%>
+    <% end %>
+
     <%= yield %>
+    
   </body>
 </html>
