@@ -1,10 +1,10 @@
 class User::DashboardsController < ApplicationController
 
   def index
-    # Display the specific sidebar
+    # Displays the initial sidebar specific to User
     @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content"]
 
-    # Display the chosen partial through links clicked on the sidebar
+    # Displays the chosen partial through links clicked on the sidebar
     case params[:clicked_link]
     when "Mes Participations"
       @render_view = "organizations/list"
@@ -26,6 +26,7 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations
+    # Displays the sidebar dedicated to the organizations list filtered by activity sectors
     @render_sidebar_specific_contents = ["user/partials/dashboards/organizations/sidebar_specific_content"]
     
     sector_selected = params[:sector]
