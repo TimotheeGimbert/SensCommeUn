@@ -14,9 +14,9 @@
 
     <%# Conditioned navbars rendering %>
     <% if admin_signed_in? %>
-      <%=render "admin/partials/navbar"%>
+      <%=render "admin/partials/navbar/navbar"%>
     <% elsif user_signed_in? %>
-      <%=render "user/partials/navbar"%>
+      <%=render "user/partials/navbar/navbar"%>
     <% else %>
       <%=render "partials/navbars/visitor"%>
     <% end %>
