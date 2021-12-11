@@ -8,8 +8,8 @@
     </div>
     <div class="mx-auto my-2 pe-5 d-flex flex-column justify-content-center align-items-center">
       <% unless user_signed_in? %>
-        <h5><%=link_to 'Connexion', new_user_session_path, class:"btn btn-success my-2" %></h5>
-        <h5> <%=link_to "Inscription", new_user_registration_path, class:"btn btn-warning" %></h5>
+        <h5><%=link_to 'Connexion', new_user_session_path, class:"btn btn-warning my-2" %></h5>
+        <h5> <%=link_to "Inscription", new_user_registration_path, class:"btn btn-dark text-light" %></h5>
       <% end %>
     </div>
     

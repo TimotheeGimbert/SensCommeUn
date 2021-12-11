@@ -13,13 +13,17 @@
         <li class="nav-item">
          <%=link_to 'Contactez-nous', pages_contact_path, class:"nav-link" %>
         </li>
-        <li class="nav-item">
-         <%=link_to 'Espace Administrateur', new_admin_session_path, class:"nav-link" %>
-        </li>
-        <li class="nav-item">
-         <%=link_to 'Connexion', new_user_session_path, class:"nav-link" %>
-        </li>
       </ul>
+      <div class="d-flex">
+        <span class="nav-item">
+          <%=link_to 'Espace Administrateur', new_admin_session_path, class:"nav-link text-danger" %>
+        </span>
+      </div>
+      <div class="d-flex">
+        <span class="nav-item">
+          <%=link_to 'Connexion', new_user_session_path, class:"nav-link my-3 mx-2 p-2 btn-warning" %>
+        </span>
+      </div>
     </div>
   </div>
 </nav>
