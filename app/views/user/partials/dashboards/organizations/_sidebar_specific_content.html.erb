@@ -6,7 +6,7 @@
   <ul class="nav nav-pills flex-column mb-auto">
       <% links.each do |link| %>
         <li class="nav-item mb-2" style="font-size:smaller">
-          <%= link_to "#{link[:label]}", user_dashboards_organizations_path(sector: link[:id]), class:"sidebar-item text-secondary text-decoration-none" %>
+          <%= link_to "#{link[:label]}", user_dashboards_organizations_path(sectorID: link[:id]), class:"sidebar-item text-secondary text-decoration-none" %>
         </li>
       <% end %>
   </ul>
