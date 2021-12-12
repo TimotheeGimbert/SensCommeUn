@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-evenly mt-5">
+  <div class="d-flex flex-column" style="80%">
+    <h4 class="text-info">Liste par catégorie</h4>
+    <% @external_stakeholders_category.each do |category| %>
+      <div class="d-flex flex-column align-items-center bg-info text-white mt-4">
+        <h5><%=category.name.capitalize%></h5>
+      </div>
+      <%= render "external_stakeholders/list", external_stakeholders: @all_external_stakeholders.where(stakeholder_category: category)%>
+    <%end%>
+  </div>
+  <div class="d-flex flex-column" style="20%">
+    <h4 class="text-info">Ajouter une partie prenante</h4>
+    <%=render "external_stakeholders/form"%>
+  </div>
+</div>

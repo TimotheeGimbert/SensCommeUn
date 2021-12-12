@@ -60,8 +60,29 @@ class User::DashboardsController < ApplicationController
       "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
     if params[:organization_managed]
       @organization = Organization.find_by(id: params[:organization_managed].to_i)
-      @render_view_title = "Éditer les informations de l'organisation"
-      @render_view = "organizations/form"
+      if params[:clicked_link]
+        case params[:clicked_link]
+        when "Éditer les informations"
+          @render_view_title = "Éditer les informations de l'organisation"
+          @render_view = "organizations/form"
+        when "Parties prenantes"
+          @all_external_stakeholders = @organization.external_stakeholders
+          @render_view_title = "Gérer les parties prenantes de l'organisation"
+          @render_view = "user/partials/dashboards/organizations_legalreps/external_stakeholders.html.erb"
+          @external_stakeholders_category = StakeholderCategory.all.sort {|a, b| a.name <=> b.name}
+          @external_stakeholder = ExternalStakeholder.new(organization: @organization)
+
+        when "Documents"
+          @render_view_title = "Bientôt dans votre tableau de bord..."
+          @render_view = "user/partials/soon"
+        when "Présentations"
+          @render_view_title = "Bientôt dans votre tableau de bord..."
+          @render_view = "user/partials/soon"
+        end
+      else
+        @render_view_title = "Informations de l'organisation"
+        @render_view = "organizations/show"
+      end
     end
   end
 

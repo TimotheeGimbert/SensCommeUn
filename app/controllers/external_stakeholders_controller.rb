@@ -26,10 +26,10 @@ class ExternalStakeholdersController < ApplicationController
 
     respond_to do |format|
       if @external_stakeholder.save
-        format.html { redirect_to @external_stakeholder, notice: "External stakeholder was successfully created." }
+        format.html { redirect_to user_dashboards_organizations_legalreps_path(organization_managed: @external_stakeholder.organization,clicked_link: "Parties prenantes"), notice: "External stakeholder was successfully created." }
         format.json { render :show, status: :created, location: @external_stakeholder }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html {redirect_to user_dashboards_organizations_legalreps_path(organization_managed: @external_stakeholder.organization,clicked_link: "Parties prenantes"), status: :unprocessable_entity }
         format.json { render json: @external_stakeholder.errors, status: :unprocessable_entity }
       end
     end

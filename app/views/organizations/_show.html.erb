@@ -9,9 +9,16 @@
         {label: "SIREN", data: @organization.siren, type:"primary"},
         {label: "NAF/APE", data: @organization.naf_ape, type:"primary"}
         ],
-  actions: [{label: "Devenir partie prenante", path: user_dashboards_organizations_path, type:"success"}],
   footer: "#{@organization.external_stakeholders.length} parties prenantes connectées"
   }%>
+
+<% if @organization.managers.include?(current_user)%>
+  <% card[:actions] = [{label: "Éditer les informations", path: user_dashboards_organizations_legalreps_path(organization_managed: @organization.id, clicked_link: "Éditer les informations"), type:"success"}] %>
+<%else%>
+  <%card[:actions] = [{label: "Devenir partie prenante", path: user_dashboards_organizations_path, type:"success"}]%>
+<%end%>
+
+
 <div class="d-flex justify-content-center bg-white">
   <%=image_tag(@organization.logo_url, width: "100px") %>
 </div>
