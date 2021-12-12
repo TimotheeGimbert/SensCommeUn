@@ -121,11 +121,31 @@ end
 puts "Représentant légaux créés"
 
 
-# Seeds dedicated to application tests and demo
+
+
+
+
+
+
+
+
+
+
+
+
+
+###############################################
+# Seeds dedicated to application tests and demo dashboard
+###############################################
+
 basic_user = User.create(email: "user@user.com", password: "azerty")
   puts basic_user
+  profile = Profile.create(user: basic_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  puts profile
 legrep_user = User.create(email: "legalrep@legalrep.com", password: "azerty")
   puts legrep_user
+  profile = Profile.create(user: legrep_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  puts profile
 admin = Admin.create(email: "admin@admin.com", password: "azerty")
   puts admin
 
@@ -162,3 +182,23 @@ legalrep = LegalRep.create(
   organization: sens_commun
   )
 
+3.times do 
+  pm = PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: basic_user)
+  puts pm
+  1..4.times do
+    jm = JoinMessagesRecipient.create(private_message: pm, recipient:User.all.sample(1).first)
+    puts jm
+  end
+  pm = PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: legrep_user)
+  puts pm
+  1..4.times do
+    jm = JoinMessagesRecipient.create(private_message: pm, recipient:User.all.sample(1).first)
+    puts jm
+  end
+  pm = PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: admin)
+  puts pm
+  1..4.times do
+    jm = JoinMessagesRecipient.create(private_message: pm, recipient:User.all.sample(1).first)
+    puts jm
+  end
+end
