@@ -86,7 +86,8 @@ puts "30 organisations créées"
     name: Faker::Company.type, 
     description: Faker::Lorem.paragraph(sentence_count: 5), 
     activity_sector: ActivitySector.all.sample(1).first, 
-    organization: Organization.all.sample(1).first)
+    organization: Organization.all.sample(1).first
+  )
   puts activity
 end 
 puts "10 activités créées"
@@ -122,18 +123,6 @@ puts "Représentant légaux créés"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ###############################################
 # Seeds dedicated to application tests and demo dashboard
 ###############################################
@@ -142,10 +131,12 @@ basic_user = User.create(email: "user@user.com", password: "azerty")
   puts basic_user
   profile = Profile.create(user: basic_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
   puts profile
+
 legrep_user = User.create(email: "legalrep@legalrep.com", password: "azerty")
   puts legrep_user
   profile = Profile.create(user: legrep_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
   puts profile
+
 admin = Admin.create(email: "admin@admin.com", password: "azerty")
   puts admin
 
@@ -176,11 +167,22 @@ user_stakeholder = ExternalStakeholder.create(
   email: "sensbasic@sens.com", 
   user: basic_user
 )
+puts user_stakeholder
+
+legrep_stakeholder = ExternalStakeholder.create(
+  name: "USER-LegRep-PP", 
+  organization: Organization.all.sample(1).first, 
+  stakeholder_category: StakeholderCategory.all.sample(1).first, 
+  email: "sensLegRep@sens.com", 
+  user: legrep_user
+)
+puts user_stakeholder
 
 legalrep = LegalRep.create(
-  user: legrep_user, 
+  user: User.find_by(email: "legalrep@legalrep.com"), 
   organization: sens_commun
-  )
+)
+puts legalrep
 
 3.times do 
   pm = PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: basic_user)

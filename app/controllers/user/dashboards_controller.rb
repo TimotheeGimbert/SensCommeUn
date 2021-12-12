@@ -6,7 +6,7 @@ class User::DashboardsController < ApplicationController
     when "Mes Participations"
       @render_title = "Les organisations auxquelles je participe en tant que partie prenante :"
       @render_view = "organizations/list"
-      @organizations = current_user.organizations
+      @organizations = Organization.where(external_stakeholders: ExternalStakeholder.find_by(user: current_user))
     when "Editer mon profil"
       @render_title = "Mon profil"
       @render_view = 'profiles/form'
