@@ -58,6 +58,11 @@ class User::DashboardsController < ApplicationController
     @render_sidebar_specific_contents = 
       ["user/partials/dashboards/index/sidebar_specific_content",
       "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
+    if params[:organization_managed]
+      @organization = Organization.find_by(id: params[:organization_managed].to_i)
+      @render_view_title = "Éditer les informations de l'organisation"
+      @render_view = "organizations/form"
+    end
   end
 
 end
