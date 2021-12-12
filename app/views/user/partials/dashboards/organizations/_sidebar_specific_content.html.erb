@@ -1,14 +1,15 @@
 <% links = [] %>
 <% ActivitySector.all.each { |sector| links.push( {id:sector.id, label:sector.name} ) } %>
 
-<h4 class="text-light">Secteurs d'activité</h4>
-
-<ul class="nav nav-pills flex-column mb-auto">
-    <% links.each do |link| %>
-      <li class="nav-item mb-2" style="font-size:smaller">
-        <%= link_to "#{link[:label]}", user_dashboards_organizations_path(sectorID: link[:id]), class:"sidebar-item text-secondary text-decoration-none" %>
-      </li>
-    <% end %>
-</ul>
-
-<hr>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+  <h4 class="text-info">Secteurs d'activité</h4>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+      <% links.each do |link| %>
+        <li class="nav-item mb-2" style="font-size:smaller">
+          <%= link_to "#{link[:label]}", user_dashboards_organizations_path(sectorID: link[:id]), class:"sidebar-item text-light text-decoration-none" %>
+        </li>
+      <% end %>
+  </ul>
+  <hr>
+</div>
