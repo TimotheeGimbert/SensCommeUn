@@ -1,8 +1,6 @@
 class User::DashboardsController < ApplicationController
 
   def index
-    # Displays the dedicated sidebar for USER-Basic
-    @render_sidebar_specific_contents = ["user/partials/dashboards/index/sidebar_specific_content"]
 
     # Displays the chosen partial through links clicked on the sidebar
     case params[:clicked_link]
@@ -10,8 +8,8 @@ class User::DashboardsController < ApplicationController
       @render_title = "Les organisations auxquelles je participe en tant que partie prenante :"
       @render_view = "organizations/list"
       @organizations = current_user.organizations
-    when "Editer mon profile"
-      @render_title = "Mon profile"
+    when "Editer mon profil"
+      @render_title = "Mon profil"
       @render_view = 'profiles/form'
       @profile = current_user.profile
     when "Messagerie"
@@ -58,9 +56,9 @@ class User::DashboardsController < ApplicationController
 
   def organizations_legalreps
     # Displays the sidebar for basic users followed by the dedicated section for legal representants
-    @render_sidebar_specific_contents = 
-      ["user/partials/dashboards/index/sidebar_specific_content",
-      "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
+    #@render_sidebar_specific_contents = 
+      #["user/partials/dashboards/index/sidebar_specific_content",
+      #["user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
   end
 
 end
