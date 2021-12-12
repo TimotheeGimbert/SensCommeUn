@@ -1,6 +1,6 @@
 class StakeholderRequestsController < ApplicationController
   before_action :set_stakeholder_request, only: %i[ show edit update destroy ]
-  before_action :has_user_rights?, only: %i[ create ]
+  before_action :has_user_rights?, only: %i[ create update]
   before_action :is_user_recipient_manager?, only: %i[edit update destroy]
   
   # GET /stakeholder_requests or /stakeholder_requests.json
@@ -39,13 +39,15 @@ class StakeholderRequestsController < ApplicationController
 
   # PATCH/PUT /stakeholder_requests/1 or /stakeholder_requests/1.json
   def update
+
     respond_to do |format|
       if @stakeholder_request.update(stakeholder_request_params)
-        
-        format.html { redirect_to external_stakeholder: "create", user:@stakeholder_request.user, category_stakeholder: CategoryStakeholder.first, organization: @stakeholder_request.organization, notice: "Stakeholder request was successfully updated." }
+        ExternalStakeholder.create(user:@stakeholder_request.user, stakeholder_category: StakeholderCategory.first, organization: @stakeholder_request.organization)
+
+        format.html {redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: params[:organization_id]), notice: "Stakeholder request was successfully updated." }
         format.json { render :show, status: :ok, location: @stakeholder_request }
       else
-        format.html { redirect_to user_dashboards_organizations_legalreps_path(clicked_link: "Partie prenante"), status: :unprocessable_entity }
+        format.html { redirect_to  user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: params[:organization_id]), status: :unprocessable_entity }
         format.json { render json: @stakeholder_request.errors, status: :unprocessable_entity }
       end
     end
@@ -68,7 +70,7 @@ class StakeholderRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stakeholder_request_params
-      if current_user.managed_organizations.include?(Organization.find_by(id: params[:organization_id].to_i))
+      if current_user.managed_organizations.include?(Organization.find_by(id: params[:organization_managed].to_i))
         params.require(:stakeholder_request).permit(:validation, :organization_id)
       else
         params.require(:stakeholder_request).permit(:message, :organization_id)
