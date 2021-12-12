@@ -1,7 +1,6 @@
 class User::DashboardsController < ApplicationController
 
   def index
-
     # Displays the chosen partial through links clicked on the sidebar
     case params[:clicked_link]
     when "Mes Participations"
@@ -20,7 +19,7 @@ class User::DashboardsController < ApplicationController
       #news
       @organizations = Organization.all.sort {|a, b| b.created_at <=> a.created_at}.first(3)
       @render_view = "user/partials/dashboards/index/news"
-      @render_title_first = "Les dernières organisations connectées sur la plateforme :"
+      @render_title_first = "Les dernières organisations référencées sur la plateforme :"
       @render_view_first = "organizations/list"
       @private_messages = current_user.received_messages.sort {|a, b| b.created_at <=> a.created_at}.first(3)
       @render_title_second = "Mes derniers messages :"
@@ -56,9 +55,9 @@ class User::DashboardsController < ApplicationController
 
   def organizations_legalreps
     # Displays the sidebar for basic users followed by the dedicated section for legal representants
-    #@render_sidebar_specific_contents = 
-      #["user/partials/dashboards/index/sidebar_specific_content",
-      #["user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
+    @render_sidebar_specific_contents = 
+      ["user/partials/dashboards/index/sidebar_specific_content",
+      "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
   end
 
 end
