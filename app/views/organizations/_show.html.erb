@@ -12,10 +12,14 @@
   footer: "#{@organization.external_stakeholders.length} parties prenantes connectées"
   }%>
 
-<% if @organization.managers.include?(current_user)%>
+<%if @organization.managers.include?(current_user)%>
   <% card[:actions] = [{label: "Éditer les informations", path: user_dashboards_organizations_legalreps_path(organization_managed: @organization.id, clicked_link: "Éditer les informations"), type:"success"}] %>
-<%else%>
-  <%card[:actions] = [{label: "Devenir partie prenante", path: user_dashboards_organizations_path, type:"success"}]%>
+<%elsif current_user.organizations.include?(@organization)%>
+  <% card[:actions] = [{label: "Vous êtes partie prenante de cette organization", path: "", type:"success disabled"}] %><h3 class="tex-info"></h3>
+<%elsif current_user.stakeholder_requests.where(organization: @organization).empty?%>
+  <%card[:actions] = [{label: "Demander à devenir partie prenante", path: user_dashboards_organizations_path(organization_id: @organization.id,show: "StakeholderRequest"), type:"success"}]%>
+<%else %>
+  <%card[:actions] = [{label: "Votre demande de participation n'a pas encore été acceptée", path: "", type:"secondary disabled"},{label: "Refaire une demande", path: user_dashboards_organizations_path(organization_id: @organization.id,show: "StakeholderRequest"), type:"success"} ]%>
 <%end%>
 
 
@@ -25,6 +29,9 @@
 <div class="d-flex" style="width:100%">
   <%= render "partials/components/card_organization", card: card %>
 </div>
+<%if params[:show] && params[:show] == "StakeholderRequest"%>
+  <%=render "stakeholder_requests/form"%>
+<%end%>
 <div class="d-flex justify-content-evenly">
   <div class="d-flex flex-column align-items-center">
     <h4>Dirigeants</h4>

@@ -33,8 +33,7 @@ class User::DashboardsController < ApplicationController
     
     # Gets user-selected sector_id and organisation through params from sidebar
     sectorID_selected = params[:sectorID]
-    organization_selected = params[:show]
-
+    
     # Displays by default the full list of organizations
     @render_view = "organizations/list"
 
@@ -47,10 +46,19 @@ class User::DashboardsController < ApplicationController
     end
 
     # Displays an organization if selected by the Show eye-button
-    if organization_selected != nil
+    organization_id = params[:organization_id]
+    if organization_id != nil
       @render_view = "organizations/show"
-      @organization = Organization.find_by(id: organization_selected.to_i)
+      @organization = Organization.find_by(id: organization_id.to_i)
     end
+
+    # Displays form for stakholder_request
+    
+    if params[:show] && params[:show] == "StakeholderRequest"
+      @stakeholder_request = StakeholderRequest.new()
+    end
+    puts "#"*100
+    puts @stakeholder_request
   end
 
   def organizations_legalreps
