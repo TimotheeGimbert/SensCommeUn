@@ -51,33 +51,28 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations_legalreps
-    # Displays the sidebar for basic users followed by the dedicated section for legal representants
-    @render_sidebar_specific_contents = 
-      ["user/partials/dashboards/index/sidebar_specific_content",
-      "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
     if params[:organization_managed]
+      # Gets organizations managed by the legal representant
       @organization = Organization.find_by(id: params[:organization_managed].to_i)
       if params[:clicked_link]
         case params[:clicked_link]
         when "Éditer les informations"
-          @render_view_title = "Éditer les informations de l'organisation"
+          @view_title = "Éditer les informations de l'organisation"
           @render_view = "organizations/form"
         when "Parties prenantes"
           @all_external_stakeholders = @organization.external_stakeholders
-          @render_view_title = "Gérer les parties prenantes de l'organisation"
-          @render_view = "user/partials/dashboards/organizations_legalreps/external_stakeholders.html.erb"
-          @external_stakeholders_category = StakeholderCategory.all.sort {|a, b| a.name <=> b.name}
           @external_stakeholder = ExternalStakeholder.new(organization: @organization)
-
+          @external_stakeholders_category = StakeholderCategory.all.sort {|a, b| a.name <=> b.name}
+          @view_title = "Gérer les parties prenantes de l'organisation"
+          @render_view = "user/partials/dashboards/organizations_legalreps/external_stakeholders.html.erb"
         when "Documents"
-          @render_view_title = "Bientôt dans votre tableau de bord..."
+          @view_title = "Bientôt dans votre tableau de bord..."
           @render_view = "user/partials/soon"
         when "Présentations"
-          @render_view_title = "Bientôt dans votre tableau de bord..."
+          @view_title = "Bientôt dans votre tableau de bord..."
           @render_view = "user/partials/soon"
         end
       else
-        @render_view_title = "Informations de l'organisation"
         @render_view = "organizations/show"
       end
     end
