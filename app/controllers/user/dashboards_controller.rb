@@ -4,26 +4,26 @@ class User::DashboardsController < ApplicationController
     # Displays the chosen partial through links clicked on the sidebar
     case params[:clicked_link]
     when "Mes Participations"
-      @render_title = "Les organisations auxquelles je participe en tant que partie prenante :"
-      @render_view = "organizations/list"
+      # Gets organizations where the current user is a stakeholder, then renders the appropriate partial
+      @view_title = "Organisations dont je suis partie-prenante"
       @organizations = Organization.where(external_stakeholders: ExternalStakeholder.find_by(user: current_user))
-    when "Editer mon profil"
-      @render_title = "Mon profil"
-      @render_view = 'profiles/form'
-      @profile = current_user.profile
+      @render_view = "organizations/list"
     when "Messagerie"
-      @render_title = "Mes messages"
-      @render_view = 'private_messages/list'
+      # Gets messages of the current user, then renders the appropriate partial
+      @view_title = "Mes messages"
       @private_messages = current_user.private_messages
-    else 
-      #news
+      @render_view = "private_messages/list" 
+    when "Editer mon profil"
+      # Gets the current user's profile, then renders the appropriate partial
+      @profile = current_user.profile
+      @render_view = "profiles/form"
+    else
+      # Open partial of last news
+      @view_title_section1 = "Dernières organisations référencées sur la plateforme"
       @organizations = Organization.all.sort {|a, b| b.created_at <=> a.created_at}.first(3)
-      @render_view = "user/partials/dashboards/index/news"
-      @render_title_first = "Les dernières organisations référencées sur la plateforme :"
-      @render_view_first = "organizations/list"
+      @view_title_section2 = "Mes derniers messages reçus"
       @private_messages = current_user.received_messages.sort {|a, b| b.created_at <=> a.created_at}.first(3)
-      @render_title_second = "Mes derniers messages :"
-      @render_view_second = "private_messages/list"
+      @render_view = "user/partials/news/index"
     end
   end
 
