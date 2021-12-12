@@ -1,19 +1,32 @@
-<div class="d-flex flex-column bg-primary p-5">
-  <div class="d-flex"><h3 class="text-info">Envoyer un message à l'organisation <br>pour lui demander de devenir partie prenante</h3></div>
-
-  <%= simple_form_for(@stakeholder_request) do |f| %>
+<%if current_user.managed_organizations.include?(Organization.find_by(id: params[:organization_managed].to_i))%>
+  <%= simple_form_for(stakeholder_request) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-    <div class="form-inputs">
-      <%= f.input :message %>
-      <%= f.hidden_field :organization_id, value: params[:organization_id]%>
-    </div>
-
-  <div class="form-actions d-flex justify-content-center mt-3">
-      <%= button_tag type: 'submit', class: "btn btn-success" do %>
-          <i class="fas fa-check" aria-hidden="true"></i>
-      <% end %>
-    </div>
+    <%= f.hidden_field :organization_id, value: params[:organization_id]%>
+    <div class="form-actions d-flex justify-content-center mt-3">
+        <%= button_tag type: 'submit', class: "btn btn-success btn-sm" do %>
+            <i class="fas fa-check" aria-hidden="true"> Accepter</i>
+        <% end %>
+      </div>
   <% end %>
-</div>
+<%else%> 
+  <div class="d-flex flex-column bg-primary p-5">
+    <div class="d-flex">
+      <h3 class="text-info">Envoyer un message à l'organisation <br>pour lui demander de devenir partie prenante</h3>
+    </div>
+      <%= simple_form_for(@stakeholder_request) do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+        <%= f.hidden_field :organization_id, value: params[:organization_id]%>
+        
+        <div class="form-inputs">
+          <%= f.input :message %>
+        </div>
+        <div class="form-actions d-flex justify-content-center mt-3">
+          <%= button_tag type: 'submit', class: "btn btn-success" do %>
+              <i class="fas fa-check" aria-hidden="true"></i>
+          <% end %>
+        </div>
+      <% end %>
+  </div>
+<%end%>
