@@ -1,5 +1,7 @@
 class StakeholderCategoriesController < ApplicationController
   before_action :set_stakeholder_category, only: %i[ show edit update destroy ]
+  before_action :has_legal_rep_rights?, only: %i[ index show new create ]
+  before_action :has_admin_rights?, only: %i[ edit update destroy ]
 
   # GET /stakeholder_categories or /stakeholder_categories.json
   def index

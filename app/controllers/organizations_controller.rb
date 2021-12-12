@@ -1,5 +1,8 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[ show edit update destroy ]
+  before_action :has_user_rights?, only: %i[ index show ]
+  before_action :has_legal_rep_rights?, only: %i[ edit update ]
+  before_action :has_admin_rights?, only: %i[ new create destroy ]
 
   # GET /organizations or /organizations.json
   def index
@@ -38,7 +41,7 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to @organization, notice: "Organization was successfully updated." }
+        format.html { redirect_to user_dashboards_organizations_legalreps_path(organization_managed: @organization.id) , notice: "Organization was successfully updated." }
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit, status: :unprocessable_entity }
