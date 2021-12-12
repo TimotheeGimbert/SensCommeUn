@@ -122,18 +122,6 @@ puts "Représentant légaux créés"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ###############################################
 # Seeds dedicated to application tests and demo dashboard
 ###############################################
@@ -142,10 +130,12 @@ basic_user = User.create(email: "user@user.com", password: "azerty")
   puts basic_user
   profile = Profile.create(user: basic_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
   puts profile
+
 legrep_user = User.create(email: "legalrep@legalrep.com", password: "azerty")
   puts legrep_user
   profile = Profile.create(user: legrep_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
   puts profile
+
 admin = Admin.create(email: "admin@admin.com", password: "azerty")
   puts admin
 
@@ -174,13 +164,15 @@ user_stakeholder = ExternalStakeholder.create(
   organization: sens_commun, 
   stakeholder_category: StakeholderCategory.all.sample(1).first, 
   email: "sensbasic@sens.com", 
-  user: basic_user
+  user: User.find_by(email: "user@user.com")
 )
+puts user_stakeholder
 
 legalrep = LegalRep.create(
-  user: legrep_user, 
+  user: User.find_by(email: "legalrep@legalrep.com"), 
   organization: sens_commun
-  )
+)
+puts legal_rep
 
 3.times do 
   pm = PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: basic_user)
