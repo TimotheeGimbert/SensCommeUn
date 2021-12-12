@@ -3,6 +3,7 @@
     <tr>
       <th>Object</th>
       <th>Content</th>
+      <th>Author id</th>
       <th>Author</th>
       <th colspan="3"></th>
     </tr>
@@ -14,6 +15,7 @@
         <td><%= private_message.object %></td>
         <td><%= private_message.content %></td>
         <td><%= private_message.author_id %></td>
+        <td><%= private_message.author.email%></td>
         <td><%= link_to 'Show', private_message %></td>
         <td><%= link_to 'Edit', edit_private_message_path(private_message) %></td>
         <td><%= link_to 'Destroy', private_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>

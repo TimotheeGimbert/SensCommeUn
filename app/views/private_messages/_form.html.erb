@@ -6,7 +6,10 @@
   <div class="form-inputs">
     <%= f.input :object %>
     <%= f.input :content %>
-    <%= f.input :recipient_emails , collection: @users_email,input_html: { multiple: true }%>
+    <h5>Faites control+click pour en sélectionner plusieurs</h5>
+    <%= f.select :recipients_user_ids, User.all.collect {|x| [x.email, x.id]}, {}, :multiple => true %>
+    <br>
+    <%= f.select :recipients_admin_ids, Admin.all.collect {|x| [x.email, x.id]}, {}, :multiple => true %>
 
     <%if user_signed_in?%>
       <%= f.hidden_field :author_id , value: current_user.id %>

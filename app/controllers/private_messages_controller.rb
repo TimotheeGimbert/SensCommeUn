@@ -1,7 +1,7 @@
 class PrivateMessagesController < ApplicationController
   before_action :set_private_message, only: %i[ show edit update destroy ]
-  before_action :has_user_rights?, only: %i[ new show]
-  before_action :has_admin_rights?, only: %i[ index edit create update destroy]
+  before_action :has_user_rights?, only: %i[ new show create ]
+  before_action :has_admin_rights?, only: %i[ index edit update destroy ]
 
   # GET /private_messages or /private_messages.json
   def index
@@ -36,6 +36,15 @@ class PrivateMessagesController < ApplicationController
     
     respond_to do |format|
       if @private_message.save
+        # puts "it's working"
+        # params[:recipients_user].each do |recipients_user|
+        #   recipients_user = JoinMessagesRecipient.new(:recipients_user_id => recipients_user, :post_id => @private_message.id)
+        #   if recipients_user.valid?
+        #     recipients_user.save
+        #   else
+        #     @errors += recipients_user.errors
+        #   end
+        # end
         format.html { redirect_to @private_message, notice: "Private message was successfully created." }
         format.json { render :show, status: :created, location: @private_message }
       else
@@ -75,6 +84,6 @@ class PrivateMessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def private_message_params
-      params.require(:private_message).permit(:object, :content, :author_id, :author_type, :recipient_emails)
+      params.require(:private_message).permit(:object, :content, :author_id, :author_type, recipients_user_ids: [], recipients_admin_ids: [])
     end
 end
