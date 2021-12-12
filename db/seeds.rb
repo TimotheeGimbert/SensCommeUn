@@ -86,7 +86,8 @@ puts "30 organisations créées"
     name: Faker::Company.type, 
     description: Faker::Lorem.paragraph(sentence_count: 5), 
     activity_sector: ActivitySector.all.sample(1).first, 
-    organization: Organization.all.sample(1).first)
+    organization: Organization.all.sample(1).first
+  )
   puts activity
 end 
 puts "10 activités créées"
@@ -164,7 +165,16 @@ user_stakeholder = ExternalStakeholder.create(
   organization: sens_commun, 
   stakeholder_category: StakeholderCategory.all.sample(1).first, 
   email: "sensbasic@sens.com", 
-  user: User.find_by(email: "user@user.com")
+  user: basic_user
+)
+puts user_stakeholder
+
+legrep_stakeholder = ExternalStakeholder.create(
+  name: "USER-LegRep-PP", 
+  organization: Organization.all.sample(1).first, 
+  stakeholder_category: StakeholderCategory.all.sample(1).first, 
+  email: "sensLegRep@sens.com", 
+  user: legrep_user
 )
 puts user_stakeholder
 
@@ -172,7 +182,7 @@ legalrep = LegalRep.create(
   user: User.find_by(email: "legalrep@legalrep.com"), 
   organization: sens_commun
 )
-puts legal_rep
+puts legalrep
 
 3.times do 
   pm = PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: basic_user)
