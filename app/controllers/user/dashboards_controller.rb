@@ -68,6 +68,7 @@ class User::DashboardsController < ApplicationController
       "user/partials/dashboards/organizations_legalreps/sidebar_specific_content"]
     if params[:organization_managed]
       @organization = Organization.find_by(id: params[:organization_managed].to_i)
+
       if params[:clicked_link]
         case params[:clicked_link]
         when "Éditer les informations"
@@ -79,7 +80,8 @@ class User::DashboardsController < ApplicationController
           @render_view = "user/partials/dashboards/organizations_legalreps/external_stakeholders.html.erb"
           @external_stakeholders_category = StakeholderCategory.all.sort {|a, b| a.name <=> b.name}
           @external_stakeholder = ExternalStakeholder.new(organization: @organization)
-
+          @stakeholder_requests = @organization.stakeholder_requests
+          
         when "Documents"
           @render_view_title = "Bientôt dans votre tableau de bord..."
           @render_view = "user/partials/soon"

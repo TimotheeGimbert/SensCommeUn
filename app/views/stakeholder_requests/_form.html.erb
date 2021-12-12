@@ -6,11 +6,7 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
     <div class="form-inputs">
-      <%if current_user.managed_organizations.include?(Organization.find_by(id: params[:organization_id]))%>
-        <%= f.input :validation %>
-      <%else%>
-        <%= f.input :message %>
-      <%end%>
+      <%= f.input :message %>
       <%= f.hidden_field :organization_id, value: params[:organization_id]%>
     </div>
 
