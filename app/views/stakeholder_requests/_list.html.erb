@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Message</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stakeholder_requests.each do |stakeholder_request| %>
+      <tr>
+        <td><%= stakeholder_request.user_id %></td>
+        <td><%= stakeholder_request.message %></td>
+        <td><%= render "stakeholder_requests/form", stakeholder_request: stakeholder_request %><br></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

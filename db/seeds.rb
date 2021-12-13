@@ -4,6 +4,7 @@
 PrivateMessage.destroy_all
 Activity.destroy_all
 ExternalStakeholder.destroy_all
+StakeholderCategory.destroy_all
 LegalRep.destroy_all
 Organization.destroy_all
 ActivitySector.destroy_all
@@ -91,7 +92,7 @@ puts "30 organisations créées"
 end 
 puts "10 activités créées"
 
-['client','fournisseur','financeur'].each do |category|
+['non déterminé','client','fournisseur','financeur'].each do |category|
   StakeholderCategory.create(name: category)
 end
 puts "categories de pp crees"
@@ -140,7 +141,7 @@ admin = Admin.create(email: "admin@admin.com", password: "azerty")
   puts admin
 
 sens_commun = Organization.create(
-  name: "SENS-COMMUN", 
+  name: "SENS·COMMUN", 
   nickname: "sensC", 
   creation_date: DateTime.new(2021,12,11,23,11,0), 
   address: Faker::Address.street_address, 
@@ -162,7 +163,7 @@ puts sens_commun
 user_stakeholder = ExternalStakeholder.create(
   name: "USER-Basic-PP", 
   organization: sens_commun, 
-  stakeholder_category: StakeholderCategory.all.sample(1).first, 
+  stakeholder_category: StakeholderCategory.last, 
   email: "sensbasic@sens.com", 
   user: basic_user
 )
