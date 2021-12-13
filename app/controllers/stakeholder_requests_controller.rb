@@ -39,15 +39,17 @@ class StakeholderRequestsController < ApplicationController
 
   # PATCH/PUT /stakeholder_requests/1 or /stakeholder_requests/1.json
   def update
-
+    stakeholder_category_id = stakeholder_request_params[:stakeholder_category].to_i
+    stakeholder_request_params.delete("stakeholder_category") 
     respond_to do |format|
       if @stakeholder_request.update(stakeholder_request_params)
-        ExternalStakeholder.create(user:@stakeholder_request.user, stakeholder_category: StakeholderCategory.first, organization: @stakeholder_request.organization)
+        
+        ExternalStakeholder.create(user:@stakeholder_request.user, email: @stakeholder_request.user.email, stakeholder_category_id: stakeholder_category_id, organization: @stakeholder_request.organization)
 
-        format.html {redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantesa", organization_managed: params[:organization_id]), notice: "Stakeholder request was successfully updated." }
+        format.html {redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully updated." }
         format.json { render :show, status: :ok, location: @stakeholder_request }
       else
-        format.html { redirect_to  user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: params[:organization_id]), status: :unprocessable_entity }
+        format.html { redirect_to  user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: @stakeholder_request.organization.id), status: :unprocessable_entity }
         format.json { render json: @stakeholder_request.errors, status: :unprocessable_entity }
       end
     end
@@ -55,9 +57,10 @@ class StakeholderRequestsController < ApplicationController
 
   # DELETE /stakeholder_requests/1 or /stakeholder_requests/1.json
   def destroy
+    organization_id = @stakeholder_request.organization.id
     @stakeholder_request.destroy
     respond_to do |format|
-      format.html { redirect_to stakeholder_requests_url, notice: "Stakeholder request was successfully destroyed." }
+      format.html { redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: organization_id), notice: "Stakeholder request was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -65,13 +68,15 @@ class StakeholderRequestsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stakeholder_request
-      @stakeholder_request = StakeholderRequest.find(params[:id])
+      @stakeholder_request = StakeholderRequest.find(params[:id].to_i)
     end
 
     # Only allow a list of trusted parameters through.
     def stakeholder_request_params
-      if current_user.managed_organizations.include?(Organization.find_by(id: params[:organization_managed].to_i))
-        params.require(:stakeholder_request).permit(:validation, :organization_id)
+      puts "#"*100
+      organization_id = params[:stakeholder_request][:organization_id]
+      if current_user.managed_organizations.include?(Organization.find_by(id: organization_id.to_i))
+        params.require(:stakeholder_request).permit(:validation, :organization_id,:stakeholder_category )
       else
         params.require(:stakeholder_request).permit(:message, :organization_id)
       end

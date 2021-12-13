@@ -4,6 +4,7 @@
 PrivateMessage.destroy_all
 Activity.destroy_all
 ExternalStakeholder.destroy_all
+StakeholderCategory.destroy_all
 LegalRep.destroy_all
 Organization.destroy_all
 ActivitySector.destroy_all
