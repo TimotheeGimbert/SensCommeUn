@@ -70,7 +70,11 @@ class User::DashboardsController < ApplicationController
           @render_view = "organizations/form"
         when "Parties prenantes"
           @all_external_stakeholders = @organization.external_stakeholders
-          @external_stakeholder = ExternalStakeholder.new(organization: @organization)
+          if params[:stakeholder_id]
+            @external_stakeholder = ExternalStakeholder.find_by(id: params[:stakeholder_id])
+          else 
+            @external_stakeholder = ExternalStakeholder.new(organization: @organization)
+          end
           @stakeholder_requests = @organization.stakeholder_requests
           @external_stakeholders_category = StakeholderCategory.all.sort {|a, b| a.name <=> b.name}
           @view_title = "Gérer les parties prenantes de l'organisation"
