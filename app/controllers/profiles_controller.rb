@@ -1,7 +1,8 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
-  before_action :has_user_rights, only: %i[ new create ]
-  before_action :has_admin_rights?, only: %i[ index show edit update destroy ]
+  before_action :has_user_rights?, only: %i[ new create update edit ]
+  before_action :has_admin_rights?, only: %i[ destroy ]
+  before_action :current_user?, only: %i[ update ]
 
   # GET /profiles or /profiles.json
   def index
@@ -40,10 +41,10 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: "Profile was successfully updated." }
+        format.html { redirect_to user_dashboards_index_path(clicked_link: "Editer mon profil"), notice: "Profile was successfully updated." }
         format.json { render :show, status: :ok, location: @profile }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render user_dashboards_index_path(clicked_link: "Editer mon profil"), status: :unprocessable_entity }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end

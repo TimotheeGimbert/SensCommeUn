@@ -12,4 +12,7 @@ class ApplicationController < ActionController::Base
     redirect_back fallback_location: root_path unless (LegalRep.exists?(user: current_user) == true || admin_signed_in? == true)
   end
 
+  def current_user?
+    redirect_back fallback_location: root_path unless current_user.profile.id == @profile.id
+  end
 end
