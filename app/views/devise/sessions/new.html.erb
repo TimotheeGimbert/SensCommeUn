@@ -1,37 +1,44 @@
-<div class="d-flex flex-column justify-content-center align-items-center mt-5">
-  <h2>Log in</h2>
+<div class="container_devise_session"
+style="box-sizing: border-box;
+background-color: rgba(8, 11, 12, 0.158);
+margin-top: 30px;">
+<head>
+<h2 style="padding-top: 40px;">Connexion</h2>
+</head>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
+<body class='text-center'>
 
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-group" style="width: fit-content; padding-left: 41%;">
+    <% f.label :email %><br />
+    <%= f.email_field :email, class:"form-control", placeholder:"Enter Email", autofocus: true, autocomplete: "email" %>
+  </div>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-    <% end %>
-
-    <div class="form-actions d-flex justify-content-center mt-3 mb-5">
-      <%= button_tag type: 'submit', class: "btn btn-success btn-sm" do %>
-          <i class="fas fa-check" aria-hidden="true"></i>
-      <% end %>
+  <div class="form-group" style="width: fit-content; padding-left: 41%;">
+    <% f.label :password %><br />
+    <%= f.password_field :password, class:"form-control", placeholder:"Password", autocomplete: "current-password" %>
+  </div>
+<br/>
+  <% if devise_mapping.rememberable? %>
+    <div class="form-group">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
     </div>
   <% end %>
+<br/>
+  <div class="action">
+    <%= f.submit "Log in", class:"btn btn-primary" %>
+  </div>
+<% end %>
+<br/>
 
-  <%= render "devise/shared/links" %>
+<%= render "devise/shared/links" %>
 
-
-  <div class="d-flex my-5">
+<div class="d-flex my-5">
     <span class="nav-item">
       <%= link_to "Connexion Administrateur", new_admin_session_path, class: "btn btn-outline-danger text-light mx-3" %>
     </span>
-  </div>
+</div>
+
+</body>
 </div>
