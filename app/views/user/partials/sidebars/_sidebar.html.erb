@@ -1,0 +1,13 @@
+<div class="d-flex flex-column p-4 text-center text-white bg-dark" style="width: 311px;">
+  
+  <%= render "user/partials/sidebars/dash" %>
+
+
+  <% if LegalRep.exists?(user: current_user) %>
+    <%= render "user/partials/sidebars/manage" %>
+    <%= render "user/partials/sidebars/data" %>
+  <% end %>
+
+  <%= render "user/partials/sidebars/profile" %>
+  
+</div>

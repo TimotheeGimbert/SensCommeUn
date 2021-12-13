@@ -18,7 +18,7 @@ class User::DashboardsController < ApplicationController
       @profile = current_user.profile
       @render_view = "profiles/form"
     else
-      # Opens partial of last news and messages
+      # DEFAULT : Opens partial of last news and messages
       # "Les dernières actualités" 
       @view_title_section1 = "Dernières organisations référencées sur la plateforme"
       @organizations = Organization.all.sort {|a, b| b.created_at <=> a.created_at}.first(3)

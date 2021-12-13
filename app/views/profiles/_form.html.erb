@@ -1,23 +1,25 @@
-<div class="d-flex justify-content-center">
-  <h2 class="text-success text-center my-5">Mon profil</h2>
-  <div class="d-flex">
-    <%= simple_form_for(@profile) do |f| %>
-      <%= f.error_notification %>
-      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<h2 class="text-success text-center my-5">Mon profil</h2>
+<div class="d-flex flex-column">
 
-      <div class="form-inputs">
-        <%= f.association :city, label: "Ville" %>
-        <%= f.input :first_name, label: "Prénom" %>
-        <%= f.input :last_name, label: "nom" %>
-        <%= f.input :phone_number, label: "Numéro de téléphone" %>
-        <%= f.hidden_field :user_id, value: current_user.id%>
-      </div>
-
-      <div class="form-actions d-flex justify-content-center mt-3">
-        <%= button_tag type: 'submit', class: "btn btn-success" do %>
-            <i class="fas fa-check" aria-hidden="true"></i>
-        <% end %>
-      </div>
-    <% end %>
+  <%= simple_form_for(@profile) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  
+  <div class="form-inputs">
+    <%= f.association :user, label: @profile.user.id %>
+    <%= f.association :city %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :phone_number %>
   </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class:"btn btn-outline-light py-1  px-5 m-5 mt-2" %>
+  </div>
+<% end %>
+
+  <div class="d-flex">
+    <%= link_to "Éditer mes identifiants", edit_user_registration_path, class:"btn btn-outline-danger text-light mx-auto" %>
+  </div>
+
 </div>
