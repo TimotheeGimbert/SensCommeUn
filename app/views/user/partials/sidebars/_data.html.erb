@@ -1,0 +1,13 @@
+<%if params[:organization_managed] %>
+  <% links = ["Parties prenantes", "Documents", "Présentations"] %>
+
+  <ul class="nav nav-pills flex-column mb-auto">
+    <% links.each do |link| %>
+      <li class="nav-item"> 
+        <%= link_to "#{link}", user_dashboards_organizations_legalreps_path(organization_managed: params[:organization_managed], clicked_link: link), class:"nav-link sidebar-item" %>
+      </li>
+    <% end %>
+  </ul>
+<%else%>
+  <p><i>Sélectionner une organisation</i></p>
+<%end%>

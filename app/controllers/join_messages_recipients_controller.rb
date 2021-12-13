@@ -1,5 +1,7 @@
 class JoinMessagesRecipientsController < ApplicationController
   before_action :set_join_messages_recipient, only: %i[ show edit update destroy ]
+  before_action :has_user_rights?, only: %i[ index new create destroy ]
+  before_action :has_admin_rights?, only: %i[ show edit update ]
 
   # GET /join_messages_recipients or /join_messages_recipients.json
   def index

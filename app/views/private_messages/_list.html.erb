@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
+<h2 class="text-success text-center"> <%= @view_title %> </h2>
 
-<h1>Private Messages</h1>
-
-<table>
+<table class="table table-dark table-hover mt-4 mb-5">
   <thead>
     <tr>
       <th>Object</th>
@@ -13,19 +11,15 @@
   </thead>
 
   <tbody>
-    <% @private_messages.each do |private_message| %>
+    <% @private_messages.each do |pm| %>
       <tr>
-        <td><%= private_message.object %></td>
-        <td><%= private_message.content %></td>
-        <td><%= private_message.author_id %></td>
-        <td><%= link_to 'Show', private_message %></td>
-        <td><%= link_to 'Edit', edit_private_message_path(private_message) %></td>
-        <td><%= link_to 'Destroy', private_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= pm.object %></td>
+        <td><%= pm.content %></td>
+        <td><%= pm.author_id %></td>
+        <td><%= link_to 'Show', pm %></td>
+        <td><%= link_to 'Edit', edit_private_message_path(pm) %></td>
+        <td><%= link_to 'Destroy', pm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Private Message', new_private_message_path %>

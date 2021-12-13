@@ -4,13 +4,15 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.association :organization %>
+    <%= f.hidden_field :organization_id, :value => params[:organization_managed] %>
     <%= f.input :name %>
     <%= f.input :email %>
     <%= f.association :stakeholder_category %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-actions d-flex justify-content-center mt-3">
+    <%= button_tag type: 'submit', class: "btn btn-success" do %>
+        <i class="fas fa-check" aria-hidden="true"></i>
+    <% end %>
   </div>
 <% end %>

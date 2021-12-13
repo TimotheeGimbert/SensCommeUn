@@ -11,14 +11,10 @@
   </head>
 
   <body>
-    <% if admin_signed_in?%>
-      <%=render "admin/partials/shared/navbar"%>
-    <%elsif user_signed_in?%>
-      <%=render "user/partials/shared/navbar"%>
-    <%else%>
-      <%=render "partials/visitor/navbar"%>
-    <%end%>
+
+    <%=render "partials/navbar"%>
+
     <%= yield %>
-    <%=render "partials/shared/footer"%>
+    
   </body>
 </html>

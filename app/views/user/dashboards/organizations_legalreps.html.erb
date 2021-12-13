@@ -1,9 +1,12 @@
-<h2>Dashboard legalrep</h2>
 <div class="d-flex">
+
   <div class="d-flex flex-column" id="sidebar">
-    render partials/legalreps/sidebar
+    <%= render "user/partials/sidebars/sidebar"%>
   </div>
-  <div class="d-flex flex-column m-5" id="panel">
-   render partials/legalreps/ -> conditionnel
+
+  <div class="d-flex flex-column m-5" style="width:100%" id="panel">
+    <h3 class="text-info"><%= @render_view_title%></h3>
+    <%= render "#{@render_view}"%>
   </div>
+  
 </div>

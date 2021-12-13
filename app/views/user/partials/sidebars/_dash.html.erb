@@ -1,0 +1,13 @@
+<hr class="mb-3">
+<h4><%=link_to "TABLEAU DE BORD", user_dashboards_index_path, class:"text-warning text-decoration-none"%></h4>
+<hr class="mt-2">
+
+<% links = ["Mes Participations", "Les dernières actualités", "Messagerie"] %>
+
+<ul class="nav nav-pills flex-column mb-auto">
+  <% links.each do |link| %>
+    <li class="nav-item"> 
+      <%= link_to "#{link}", user_dashboards_index_path(clicked_link: link), class:"nav-link sidebar-item" %>
+    </li>
+  <% end %>
+</ul>
