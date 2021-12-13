@@ -1,0 +1,2 @@
+class VisitorMessage < ApplicationRecord
+end

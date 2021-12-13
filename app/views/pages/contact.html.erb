@@ -7,25 +7,7 @@
       <h4> Vous avez une question ? <br> 
       Il suffit de remplir ce formulaire.</h4>
     </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Nom</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Votre nom">
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Prénom</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Votre prénom">
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Email</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="email@exemple.com">
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">Votre Message</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    <div class="d-flex justify-content-center mb-3 ">
-      <button type="submit" class="btn btn-primary">Envoyer</button>
-    </div>
+    <%= render 'visitor_messages/form', visitor_message: @visitor_message %>
   </div>
 </div>
 
