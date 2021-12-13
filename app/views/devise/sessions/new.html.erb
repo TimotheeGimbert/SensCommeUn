@@ -1,4 +1,4 @@
-<div class="container"
+<div class="container_devise_session"
 style="box-sizing: border-box;
 background-color: rgba(8, 11, 12, 0.158);
 margin-top: 30px;">
@@ -6,12 +6,7 @@ margin-top: 30px;">
 <h2 style="padding-top: 40px;">Connexion</h2>
 </head>
 
-<body
-style=" box-sizing: border-box;
-justify-content: center;
-text-align: center;
-align-items: center;
-box-sizing: border-box;">
+<body class='text-center'>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group" style="width: fit-content; padding-left: 41%;">
@@ -38,5 +33,12 @@ box-sizing: border-box;">
 <br/>
 
 <%= render "devise/shared/links" %>
+
+<div class="d-flex my-5">
+    <span class="nav-item">
+      <%= link_to "Connexion Administrateur", new_admin_session_path, class: "btn btn-outline-danger text-light mx-3" %>
+    </span>
+</div>
+
 </body>
 </div>
