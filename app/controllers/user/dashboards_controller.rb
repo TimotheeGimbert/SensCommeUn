@@ -31,8 +31,7 @@ class User::DashboardsController < ApplicationController
   def organizations
     # Gets user-selected sector_id and organisation through params from sidebar
     sectorID_selected = params[:sectorID]
-    organization_selected = params[:show]
-
+    
     # Displays by default the full list of organizations
     @organizations = Organization.all
     @render_view = "organizations/list"
@@ -44,16 +43,26 @@ class User::DashboardsController < ApplicationController
     end
 
     # Displays an organization if selected by the Show eye-button
-    if organization_selected != nil
-      @organization = Organization.find_by(id: organization_selected.to_i)
-      @render_view = "organizations/show" 
+    organization_id = params[:organization_id]
+    if organization_id != nil
+      @render_view = "organizations/show"
+      @organization = Organization.find_by(id: organization_id.to_i)
     end
+
+    # Displays form for stakholder_request
+    
+    if params[:show] && params[:show] == "StakeholderRequest"
+      @stakeholder_request = StakeholderRequest.new()
+    end
+    puts "#"*100
+    puts @stakeholder_request
   end
 
   def organizations_legalreps
     if params[:organization_managed]
       # Gets organizations managed by the legal representant
       @organization = Organization.find_by(id: params[:organization_managed].to_i)
+
       if params[:clicked_link]
         case params[:clicked_link]
         when "Éditer les informations"
@@ -61,7 +70,12 @@ class User::DashboardsController < ApplicationController
           @render_view = "organizations/form"
         when "Parties prenantes"
           @all_external_stakeholders = @organization.external_stakeholders
-          @external_stakeholder = ExternalStakeholder.new(organization: @organization)
+          if params[:stakeholder_id]
+            @external_stakeholder = ExternalStakeholder.find_by(id: params[:stakeholder_id])
+          else 
+            @external_stakeholder = ExternalStakeholder.new(organization: @organization)
+          end
+          @stakeholder_requests = @organization.stakeholder_requests
           @external_stakeholders_category = StakeholderCategory.all.sort {|a, b| a.name <=> b.name}
           @view_title = "Gérer les parties prenantes de l'organisation"
           @render_view = "user/partials/dashboards/organizations_legalreps/external_stakeholders.html.erb"
