@@ -1,9 +1,0 @@
-<ul class="nav nav-pills flex-column mb-auto">
-  <span class="text-end mb-2"><b><%=current_user.email%></b></span>
-  <li class="nav-item">
-    <%= link_to "Éditer mon profil", user_dashboards_index_path(clicked_link: "Editer mon profil"), class:"nav-link sidebar-item" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Éditer mes identifiants", edit_user_registration_path, class:"nav-link sidebar-item" %>
-  </li>
-</ul>

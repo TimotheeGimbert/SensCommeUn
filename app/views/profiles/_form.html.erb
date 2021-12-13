@@ -3,7 +3,7 @@
 <%= simple_form_for(@profile) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
+  
   <div class="form-inputs">
     <%= f.association :user, label: @profile.user.id %>
     <%= f.association :city %>
@@ -13,6 +13,11 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class:"btn btn-outline-light py-1  px-5 m-5 mt-2" %>
   </div>
+
+  <div class="d-flex">
+    <%= link_to "Éditer mes identifiants", edit_user_registration_path, class:"btn btn-outline-danger text-light mx-auto" %>
+  </div>
+
 <% end %>
