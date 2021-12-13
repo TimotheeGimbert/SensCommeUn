@@ -44,7 +44,7 @@ class StakeholderRequestsController < ApplicationController
       if @stakeholder_request.update(stakeholder_request_params)
         ExternalStakeholder.create(user:@stakeholder_request.user, stakeholder_category: StakeholderCategory.first, organization: @stakeholder_request.organization)
 
-        format.html {redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: params[:organization_id]), notice: "Stakeholder request was successfully updated." }
+        format.html {redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantesa", organization_managed: params[:organization_id]), notice: "Stakeholder request was successfully updated." }
         format.json { render :show, status: :ok, location: @stakeholder_request }
       else
         format.html { redirect_to  user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: params[:organization_id]), status: :unprocessable_entity }
