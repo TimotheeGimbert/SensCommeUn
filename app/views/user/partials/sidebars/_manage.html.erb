@@ -1,7 +1,6 @@
-<h5 class="mb-3 mb-md-0 me-md-auto text-info">CONSOLE DE GESTION</h5>
-<hr>
-
-<h6 class="text-light text-end">Organisations gérées</h6>
+<hr class="mt-5 mb-3">
+<h5 class="text-info">Organisations gérées</h5>
+<hr class="mt-2">
 
 <ul class="nav nav-pills flex-column mb-auto">
   <% current_user.managed_organizations.each do |organization| %>
@@ -10,5 +9,3 @@
     </li>
   <% end %>
 </ul>
-
-<hr>
