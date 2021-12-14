@@ -19,8 +19,15 @@
     <%= f.input :description, label: "Description courte" %>
     <%= f.association :activity_sector, label: "Secteur d'activité principal" %>
     <%= f.input :naf_ape, label: "Code NAF/APE" %>
-    <%= f.input :logo_url, label: "Lien du logo" %>
     <%= f.input :website_url, label: "Lien du site internet" %>
+    <p>Modifier son logo</p>
+    <label class="btn btn-primary">
+      Choisir un logo
+      <span style="display:none;">
+      <%= f.file_field :logo, label: "Lien du logo", class:"form-control", accept: 'image/png,image/gif,image/jpeg'%>
+
+      </span>
+    </label>
   </div>
 
   <div class="form-actions d-flex justify-content-center mt-3">
