@@ -12,10 +12,9 @@
     <% else %>
       <%= f.input :email %>
       <%= f.input :message %>
-      <div class="form-actions d-flex justify-content-center mt-3">
-      <%= f.button :submit %>
+      <div class="action mt-3 mb-3">
+        <%= f.submit "Envoyer", class:"btn btn-primary" %>
       </div>
     <% end %>
   </div>  
-
 <% end %>
