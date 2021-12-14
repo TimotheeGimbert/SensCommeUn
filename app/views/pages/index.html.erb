@@ -1,20 +1,19 @@
-<div class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
-  <div class="container d-flex justify-content-align bg-dark rounded my-auto"style="--bs-bg-opacity: .5;">
-    <div class="mx-auto my-2 text-center p-5">
-      <h1 class="text-info">Bienvenue sur SENS·COMMUN</h1>
-      <br>
-      <h4>Le premier site de mise en relation des organisations de l'économie sociale et solidaire</h4>
-      <p>Rejoignez dès maintenant différentes organisations et participez à leur évolution !</p>
+<div id="index-intro" class="container-fluid mb-5">
+
+  <div class="row hero">
+    <div class="col-8 hero__call m-auto p-5">
+      <h1 class="my-3">Prenez part à l'économie sociale et solidaire !</h1>
+      <p class="text-light mt-4">Vous êtes chez SENS·COMMUN</p>
+      <a href="#index-presentation" >
+        <button class="btn btn-outline-success mt-4">Découvrir</button>
+      </a>
     </div>
-    <div class="mx-auto my-2 pe-5 d-flex flex-column justify-content-center align-items-center">
-      <% unless user_signed_in? %>
-        <h5><%=link_to 'Connexion', new_user_session_path, class:"btn btn-warning my-2" %></h5>
-        <h5> <%=link_to "Inscription", new_user_registration_path, class:"btn btn-dark text-light" %></h5>
-      <% end %>
-    </div>
-    
   </div>
+
 </div>
+
+<div id="index-presentation" class="container-fluid">
+
   <div class="b-example-divider"></div>
 
   <div class="container col-xxl-8 px-4 py-5">
@@ -72,7 +71,7 @@
         </div>
       </div>
       <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-          <img class="rounded-lg-3" src="bootstrap-docs.png" alt="" width="720">
+          <img class="rounded-lg-3" src="" alt="" width="720">
       </div>
     </div>
   </div>
@@ -93,4 +92,5 @@
   </div>
 
   <div class="b-example-divider mb-0"></div>
-</main>
+  
+</div>
