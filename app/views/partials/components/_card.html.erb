@@ -24,6 +24,9 @@
   <%end%>
   <%if card[:actions]%>
     <div class="card-body text-center">
+      <%if card[:actions_title]%>
+        <p><b><%=card[:actions_title]%></b></p>
+      <%end%>
       <%card[:actions].each do |current|%>
         <%if current[:type] then type = current[:type] else type="info" end%>
        <%= link_to "#{current[:label]}", current[:path], class:"btn btn-#{type}" %>

@@ -10,10 +10,21 @@ class User::DashboardsController < ApplicationController
       @organizations = Organization.where(external_stakeholders: ExternalStakeholder.find_by(user: current_user))
       @render_view = "organizations/list"
     when "Messagerie"
+      if params[:message] && params[:message] == "new"
+        @view_title = "Envoyer un message"
+        @render_view = "private_messages/form"
+        @private_message = PrivateMessage.new
+      elsif params[:message_id]
+        @view_title = "Message"
+        @private_message = PrivateMessage.find_by(id: params[:message_id].to_i)
+        @render_view = "private_messages/show"
+      else
       # Gets messages of the current user, then renders the appropriate partial
-      @view_title = "Mes messages"
-      @private_messages = current_user.private_messages
-      @render_view = "private_messages/list" 
+        @view_title = "Mes messages"
+        @sent_messages = current_user.sent_messages
+        @received_messages = current_user.received_messages
+        @render_view = "private_messages/list"
+      end
     when "Editer mon profil"
       # Gets the current user's profile, then renders the appropriate partial
       @profile = current_user.profile
@@ -24,7 +35,7 @@ class User::DashboardsController < ApplicationController
       @view_title_section1 = "Dernières organisations référencées sur la plateforme"
       @organizations = Organization.all.sort {|a, b| b.created_at <=> a.created_at}.first(3)
       @view_title_section2 = "Mes derniers messages reçus"
-      @private_messages = current_user.received_messages.sort {|a, b| b.created_at <=> a.created_at}.first(3)
+      @received_messages = current_user.received_messages.sort {|a, b| b.created_at <=> a.created_at}.first(3)
       @render_view = "user/partials/news/index"
     end
   end
@@ -55,8 +66,6 @@ class User::DashboardsController < ApplicationController
     if params[:show] && params[:show] == "StakeholderRequest"
       @stakeholder_request = StakeholderRequest.new()
     end
-    puts "#"*100
-    puts @stakeholder_request
   end
 
   def organizations_legalreps
