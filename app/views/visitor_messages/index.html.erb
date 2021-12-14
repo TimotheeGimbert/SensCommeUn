@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Visitor Messages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Message</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @visitor_messages.each do |visitor_message| %>
+      <tr>
+        <td><%= visitor_message.email %></td>
+        <td><%= visitor_message.message %></td>
+        <td><%= link_to 'Show', visitor_message %></td>
+        <td><%= link_to 'Edit', edit_visitor_message_path(visitor_message) %></td>
+        <td><%= link_to 'Destroy', visitor_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Visitor Message', new_visitor_message_path %>

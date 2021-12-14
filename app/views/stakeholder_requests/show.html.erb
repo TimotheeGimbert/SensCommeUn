@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @stakeholder_request.user_id %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @stakeholder_request.organization_id %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @stakeholder_request.message %>
+</p>
+
+<p>
+  <strong>Validation:</strong>
+  <%= @stakeholder_request.validation %>
+</p>
+
+<%= link_to 'Edit', edit_stakeholder_request_path(@stakeholder_request) %> |
+<%= link_to 'Back', stakeholder_requests_path %>
