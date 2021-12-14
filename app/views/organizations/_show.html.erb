@@ -32,7 +32,7 @@
 </div>
 <%end%>
 <div class="d-flex" style="width:100%">
-  <%= render "partials/components/card_organization", card: card %>
+  <%= render "partials/components/card", card: card %>
 </div>
 <%if params[:show] && params[:show] == "StakeholderRequest"%>
   <%=render "stakeholder_requests/form"%>

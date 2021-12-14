@@ -45,7 +45,7 @@ class PrivateMessagesController < ApplicationController
         #     @errors += recipients_user.errors
         #   end
         # end
-        format.html { redirect_to @private_message, notice: "Private message was successfully created." }
+        format.html { redirect_to user_dashboards_index_path(clicked_link: "Messagerie"), success: "Private message was successfully created." }
         format.json { render :show, status: :created, location: @private_message }
       else
         format.html { render :new, status: :unprocessable_entity }
