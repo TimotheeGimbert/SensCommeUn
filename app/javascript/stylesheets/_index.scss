@@ -1,0 +1,22 @@
+.hero {
+  background-image: url("assets/hero-image.jpg"); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  height: 90vh;
+  &__call {
+    background: rgba(0, 0, 0, 0.44);
+    text-align: center;
+    border-radius: 33px;
+    h1 {
+      margin: 33px 0;
+      opacity: 0.88;
+    }
+    button {
+      border-radius: 66px;
+      padding: 11px 66px;
+    }
+  }
+}
+
