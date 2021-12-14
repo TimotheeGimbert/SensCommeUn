@@ -1,6 +1,6 @@
 class VisitorMessagesController < ApplicationController
   before_action :set_visitor_message, only: %i[ show edit update destroy ]
-  before_action :has_admin_rights?, only: %i[ show edit update destroy ]
+  before_action :has_admin_rights?, only: %i[ index show edit update destroy ]
 
 
   # GET /visitor_messages or /visitor_messages.json
@@ -27,10 +27,10 @@ class VisitorMessagesController < ApplicationController
 
     respond_to do |format|
       if @visitor_message.save
-        format.html { redirect_to @visitor_message, notice: "Visitor message was successfully created." }
+        format.html { redirect_to root_path, notice: "Visitor message was successfully created." }
         format.json { render :show, status: :created, location: @visitor_message }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render pages_contact_path, status: :unprocessable_entity }
         format.json { render json: @visitor_message.errors, status: :unprocessable_entity }
       end
     end
