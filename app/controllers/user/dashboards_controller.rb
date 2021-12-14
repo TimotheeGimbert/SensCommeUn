@@ -1,4 +1,5 @@
 class User::DashboardsController < ApplicationController
+  before_action :has_legal_rep_organization_rights?, only: %i[ organizations_legalreps ]
 
   def index
     # Displays the chosen partial through links clicked on the sidebar
@@ -90,6 +91,12 @@ class User::DashboardsController < ApplicationController
         @render_view = "organizations/show"
       end
     end
+  end
+
+  private
+
+  def has_legal_rep_organization_rights?
+    redirect_back fallback_location: root_path unless Organization.find_by(id: params[:organization_managed].to_i).managers.include?(current_user)
   end
 
 end
