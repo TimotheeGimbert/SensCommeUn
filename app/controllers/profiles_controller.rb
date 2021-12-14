@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
   before_action :has_user_rights?, only: %i[ new create update edit ]
   before_action :has_admin_rights?, only: %i[ destroy ]
-  before_action :current_user?, only: %i[ update ]
+  before_action :current_user_profile?, only: %i[ update ]
 
   # GET /profiles or /profiles.json
   def index
@@ -68,5 +68,9 @@ class ProfilesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def profile_params
       params.require(:profile).permit(:user_id, :city_id, :first_name, :last_name, :phone_number)
+    end
+
+    def current_user_profile?
+      redirect_back fallback_location: root_path unless current_user.profile.id == @profile.id
     end
 end
