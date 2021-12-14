@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  add_flash_types :danger, :info, :warning, :success, :messages
 
   def has_admin_rights?
     redirect_back fallback_location: root_path unless admin_signed_in? == true
