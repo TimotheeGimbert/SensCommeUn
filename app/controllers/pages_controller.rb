@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
 
   def contact
+    @visitor_message = VisitorMessage.new()
   end
   
 end
