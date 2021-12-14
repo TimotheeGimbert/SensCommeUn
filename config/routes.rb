@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'pages/presentation'
   get 'pages/contact'
 
-  devise_for :user
+  devise_for :user, controllers: { registrations: 'user/registrations' }
   devise_for :admin
 
   devise_scope :user do
