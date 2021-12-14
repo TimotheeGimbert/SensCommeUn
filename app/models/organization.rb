@@ -9,4 +9,5 @@ class Organization < ApplicationRecord
   has_many :activities
   has_many :stakeholder_requests, dependent: :destroy
   has_many :stakeholder_demands, through: :stakeholder_requests, source: :user
+  has_one_attached :logo
 end
