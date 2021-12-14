@@ -22,10 +22,15 @@
   <%card[:actions] = [{label: "Votre demande de participation n'a pas encore été acceptée", path: "", type:"secondary disabled"},{label: "Refaire une demande", path: user_dashboards_organizations_path(organization_id: @organization.id,show: "StakeholderRequest"), type:"success"} ]%>
 <%end%>
 
-
+<%if @organization.logo.attached?%>
+<div class="d-flex justify-content-center bg-white">
+  <%=image_tag(@organization.logo, width: "100px") %>
+</div>
+<%else%>
 <div class="d-flex justify-content-center bg-white">
   <%=image_tag(@organization.logo_url, width: "100px") %>
 </div>
+<%end%>
 <div class="d-flex" style="width:100%">
   <%= render "partials/components/card_organization", card: card %>
 </div>

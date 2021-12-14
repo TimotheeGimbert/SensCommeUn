@@ -39,6 +39,9 @@ class OrganizationsController < ApplicationController
 
   # PATCH/PUT /organizations/1 or /organizations/1.json
   def update
+    if (params[:logo])
+      @organization.logo.attach(params[:logo])
+    end
     respond_to do |format|
       if @organization.update(organization_params)
         format.html { redirect_to user_dashboards_organizations_legalreps_path(organization_managed: @organization.id) , notice: "Organization was successfully updated." }
@@ -60,6 +63,11 @@ class OrganizationsController < ApplicationController
   end
 
   private
+    def create_logo
+      @organization = Organization.find(params[:organization_id])
+      @organization.logo.attach(params[:logo])
+      redirect_to user_organizations_legalreps_path(organization_managed: @organization.id)
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
       @organization = Organization.find(params[:id])
@@ -67,6 +75,6 @@ class OrganizationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def organization_params
-      params.require(:organization).permit(:name, :nickname, :creation_date, :address, :address_complement, :zip_code, :city_id, :email, :phone_number, :status_id, :siren, :description, :activity_sector_id, :naf_ape, :logo_url, :website_url)
+      params.require(:organization).permit(:name, :nickname, :creation_date, :address, :address_complement, :zip_code, :city_id, :email, :phone_number, :status_id, :siren, :description, :activity_sector_id, :naf_ape, :logo_url, :website_url, :logo)
     end
 end

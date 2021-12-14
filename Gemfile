@@ -60,3 +60,4 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'simple_form'
 gem "table_print"
 gem 'dotenv-rails', groups: [:development, :test]
+gem "aws-sdk-s3", require: false
