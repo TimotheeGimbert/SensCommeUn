@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     authenticated :user do
       namespace :user do
+        root "dashboards#index"
         get 'dashboards/index', as: :dashboards_index
         get 'dashboards/organizations', as: :dashboards_organizations
         get 'dashboards/organizations_legalreps', as: :dashboards_organizations_legalreps
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
   devise_scope :admin do
     authenticated :admin do
       namespace :admin do
+        root "dashboards#index"
         get 'dashboards/index', as: :authenticated_root
       end
     end
