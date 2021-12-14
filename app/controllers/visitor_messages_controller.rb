@@ -27,7 +27,7 @@ class VisitorMessagesController < ApplicationController
 
     respond_to do |format|
       if @visitor_message.save
-        format.html { redirect_to root_path, notice: "Visitor message was successfully created." }
+        format.html { redirect_to root_path, success: "Votre message a bien été envoyé" }
         format.json { render :show, status: :created, location: @visitor_message }
       else
         format.html { render pages_contact_path, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class VisitorMessagesController < ApplicationController
   def update
     respond_to do |format|
       if @visitor_message.update(visitor_message_params)
-        format.html { redirect_to @visitor_message, notice: "Visitor message was successfully updated." }
+        format.html { redirect_to @visitor_message, success: "Votre message a bien été envoyé" }
         format.json { render :show, status: :ok, location: @visitor_message }
       else
         format.html { render :edit, status: :unprocessable_entity }
