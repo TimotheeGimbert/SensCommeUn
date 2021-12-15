@@ -46,7 +46,7 @@ class StakeholderRequestsController < ApplicationController
         
         ExternalStakeholder.create(user:@stakeholder_request.user, email: @stakeholder_request.user.email, stakeholder_category_id: stakeholder_category_id, organization: @stakeholder_request.organization)
 
-        format.html {redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully updated." }
+        format.html {redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: @stakeholder_request.organization.id), success: "La demande de participation a été acceptée" }
         format.json { render :show, status: :ok, location: @stakeholder_request }
       else
         format.html { redirect_to  user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: @stakeholder_request.organization.id), status: :unprocessable_entity }
