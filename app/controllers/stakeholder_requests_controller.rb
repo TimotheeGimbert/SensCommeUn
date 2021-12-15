@@ -28,10 +28,10 @@ class StakeholderRequestsController < ApplicationController
 
     respond_to do |format|
         if @stakeholder_request.save
-          format.html { redirect_to user_dashboards_organizations_path(organization_id: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully created." }
+          format.html { redirect_to user_dashboards_organizations_path(organization_id: @stakeholder_request.organization.id), success: "Votre demande a été envoyée" }
           format.json { render :show, status: :created, location: @stakeholder_request }
         else
-          format.html { redirect_to user_dashboards_organizations_path(organization_id: @stakeholder_request.organization.id), status: :unprocessable_entity }
+          format.html { redirect_to user_dashboards_organizations_path(organization_id: @stakeholder_request.organization.id,show:"StakeholderRequest"), danger: "Veuillez renseignez un message" }
           format.json { render json: @stakeholder_request.errors, status: :unprocessable_entity }
         end
     end

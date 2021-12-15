@@ -118,7 +118,7 @@ class User::DashboardsController < ApplicationController
           else 
             @external_stakeholder = ExternalStakeholder.new(organization: @organization)
           end
-          @stakeholder_requests = @organization.stakeholder_requests
+          @stakeholder_requests = @organization.stakeholder_requests.where(validation: 0)
           @external_stakeholders_category = StakeholderCategory.all.sort {|a, b| a.name <=> b.name}
           @view_title = "Gérer les parties prenantes de l'organisation"
           @render_view = "user/partials/dashboards/organizations_legalreps/external_stakeholders.html.erb"
