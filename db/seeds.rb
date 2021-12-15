@@ -184,6 +184,12 @@ legalrep = LegalRep.create(
 )
 puts legalrep
 
+legalrep = LegalRep.create(
+  user: User.find_by(email: "legalrep@legalrep.com"), 
+  organization: Organization.first
+)
+puts legalrep
+
 3.times do 
   pm = PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: basic_user)
   puts pm

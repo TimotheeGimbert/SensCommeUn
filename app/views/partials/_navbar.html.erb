@@ -9,7 +9,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% if user_signed_in? %>
           <li class="nav-item my-auto">
-            <%= link_to "Découvrir les organisations", user_dashboards_organizations_path, class:"text-light text-decoration-none mx-3" %>
+            <%= link_to "Découvrir les organisations", organizations_path(search_by: "all"), class:"text-light text-decoration-none mx-3" %>
           </li>
         <% end %>
         <% unless admin_signed_in? %>
@@ -23,9 +23,9 @@
         <div class="d-flex">
           <span class="nav-item">
             <% if user_signed_in? %>
-              <%= link_to "TABLEAU DE BORD", user_dashboards_index_path, class: "btn btn-outline-light text-warning mx-3" %>
+              <%= link_to "TABLEAU DE BORD", user_root_path, class: "btn btn-outline-light text-warning mx-3" %>
             <% elsif admin_signed_in? %>
-              <%= link_to 'CONSOLE ADMINISTRATEUR', admin_authenticated_root_path, class: "btn btn-outline-light text-warning mx-3" %>
+              <%= link_to 'CONSOLE ADMINISTRATEUR', admin_root_path, class: "btn btn-outline-light text-warning mx-3" %>
             <% end %>
           </span>
         </div>

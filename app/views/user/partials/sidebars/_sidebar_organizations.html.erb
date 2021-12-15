@@ -1,0 +1,30 @@
+<%if params[:search_by] && (params[:search_by] != "all" || params[:search_by] == "sectors" || params[:search_by] == "status" || params[:search_by] == "geo_zones")%>
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <%= link_to "Retour", organizations_path(search_by: "all"), class:"sidebar-item text-light text-decoration-none text-center mb-2" %>
+    <h4 class="text-info"><%= @sidebar_title%></h4>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <% @sidebar_links.each do |link| %>
+          <li class="nav-item mb-2" style="font-size:smaller">
+            <%= link_to "#{link[:label]}", organizations_path(search_by: params[:search_by], categ_id: link[:id]), class:"sidebar-item text-light text-decoration-none" %>
+          </li>
+        <% end %>
+    </ul>
+    <hr>
+  </div>
+<%else %>
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <h4 class="text-info">Parcourir les organisations</h4>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item m-3" style="font-size:smaller">
+        <%= link_to "Par zones géographiques", organizations_path(search_by: "geo_zones"), class:"nav-link sidebar-item" %>
+      </li>
+      <li class="nav-item m-3" style="font-size:smaller">
+        <%= link_to "Par secteur d'activité", organizations_path(search_by: "sectors"), class:"nav-link sidebar-item" %>
+      </li>
+      <li class="nav-item m-3" style="font-size:smaller">
+        <%= link_to "Par statut", organizations_path(search_by: "status"), class:"nav-link sidebar-item" %>
+      </li>
+    </ul>
+  </div>
+<%end%>

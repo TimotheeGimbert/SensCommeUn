@@ -14,14 +14,12 @@
 
   <tbody>
     <% @received_messages.reverse_each do |pm| %>
-      <%= link_to user_dashboards_index_path(clicked_link: "Messagerie", message_id: pm.id) do%>
       <tr>
         <td><%= pm.object %></td>
         <td><%= pm.author.email %></td>
         <td><%= format_date_with_hour(pm.created_at) %></td>
-        <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, user_dashboards_index_path(clicked_link: "Messagerie", message_id: pm.id), class: "btn btn-success btn-sm" %></td>
+        <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm" %></td>
       </tr>
-      <%end%>
     <% end %>
   </tbody>
 </table>
@@ -42,18 +40,16 @@
 
     <tbody>
       <% @sent_messages.reverse_each do |pm| %>
-        <%= link_to user_dashboards_index_path(clicked_link: "Messagerie", message_id: pm.id) do%>
         <tr>
           <td><%= pm.object %></td>
           <td><%= pm.author.email %></td>
           <td><%= format_date_with_hour(pm.created_at) %></td>
-          <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, user_dashboards_index_path(clicked_link: "Messagerie", message_id: pm.id), class: "btn btn-success btn-sm" %></td>
+          <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm" %></td>
         </tr>
-        <%end%>
       <% end %>
     </tbody>
   </table>
 
-  <%= link_to "Nouveau Message", user_dashboards_index_path(clicked_link: "Messagerie", message: "new"), class: "btn btn-success px-5 align-self-center" %>
+  <%= link_to "Nouveau Message", new_private_message_path(), class: "btn btn-success px-5 align-self-center" %>
 
 <%end%>

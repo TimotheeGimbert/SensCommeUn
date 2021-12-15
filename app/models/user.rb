@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :profile
+  has_one :profile, dependent: :destroy
   has_many :external_stakeholders
   has_many :organizations, through: :external_stakeholders
   has_many :sent_messages, as: :author, class_name: 'PrivateMessage'
