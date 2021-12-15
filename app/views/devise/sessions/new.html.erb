@@ -1,8 +1,8 @@
 <div class="container bg-overdark text-center mt-5 py-5">
   <% if request.path_info.to_s.include?('user') %>
-    <h2 class="text-success">Connexion Utilisateur</h2>
+    <h2 class="text-info">Connexion</h2>
   <% else %>
-    <h2 class="text-danger">Connexion Administrateur</h2>
+    <h2 class="text-danger">Administration</h2>
   <% end %>
   <div class="row mt-5">
 
@@ -44,9 +44,9 @@
 
 <span class="fixed-bottom text-center mb-5">
   <% if request.path_info.to_s.include?('user') %>
-    <%= link_to "Page de connexion Administrateur", new_admin_session_path, class: "btn btn-outline-danger mx-auto" %>
+    <%= link_to "Page de connexion Administrateur", new_admin_session_path, class: "btn btn-outline-danger text-light mx-auto" %>
   <% else %>
-    <%= link_to "Page de connexion Utilisateur", new_user_session_path, class: "btn btn-outline-success mx-auto" %>
+    <%= link_to "Page de connexion Utilisateur", new_user_session_path, class: "btn btn-outline-light mx-auto" %>
   <% end %>
 </span>
 
