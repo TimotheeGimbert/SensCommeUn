@@ -1,7 +1,7 @@
 
 <% if user_signed_in? %>
   <p> Accedez a votre messagerie pour nous contacter </p>
-  <%= link_to "ma messagerie", user_dashboards_index_path(clicked_link:"Messagerie"), class:"btn btn-primary mb-3" %>
+  <%= link_to "ma messagerie", user_dashboards_index_path(clicked_link: "Messagerie", message: "new"), class:"btn btn-primary mb-3" %>
 <% else %>
   <%= simple_form_for(@visitor_message) do |f| %>
     <%= f.error_notification %>
