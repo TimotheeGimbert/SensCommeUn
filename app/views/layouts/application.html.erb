@@ -15,10 +15,10 @@
     <%=render "partials/navbar"%>
 
     <div class="d-flex">
-      
-      
-      <% if user_signed_in? %>
+      <%if user_signed_in? %>
         <%=render "user/partials/sidebars/sidebar"%>
+      <%elsif admin_signed_in?%>
+        <%=render "admin/partials/sidebars/sidebar"%>
       <%end%>
       
       <div class="d-flex flex-column" style="width:100%">
@@ -31,6 +31,7 @@
           <%= yield %>
         </div>
       </div>
-    </div>    
+
+    </div> 
   </body>
 </html>

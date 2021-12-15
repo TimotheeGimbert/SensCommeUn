@@ -15,7 +15,7 @@
       <%= f.hidden_field :author_id , value: current_user.id %>
       <%= f.hidden_field :author_type , value: "User" %>
     <%elsif admin_signed_in?%>
-      <%= f.hidden_field :author_id , value: admin_user.id %>
+      <%= f.hidden_field :author_id , value: current_admin.id %>
       <%= f.hidden_field :author_type , value: "Admin" %>
     <%end%>
   </div>

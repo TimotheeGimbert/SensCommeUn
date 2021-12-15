@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
   before_action :has_user_rights?, only: %i[ new create update edit ]
-  before_action :has_admin_rights?, only: %i[ destroy ]
+  before_action :has_admin_rights?, only: %i[index destroy ]
   before_action :current_user_profile?, only: %i[ update ]
 
   # GET /profiles or /profiles.json

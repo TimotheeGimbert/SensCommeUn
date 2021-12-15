@@ -7,8 +7,13 @@ class PrivateMessagesController < ApplicationController
   def index
     # Gets messages of the current user, then renders the appropriate partial
       @view_title = "Mes messages"
-      @sent_messages = current_user.sent_messages
-      @received_messages = current_user.received_messages
+      if user_signed_in?
+        @sent_messages = current_user.sent_messages
+        @received_messages = current_user.received_messages
+      elsif admin_signed_in?
+        @sent_messages = current_admin.sent_messages
+        @received_messages = current_admin.received_messages
+      end
       @render_view = "private_messages/list"
   end
 
@@ -53,7 +58,7 @@ class PrivateMessagesController < ApplicationController
         #     @errors += recipients_user.errors
         #   end
         # end
-        format.html { redirect_to user_dashboards_index_path(clicked_link: "Messagerie"), success: "Private message was successfully created." }
+        format.html { redirect_to @private_message, success: "Private message was successfully created." }
         format.json { render :show, status: :created, location: @private_message }
       else
         format.html { render :new, status: :unprocessable_entity }

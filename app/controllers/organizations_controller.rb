@@ -1,7 +1,7 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[ show edit update destroy ]
   before_action :has_user_rights?, only: %i[ index show ]
-  before_action :has_legal_rep_rights?, only: %i[ edit update ]
+  before_action :has_legal_rep_organization_rights?, only: %i[ edit update ]
   before_action :has_admin_rights?, only: %i[ new create destroy ]
 
   # GET /organizations or /organizations.json
@@ -63,7 +63,7 @@ class OrganizationsController < ApplicationController
     end
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to user_dashboards_organizations_legalreps_path(organization_managed: @organization.id) , notice: "Organization was successfully updated." }
+        format.html { redirect_to @organization , notice: "Organization was successfully updated." }
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -90,6 +90,13 @@ class OrganizationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
       @organization = Organization.find(params[:id])
+    end
+
+    def has_legal_rep_organization_rights?
+      redirect_back fallback_location: root_path unless Organization.find_by(id: params[:id]).managers.include?(current_user)
+      puts "*" * 50
+      puts Organization.find_by(id: session[:organization_managed_id]).managers.include?(current_user)
+      puts "*" * 50
     end
 
     # Only allow a list of trusted parameters through.

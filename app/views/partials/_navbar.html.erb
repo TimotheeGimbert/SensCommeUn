@@ -23,9 +23,9 @@
         <div class="d-flex">
           <span class="nav-item">
             <% if user_signed_in? %>
-              <%= link_to "TABLEAU DE BORD", user_dashboards_index_path, class: "btn btn-outline-light text-warning mx-3" %>
+              <%= link_to "TABLEAU DE BORD", user_root_path, class: "btn btn-outline-light text-warning mx-3" %>
             <% elsif admin_signed_in? %>
-              <%= link_to 'CONSOLE ADMINISTRATEUR', admin_authenticated_root_path, class: "btn btn-outline-light text-warning mx-3" %>
+              <%= link_to 'CONSOLE ADMINISTRATEUR', admin_root_path, class: "btn btn-outline-light text-warning mx-3" %>
             <% end %>
           </span>
         </div>

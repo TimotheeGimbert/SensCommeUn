@@ -12,7 +12,9 @@
   footer: "#{@organization.external_stakeholders.length} parties prenantes connectées"
   }%>
 
-<%if @organization.managers.include?(current_user)%>
+<%if admin_signed_in?%>
+
+<%elsif @organization.managers.include?(current_user)%>
   <% card[:actions] = [{label: "Éditer les informations", path: edit_organization_path(id: @organization.id, clicked_link: "Éditer les informations"), type:"success"}] %>
 <%elsif @organization.users_stakeholders.include?(current_user)%>
   <% card[:actions] = [{label: "Vous êtes partie prenante de cette organization", path: "", type:"success disabled"}] %><h3 class="tex-info"></h3>
@@ -26,7 +28,7 @@
 <div class="d-flex justify-content-center bg-white">
   <%=image_tag(@organization.logo, width: "100px") %>
 </div>
-<%else%>
+<%elsif @organization.logo_url%>
 <div class="d-flex justify-content-center bg-white">
   <%=image_tag(@organization.logo_url, width: "100px") %>
 </div>

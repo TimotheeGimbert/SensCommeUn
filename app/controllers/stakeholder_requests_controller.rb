@@ -25,7 +25,7 @@ class StakeholderRequestsController < ApplicationController
   def create
     @stakeholder_request = StakeholderRequest.new(stakeholder_request_params)
     @stakeholder_request.user = current_user
-
+    @stakeholder_request.validation = 0
     respond_to do |format|
         if @stakeholder_request.save
           format.html { redirect_to organization_path(id:@stakeholder_request.organization.id ,organization_managed_id: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully created." }
@@ -40,6 +40,9 @@ class StakeholderRequestsController < ApplicationController
   # PATCH/PUT /stakeholder_requests/1 or /stakeholder_requests/1.json
   def update
     stakeholder_category_id = stakeholder_request_params[:stakeholder_category].to_i
+    if stakeholder_category_id == 0
+      stakeholder_category_id = StakeholderCategory.find_by(name:"non déterminé").id
+    end
     stakeholder_request_params.delete("stakeholder_category") 
     respond_to do |format|
       if @stakeholder_request.update(stakeholder_request_params)

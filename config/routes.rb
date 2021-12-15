@@ -26,8 +26,6 @@ Rails.application.routes.draw do
       namespace :user do
         root "dashboards#index"
         get 'dashboards/index', as: :dashboards_index
-        get 'dashboards/organizations', as: :dashboards_organizations
-        get 'dashboards/organizations_legalreps', as: :dashboards_organizations_legalreps
       end
     end
   end
