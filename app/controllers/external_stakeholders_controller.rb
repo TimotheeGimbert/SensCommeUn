@@ -4,7 +4,11 @@ class ExternalStakeholdersController < ApplicationController
 
   # GET /external_stakeholders or /external_stakeholders.json
   def index
-    @external_stakeholders = ExternalStakeholder.all
+    @organization = Organization.find_by(id: params[:organization_managed_id])
+    @all_external_stakeholders = ExternalStakeholder.all
+    @stakeholder_requests = @organization.stakeholder_requests
+    @external_stakeholders_category = StakeholderCategory.all.sort {|a, b| a.name <=> b.name}
+    @external_stakeholder = ExternalStakeholder.new()
   end
 
   # GET /external_stakeholders/1 or /external_stakeholders/1.json

@@ -1,19 +1,18 @@
-<p id="notice"><%= notice %></p>
+<%recipients = Array.new%>
+<%@private_message.recipients.each do |pm|%>
+  <% recipients.push({type: "primary btn-sm disabled", label: "#{pm.email}", path: "#"})%>
+<%end%>
 
-<p>
-  <strong>Object:</strong>
-  <%= @private_message.object %>
-</p>
+<%card = {
+  header: "Message de #{@private_message.author.email}", 
+  title: @private_message.object, 
+  subtitle: "Reçu le #{format_date_with_hour(@private_message.created_at)}", 
+  text: @private_message.content,
+  actions_title: "Destinataires",
+  actions: recipients
+  }
+  %>
 
-<p>
-  <strong>Content:</strong>
-  <%= @private_message.content %>
-</p>
+<%= render "partials/components/card", card: card%>
 
-<p>
-  <strong>Author:</strong>
-  <%= @private_message.author_id %>
-</p>
-
-<%= link_to 'Edit', edit_private_message_path(@private_message) %> |
-<%= link_to 'Back', private_messages_path %>
+<%= link_to 'Retour à la liste des messages', private_messages_path(), class: "btn btn-primary btm-sm" %>

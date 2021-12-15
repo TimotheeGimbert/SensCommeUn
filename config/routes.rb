@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   root "pages#index"
   get 'pages/presentation'
   get 'pages/contact'
+  get 'pages/news'
 
   devise_for :user, controllers: { registrations: 'user/registrations' }
   devise_for :admin

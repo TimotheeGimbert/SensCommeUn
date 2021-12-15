@@ -1,21 +1,29 @@
 class PrivateMessagesController < ApplicationController
   before_action :set_private_message, only: %i[ show edit update destroy ]
-  before_action :has_user_rights?, only: %i[ new show create ]
-  before_action :has_admin_rights?, only: %i[ index edit update destroy ]
+  before_action :has_user_rights?, only: %i[ index new show create ]
+  before_action :has_admin_rights?, only: %i[ edit update destroy ]
 
   # GET /private_messages or /private_messages.json
   def index
-    @private_messages = PrivateMessage.all
+    # Gets messages of the current user, then renders the appropriate partial
+      @view_title = "Mes messages"
+      @sent_messages = current_user.sent_messages
+      @received_messages = current_user.received_messages
+      @render_view = "private_messages/list"
   end
 
   # GET /private_messages/1 or /private_messages/1.json
   def show
+    @view_title = "Message"
+    @private_message = PrivateMessage.find_by(id: params[:id].to_i)
+    @render_view = "private_messages/show"
   end
 
   # GET /private_messages/new
   def new
     @private_message = PrivateMessage.new
-    
+    @view_title = "Envoyer un message"
+    @render_view = "private_messages/form"
     # if user_signed_in?
       # @private_message = PrivateMessage.new(author: current_user)
 
