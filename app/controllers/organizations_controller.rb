@@ -23,6 +23,12 @@ class OrganizationsController < ApplicationController
     if params[:show] && params[:show] == "StakeholderRequest"
       @stakeholder_request = StakeholderRequest.new()
     end
+    if @organization.managers.include?(current_user)
+      session[:organization_managed_id] = @organization.id
+      # puts "*" * 50
+      # puts session[:organization_managed_id]
+      # puts "*" * 50
+    end
     sidebar_organizations()
   end
 

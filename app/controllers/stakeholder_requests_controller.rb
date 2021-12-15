@@ -46,10 +46,10 @@ class StakeholderRequestsController < ApplicationController
         
         ExternalStakeholder.create(user:@stakeholder_request.user, email: @stakeholder_request.user.email, stakeholder_category_id: stakeholder_category_id, organization: @stakeholder_request.organization)
 
-        format.html {redirect_to organization_path(organization_managed_id: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully updated." }
+        format.html {redirect_to external_stakeholders_path(organization_managed_id: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully updated." }
         format.json { render :show, status: :ok, location: @stakeholder_request }
       else
-        format.html { redirect_to  organization_path(organization_managed_id: @stakeholder_request.organization.id), status: :unprocessable_entity }
+        format.html { redirect_to  external_stakeholders_path(organization_managed_id: @stakeholder_request.organization.id), status: :unprocessable_entity }
         format.json { render json: @stakeholder_request.errors, status: :unprocessable_entity }
       end
     end

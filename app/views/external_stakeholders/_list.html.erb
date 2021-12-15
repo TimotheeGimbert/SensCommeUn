@@ -27,7 +27,7 @@
         <%end%>
         
         <td><%= format_date(external_stakeholder.created_at) %></td>
-        <td><%= link_to ("<i class='fas fa-edit fa-lg text-success m-2'> </i>").html_safe, external_stakeholder_path(id:external_stakeholder, organization_managed: external_stakeholder.organization.id) %></td>
+        <td><%= link_to ("<i class='fas fa-edit fa-lg text-success m-2'> </i>").html_safe, edit_external_stakeholder_path(id:external_stakeholder) %></td>
         <td><%= link_to ("<i class='fas fa-trash-alt fa-lg text-danger m-2'> </i>").html_safe, external_stakeholder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

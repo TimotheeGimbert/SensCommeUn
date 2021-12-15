@@ -4,7 +4,7 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.hidden_field :organization_id, :value => params[:organization_managed] %>
+    <%= f.hidden_field :organization_id, :value => session[:organization_managed_id] %>
     <%= f.input :name %>
     <%= f.input :email %>
     <%= f.association :stakeholder_category %>

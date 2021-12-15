@@ -29,7 +29,7 @@
         <td><%= organization.activity_sector_id %></td>
         <td><a href="<%= organization.website_url %>" target="_blank">site web</a></td>
         <td>
-          <%= link_to ("<i class='fas fa-eye fa-lg text-success m-2'> </i>").html_safe, user_dashboards_organizations_path(search_by: params[:search_by],organization_id: organization.id) %>        </td>
+          <%= link_to ("<i class='fas fa-eye fa-lg text-success m-2'> </i>").html_safe, organization_path(id: organization.id) %>        </td>
       </tr>
     <% end %>
   </tbody>

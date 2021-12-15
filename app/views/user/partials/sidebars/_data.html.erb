@@ -1,18 +1,18 @@
 <div class="d-flex flex-column mb-5">
-  <%if params[:organization_managed_id] %>
-    <h3 class="mt-3 mb-3"><%= organization = Organization.find_by(id: params[:organization_managed_id].to_i).name%></h3>
+  <%if session[:organization_managed_id] %>
+    <h3 class="mt-3 mb-3"><%= organization = Organization.find_by(id: session[:organization_managed_id].to_i).name%></h3>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item"> 
-        <%= link_to "Parties prenantes", external_stakeholders_path(organization_managed_id: params[:organization_managed_id]), class:"nav-link sidebar-item" %>
+        <%= link_to "Parties prenantes", external_stakeholders_path(), class:"nav-link sidebar-item" %>
       </li>
       <li class="nav-item"> 
-        <%= link_to "Activités",root_path(organization_managed: params[:organization_managed_id]), class:"nav-link sidebar-item disabled" %>
+        <%= link_to "Activités",root_path(), class:"nav-link sidebar-item disabled" %>
       </li>
       <li class="nav-item"> 
-        <%= link_to "Documents",root_path(organization_managed: params[:organization_managed_id]), class:"nav-link sidebar-item disabled" %>
+        <%= link_to "Documents",root_path(), class:"nav-link sidebar-item disabled" %>
       </li>
       <li class="nav-item"> 
-        <%= link_to "Présentations",root_path(organization_managed: params[:organization_managed_id]), class:"nav-link sidebar-item disabled" %>
+        <%= link_to "Présentations",root_path(), class:"nav-link sidebar-item disabled" %>
       </li>
     </ul>
   <%else%>
