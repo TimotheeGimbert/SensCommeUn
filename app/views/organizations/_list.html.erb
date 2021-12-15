@@ -12,14 +12,23 @@
       <th>Description</th>
       <th>Activity sector</th>
       <th>Website url</th>
-      <th></th>
+      <th>Show</th>
+      <%if admin_signed_in?%>
+        <th>Delete</th>
+      <%end%>
     </tr>
   </thead>
 
   <tbody style="font-size:smaller">
     <% @organizations.each do |organization| %>
       <tr>
-        <td><span class="bg-white d-flex justify-content-center"><%= image_tag(organization.logo_url, size: "24") %></span><%= organization.name %><br><%= organization.nickname %></td>
+        <% if organization.logo.attached?%>
+          <td><span class="bg-white d-flex justify-content-center"><%= image_tag(organization.logo, size: "24") %></span><%= organization.name %><br><%= organization.nickname %></td>
+        <% elsif organization.logo_url%>
+          <td><span class="bg-white d-flex justify-content-center"><%= image_tag(organization.logo_url, size: "24") %></span><%= organization.name %><br><%= organization.nickname %></td>
+        <%else%>
+          <td></td>
+        <%end%>
         <td><%= format_date(organization.creation_date) %></td>
         <td><%= organization.address %><br><%= organization.address_complement %><br><%= organization.zip_code %> <%= organization.city.name %></td>
         <td><%= organization.email %></td>
@@ -28,8 +37,10 @@
         <td><%= organization.description %></td>
         <td><%= organization.activity_sector_id %></td>
         <td><a href="<%= organization.website_url %>" target="_blank">site web</a></td>
-        <td>
-          <%= link_to ("<i class='fas fa-eye fa-lg text-success m-2'> </i>").html_safe, organization_path(id: organization.id) %>        </td>
+        <td><%= link_to ("<i class='fas fa-eye fa-lg text-success m-2'> </i>").html_safe, organization_path(search_by: params[:search_by],id: organization.id) %></td>
+        <%if admin_signed_in?%>
+          <td><%= link_to ("<i class='fas fa-trash-alt fa-lg text-danger m-2'> </i>").html_safe, organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
