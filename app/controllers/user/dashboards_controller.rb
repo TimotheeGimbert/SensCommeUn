@@ -41,12 +41,44 @@ class User::DashboardsController < ApplicationController
   end
 
   def organizations
-    # Gets user-selected sector_id and organisation through params from sidebar
-    sectorID_selected = params[:sectorID]
-    
     # Displays by default the full list of organizations
     @organizations = Organization.all
+    @view_title = "Toutes les organisations"
+    if params[:search_by]
+      @sidebar_links =[]
+      case params[:search_by]
+        when "geo_zones"
+          @sidebar_title = "Zones géographiques"
+          City.all.each { |city| @sidebar_links.push( {id:city.id, label:city.name} ) }
+          if params[:id]
+            @organizations = Organization.all.reject{|organization| organization.city.id != params[:id].to_i}
+            @view_title = City.find_by(id: params[:id]).name
+          end
+        when "sectors"
+          @sidebar_title = "Secteurs d'activité"
+          ActivitySector.all.each { |sector| @sidebar_links.push( {id:sector.id, label:sector.name} ) }
+          if params[:id]
+            @organizations = Organization.all.reject{|organization| organization.activity_sector.id != params[:id].to_i}
+            @view_title = ActivitySector.find_by(id: params[:id]).name
+          end
+        when "status"
+          @sidebar_title = "Status"
+          Status.all.each { |status| @sidebar_links.push( {id:status.id, label:status.name} ) }
+          if params[:id]
+            @organizations = Organization.all.reject{|organization| organization.status.id != params[:id].to_i}
+            @view_title = Status.find_by(id: params[:id]).name
+          end
+      end
+    end
+
+    # Gets user-selected sector_id and organisation through params from sidebar
+    sectorID_selected = params[:sectorID]
+
+    # Gets user-selected city_id and organisation through params from sidebar
+    cityID_selected = params[:cityID]
     @render_view = "organizations/list"
+
+    
 
     # Filters organizations if an activity sector is selected
     if sectorID_selected != nil
@@ -66,6 +98,7 @@ class User::DashboardsController < ApplicationController
     if params[:show] && params[:show] == "StakeholderRequest"
       @stakeholder_request = StakeholderRequest.new()
     end
+
   end
 
   def organizations_legalreps
