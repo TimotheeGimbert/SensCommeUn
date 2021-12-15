@@ -7,11 +7,11 @@
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     
-    <div class="form-inputs text-start">
+    <div class="form-inputs text-center">
       <%= f.input :email %>
       <%= f.input :message %>
-      <div class="action mt-3 mb-3">
-        <%= f.submit "Envoyer", class:"btn btn-primary" %>
+      <div class="action my-3">
+        <%= f.submit "Envoyer votre message", class:"btn btn-primary" %>
       </div>
     </div>  
   <% end %>

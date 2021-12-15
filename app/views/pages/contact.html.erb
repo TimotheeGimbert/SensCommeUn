@@ -1,18 +1,18 @@
-
-<div class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
-  <div class="container justify-content-align bg-dark rounded my-auto"style="--bs-bg-opacity: .5;">
-    <div class="mx-auto my-2 text-center">
-      <h1 class="text-info">Nous Contacter</h1>
-      <br>
+<div class="container-fluid">
+  <div class="row hero">
+    <div class="col-8 call text-center m-auto p-3 pb-5">
+      <h1 class="text-info m-5">Nous Contacter</h1>
       <h4> Sens·Commun <br>
-      83 Boulevard MacDonald <br>
-      75019 Paris <br>
+      11 Place des Humanistes <br>
+      75000 Paris <br>
       FRANCE
       </h4>
     </div>
-    <div class="mx-auto my-2 text-center">
-    <%= render 'visitor_messages/form', visitor_message: @visitor_message %>
-    </div>
-  </div>
-</div>
 
+    <div class="col-6 mx-auto my-2 text-center">
+      <%= render 'visitor_messages/form', visitor_message: @visitor_message %>
+    </div>
+
+  </div>
+
+</div>
