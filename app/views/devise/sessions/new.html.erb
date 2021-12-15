@@ -29,7 +29,7 @@
 
       <br/>
       <div class="action">
-        <%= f.submit "Se connecter", class:"btn btn-outline-warning my-3" %>
+        <%= f.submit "Se connecter", class:"btn btn-outline-info my-3" %>
       </div>
       <% end %>
 
@@ -44,7 +44,7 @@
 
 <span class="fixed-bottom text-center mb-5">
   <% if request.path_info.to_s.include?('user') %>
-    <%= link_to "Page de connexion Administrateur", new_admin_session_path, class: "btn btn-outline-danger text-light mx-auto" %>
+    <%= link_to "Page de connexion Administrateur", new_admin_session_path, class: "btn btn-outline-light mx-auto" %>
   <% else %>
     <%= link_to "Page de connexion Utilisateur", new_user_session_path, class: "btn btn-outline-light mx-auto" %>
   <% end %>
