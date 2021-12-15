@@ -1,5 +1,6 @@
 <%if params[:search_by]%>
   <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <%= link_to "Retour", user_dashboards_organizations_path(), class:"sidebar-item text-light text-decoration-none text-center mb-2" %>
     <h4 class="text-info"><%= @sidebar_title%></h4>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
