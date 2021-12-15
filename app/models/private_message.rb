@@ -1,4 +1,6 @@
 class PrivateMessage < ApplicationRecord
+  validates :object, :content, presence: true
+
   belongs_to :author, polymorphic: true
 
   has_many :join_messages_recipients, dependent: :destroy
