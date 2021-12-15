@@ -26,7 +26,7 @@ end
 end
 
 User.all.each do |user|
-  profile = Profile.create(user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  profile = Profile.create(user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "00#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)}")
   puts profile
 end
 
@@ -129,12 +129,12 @@ puts "Représentant légaux créés"
 
 basic_user = User.create(email: "user@user.com", password: "azerty")
   puts basic_user
-  profile = Profile.create(user: basic_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  profile = Profile.create(user: basic_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "0139402356")
   puts profile
 
 legrep_user = User.create(email: "legalrep@legalrep.com", password: "azerty")
   puts legrep_user
-  profile = Profile.create(user: legrep_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  profile = Profile.create(user: legrep_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "0739402356")
   puts profile
 
 admin = Admin.create(email: "admin@admin.com", password: "azerty")
