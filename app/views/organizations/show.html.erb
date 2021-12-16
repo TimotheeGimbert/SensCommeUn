@@ -1,3 +1,95 @@
+<div class="container-fluid">
+
+  <div class="row my-3">
+    <section class="card01">
+      <div class="card01__tag">
+        <p> <%=@organization.nickname%> </p>
+      </div>
+      <div class="card01__content">
+        <div class="logo"> <%=image_tag(@organization.logo_url)%> </div>
+        <main>
+          <h1> <%=@organization.name%> </h1>
+          <h2> <%=@organization.status.name%> </h2> 
+          <p> <%=@organization.description%> </p> 
+        </main>
+      </div>
+    </section>
+  </div>
+
+  <div class="row my-3">
+    <section class="card01">
+      <div class="card01__tag">
+        <p> Informations </p>
+      </div>
+      <div class="card01__infos">
+        <div class="codes">
+          <h3> SIREN </h3> 
+          <p> <%=@organization.siren%> </p>
+        </div>
+        <div class="codes">
+          <h3> NAF/APE </h3>
+          <p> <%=@organization.naf_ape%> </p>
+        </div>
+        <main>
+          <h2> Dirigeants </h2>
+          <% @organization.managers.each do |manager|%>
+            <p> <%=manager.email%> </p>
+          <%end%>
+        </main>
+      </div>
+    </section>
+  </div>
+
+  <div class="row">
+  
+  </div>
+
+  <div class="row">
+  
+  </div>
+
+</div>
+
+
+
+
+
+<div class="container-fluid">
+
+
+  <div class="organization organization__infos row mx-auto">
+    <div class="organization--tag col-1">Informations</div>
+    <div class="organization__infos--numbers col-3">
+      <h2> SIREN : </h2> 
+      <p> <%= @organization.siren %> </p>
+      <h2> NAF/APE : <%= @organization.naf_ape %> </h2> 
+    </div>
+    <div class="organization__infos--executives col-8">
+      <h1> Dirigeants </h1>
+      <% @organization.managers.each do |manager|%>
+        <p> <%= manager.email %> </p>
+      <%end%> 
+    </div>
+  </div>
+
+  <div class="organization organization__contacts row mx-auto">
+    <div class="organization--tag col-1">Informations</div>
+    <div class="organization__contacts--numbers col-3">
+      <h2> SIREN : </h2> 
+      <p> <%= @organization.siren %> </p>
+      <h2> NAF/APE : <%= @organization.naf_ape %> </h2> 
+    </div>
+    <div class="organization__infos--executives col-8">
+      <h1> Dirigeants </h1>
+      <% @organization.managers.each do |manager|%>
+        <p> <%= manager.email %> </p>
+      <%end%> 
+    </div>
+  </div>
+
+</div>
+
+
 <%card = {
   header: "ORGANISATION", 
   title: @organization.nickname, 
