@@ -71,17 +71,19 @@
     </section>
   </div>
 
-<%if @organization.managers.include?(current_user)%>
-    <% card[:actions] = [{label: "Éditer les informations", path: edit_organization_path(id: @organization.id, clicked_link: "Éditer les informations"), type:"success"}] %>
-  
-  
-  
-  <%elsif @organization.users_stakeholders.include?(current_user)%>
-    <%# card[:actions] = [{label: "Vous êtes partie prenante de cette organization", path: "", type:"success disabled"}] %>
-    <%=  %>
-
-  <%elsif current_user.stakeholder_requests.where(organization: @organization).empty?%>
-    <%card[:actions] = [{label: "Demander à devenir partie prenante", path: organization_path(id: @organization.id, search_by: params[:search_by], categ_id: params[:categ_id],show: "StakeholderRequest"), type:"success"}]%>
-  <%else %>
-    <%card[:actions] = [{label: "Votre demande de participation n'a pas encore été acceptée", path: "", type:"secondary disabled"},{label: "Refaire une demande", path: organization_path(id: @organization.id,show: "StakeholderRequest"), type:"success"} ]%>
-<%end%>
+  <div class="d-flex justify-content-center">
+    <%if @organization.managers.include?(current_user)%>
+        <%=link_to "Éditer les informations", edit_organization_path(id: @organization.id), class: "btn btn-success"%>
+      <%elsif @organization.users_stakeholders.include?(current_user)%>
+        <%=link_to "Vous êtes partie prenante de cette organization", "#", class: "btn btn-success disabled"%>
+      <%elsif current_user.stakeholder_requests.where(organization: @organization).empty?%>
+        <% if params[:show] == "StakeholderRequest"%>
+          <%=render "stakeholder_requests/form"%>
+        <%else%>
+          <%=link_to "Demander à devenir partie prenante", organization_path(id: @organization.id, search_by: params[:search_by], categ_id: params[:categ_id],show: "StakeholderRequest"), class: "btn btn-success"%>
+        <%end%>
+      <%else %>
+        <%=link_to "Votre demande de participation n'a pas encore été acceptée", "#", class: "btn btn-success disabled"%>
+    <%end%>
+  </div>
+</div>

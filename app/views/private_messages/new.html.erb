@@ -1,5 +1,7 @@
-<h1>New Private Message</h1>
-
+<div class="d-flex justify-content-center my-4">
+  <h2>Écrire un message</h2>
+</div>
 <%= render 'form', private_message: @private_message %>
-
-<%= link_to 'Back', private_messages_path %>
+<div class="d-flex justify-content-end">
+  <%= link_to 'Retour à la liste des messages', private_messages_path , class: "btn btn-sm btn-info"%>
+</div>
