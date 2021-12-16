@@ -65,7 +65,7 @@ puts "Secteur d'activités créés"
     creation_date: Faker::Date.in_date_period, 
     address: Faker::Address.street_address, 
     address_complement: Faker::Address.secondary_address, 
-    zip_code: Faker::Address.zip_code, 
+    zip_code: "00000", 
     city: City.all.sample(1).first, 
     email: Faker::Internet.email, 
     phone_number: "06 25 47 13 09", 
@@ -73,13 +73,13 @@ puts "Secteur d'activités créés"
     siren: Faker::Company.french_siren_number, 
     description: Faker::Lorem.paragraph(sentence_count: 5), 
     activity_sector: ActivitySector.all.sample(1).first, 
-    naf_ape: "a completer", 
+    naf_ape: ["AZED5","AHUI8","MLOP5","KILI2","AOLI8","BFSI3"].sample(1).first ,
     logo_url: Faker::Company.logo, 
-    website_url: Faker::Internet.url
+    website_url: "https://motherfuckingwebsite.com/"
   )
   puts organization
 end 
-puts "30 organisations créées"
+
 
 10.times do 
   activity = Activity.create(
@@ -146,7 +146,7 @@ sens_commun = Organization.create(
   creation_date: DateTime.new(2021,12,11,23,11,0), 
   address: Faker::Address.street_address, 
   address_complement: Faker::Address.secondary_address, 
-  zip_code: Faker::Address.zip_code, 
+  zip_code: "75010", 
   city: City.all.sample(1).first, 
   email: "sens@sens.com", 
   phone_number: "01 11 11 11 11", 
@@ -154,7 +154,7 @@ sens_commun = Organization.create(
   siren: Faker::Company.french_siren_number, 
   description: "This company instance is serving a demonstration purpose, in order to test our app manually", 
   activity_sector: ActivitySector.all.sample(1).first, 
-  naf_ape: "11111111", 
+  naf_ape: "AAAA4", 
   logo_url: Faker::Company.logo, 
   website_url: Faker::Internet.url
 )
