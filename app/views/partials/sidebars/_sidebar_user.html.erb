@@ -1,4 +1,4 @@
-<div class="d-flex flex-column p-4 text-center text-white bg-dark" style="width: 311px;">
+<div class="d-flex flex-column p-4 text-center text-white bg-dark">
   <% if request.fullpath.to_s.include?('organizations') && request.fullpath.to_s.include?('search_by')  %>
     <%= render "partials/sidebars/sidebar_organizations"%>
   <%else%>
