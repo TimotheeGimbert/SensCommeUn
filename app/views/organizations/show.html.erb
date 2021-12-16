@@ -1,33 +1,29 @@
-<div class="container-fluid">
+<h3 class="text-light text-start my-5 ms-5"> <%= @view_title %> </h3>
+
+<div class="container-fluid px-5">
 
   <div class="row my-4">
-    <section class="card01">
-      <div class="card01__tag">
-        <p> <%=@organization.nickname%> </p>
-      </div>
-      <div class="card01__content">
-        <div class="logo"> 
+    <div class="card01">
+      <main>
+        <div class="card01__logo"> 
           <%if @organization.logo.attached?%>
             <%=image_tag(@organization.logo)%> 
           <%elsif @organization.logo_url%>
             <%=image_tag(@organization.logo_url)%>
           <%end%>
         </div>
-        <main>
+        <div class="card01__content">
           <h1> <%=@organization.name%> </h1>
           <h2> <%=@organization.status.name%> </h2> 
           <p> <%=@organization.description%> </p> 
-        </main>
-      </div>
-    </section>
+        </div>
+      </main>
+    </div>
   </div>
 
   <div class="row my-4">
-    <section class="card01">
-      <div class="card01__tag">
-        <p> Informations </p>
-      </div>
-      <div class="card01__infos">
+    <section class="card02">
+      <div class="card02__infos">
         <div class="codes">
           <h3> Secteur d'activité </h3> 
           <p> <%=@organization.activity_sector.name%> </p>
@@ -51,57 +47,41 @@
   </div>
 
   <div class="row my-4">
-    <section class="card01">
-      <div class="card01__tag">
-        <p> Contacts </p>
-      </div>
-      <div class="card01__infos">
+    <section class="card02">
+      <div class="card02__infos">
         <div class="codes">
-          <h3> Site internet </h3> 
-          <a href="<%= @organization.website_url %>" target="_blank"> <p> <%= @organization.website_url %> </p> </a>
+          <h3>Site internet</h3> 
+          <%=link_to(@organization.website_url, class:"text-dark", target: "_blank") do %> 
+            <p><%=@organization.website_url%></p>
+          <%end%>
         </div>
         <div class="codes">
-          <h3> Téléphone </h3>
-          <p> <%=@organization.phone_number%> </p>
+          <h3>Téléphone</h3>
+          <p><%=@organization.phone_number%></p>
         </div>
         <div class="codes">
-          <h3> Adresse </h3>
-          <p> <%=@organization.address%> </p>
+          <h3>Adresse</h3>
+          <p><%=@organization.address%></p>
         </div>
         <div class="codes">
-          <h2> Email </h2> 
-          <p> <%=@organization.email%> </p>
+          <h2>Email</h2> 
+          <p><%=@organization.email%></p>
         </div>
       </div>
     </section>
   </div>
 
-  <div class="row">
-    <%card = {
-    header: "ORGANISATION", 
-    title: @organization.nickname, 
-    subtitle: "Créée le #{format_date(@organization.creation_date)}", 
-    svg_text: @organization.name, 
-    text: @organization.description,
-    list: [{label: "Secteur d'activité", data: @organization.activity_sector.name, type:"primary"},
-          {label: "Statut", data: @organization.status.name, type:"primary"},
-          {label: "SIREN", data: @organization.siren, type:"primary"},
-          {label: "NAF/APE", data: @organization.naf_ape, type:"primary"}
-          ],
-    footer: "#{@organization.external_stakeholders.length} parties prenantes connectées"
-    }%>
-
-  <%if admin_signed_in?%>
-
-  <%elsif @organization.managers.include?(current_user)%>
+<%if @organization.managers.include?(current_user)%>
     <% card[:actions] = [{label: "Éditer les informations", path: edit_organization_path(id: @organization.id, clicked_link: "Éditer les informations"), type:"success"}] %>
+  
+  
+  
   <%elsif @organization.users_stakeholders.include?(current_user)%>
-    <% card[:actions] = [{label: "Vous êtes partie prenante de cette organization", path: "", type:"success disabled"}] %><h3 class="tex-info"></h3>
+    <%# card[:actions] = [{label: "Vous êtes partie prenante de cette organization", path: "", type:"success disabled"}] %>
+    <%=  %>
+
   <%elsif current_user.stakeholder_requests.where(organization: @organization).empty?%>
     <%card[:actions] = [{label: "Demander à devenir partie prenante", path: organization_path(id: @organization.id, search_by: params[:search_by], categ_id: params[:categ_id],show: "StakeholderRequest"), type:"success"}]%>
   <%else %>
     <%card[:actions] = [{label: "Votre demande de participation n'a pas encore été acceptée", path: "", type:"secondary disabled"},{label: "Refaire une demande", path: organization_path(id: @organization.id,show: "StakeholderRequest"), type:"success"} ]%>
-  <%end%>
-  </div>
-
-</div>
+<%end%>

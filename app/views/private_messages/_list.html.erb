@@ -1,6 +1,7 @@
-<h1 class="text-light text-center"> <%= @view_title %> </h1>
-  
-<h3 class="text-info align-self-start"> Messages reçus</h3>
+<%unless request.path_info.to_s=="/pages/news"%>
+  <h3 class="text-light text-start my-5 ms-5"><%=@view_title%></h3>
+  <h4 class="text-info align-self-start">Messages reçus</h4>
+<%end%>
 
 <table class="table table-dark table-hover mt-4 mb-5">
   <thead>

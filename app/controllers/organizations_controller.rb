@@ -4,32 +4,29 @@ class OrganizationsController < ApplicationController
   before_action :has_legal_rep_organization_rights?, only: %i[ edit update ]
   before_action :has_admin_rights?, only: %i[ new create destroy ]
 
-  # GET /organizations or /organizations.json
+  # GET /organizations
   def index
+    sidebar_organizations()
     @organizations = Organization.all
+    @view_title = "Liste de toutes les organisations"
     case params[:selected]
       when "organizations_participation"
         # Gets organizations where the current user is a stakeholder, then renders the appropriate partial
         @view_title = "Organisations dont je suis partie-prenante"
         @organizations = Organization.where(external_stakeholders: ExternalStakeholder.find_by(user: current_user))
     end
-
-    @view_title = "Toutes les organisations"
-    sidebar_organizations()
   end
 
-  # GET /organizations/1 or /organizations/1.json
+  # GET /organizations/1
   def show
+    sidebar_organizations()
+    @view_title = "Organisation sélectionnée"
     if params[:show] && params[:show] == "StakeholderRequest"
       @stakeholder_request = StakeholderRequest.new()
     end
     if @organization.managers.include?(current_user)
       session[:organization_managed_id] = @organization.id
-      # puts "*" * 50
-      # puts session[:organization_managed_id]
-      # puts "*" * 50
     end
-    sidebar_organizations()
   end
 
   # GET /organizations/new
@@ -41,7 +38,7 @@ class OrganizationsController < ApplicationController
   def edit
   end
 
-  # POST /organizations or /organizations.json
+  # POST /organizations
   def create
     @organization = Organization.new(organization_params)
 
@@ -56,7 +53,7 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /organizations/1 or /organizations/1.json
+  # PATCH/PUT /organizations/1
   def update
     if (params[:logo])
       @organization.logo.attach(params[:logo])
@@ -72,7 +69,7 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  # DELETE /organizations/1 or /organizations/1.json
+  # DELETE /organizations/1
   def destroy
     @organization.destroy
     respond_to do |format|
@@ -113,7 +110,7 @@ class OrganizationsController < ApplicationController
             City.all.each { |city| @sidebar_links.push( {id:city.id, label:city.name} ) }
             if params[:categ_id]
               @organizations = Organization.all.reject{|organization| organization.city.id != params[:categ_id].to_i}
-              @view_title = City.find_by(id: params[:categ_id]).name
+              @view_title = "Organisations situées vers " + City.find_by(id: params[:categ_id]).name
             end
           when "sectors"
             @sidebar_title = "Secteurs d'activité"
