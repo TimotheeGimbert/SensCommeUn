@@ -12,11 +12,16 @@
 
   <body>
 
-    <%=render "partials/navbar"%>
+    <%=render "partials/navbars/navbar"%>
 
-    <div class="container-fluid">
-
-      <div class="row">
+    <div class="d-flex">
+      <%if user_signed_in? %>
+        <%=render "partials/sidebars/sidebar_user"%>
+      <%elsif admin_signed_in?%>
+        <%=render "partials/sidebars/sidebar_admin"%>
+      <%end%>
+      
+      <div class="d-flex flex-column" style="width:100%">
         <% flash.each do |type, msg| %>
           <div class="alert alert-<%=type%>">
               <%= msg %>
