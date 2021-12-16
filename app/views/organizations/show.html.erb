@@ -2,9 +2,6 @@
 
   <div class="row my-4">
     <section class="card01">
-      <div class="card01__tag">
-        <p> <%=@organization.nickname%> </p>
-      </div>
       <div class="card01__content">
         <div class="logo"> 
           <%if @organization.logo.attached?%>
@@ -23,11 +20,11 @@
   </div>
 
   <div class="row my-4">
-    <section class="card01">
-      <div class="card01__tag">
+    <section class="card02">
+      <div class="card02__tag">
         <p> Informations </p>
       </div>
-      <div class="card01__infos">
+      <div class="card02__infos">
         <div class="codes">
           <h3> Secteur d'activité </h3> 
           <p> <%=@organization.activity_sector.name%> </p>
@@ -51,11 +48,11 @@
   </div>
 
   <div class="row my-4">
-    <section class="card01">
-      <div class="card01__tag">
+    <section class="card02">
+      <div class="card02__tag">
         <p> Contacts </p>
       </div>
-      <div class="card01__infos">
+      <div class="card02__infos">
         <div class="codes">
           <h3> Site internet </h3> 
           <a href="<%= @organization.website_url %>" target="_blank"> <p> <%= @organization.website_url %> </p> </a>

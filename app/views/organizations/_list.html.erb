@@ -1,31 +1,30 @@
-<h2 class="text-light text-center"> <%= @view_title %> </h2>
+<h3 class="text-light text-start my-5 ms-5"> <%= @view_title %> </h3>
 
 <div class="container-fluid">
-<% @organizations.each do |organization| %>
-
-  <div class="row my-4">
-    <a href="<%=organization_path(search_by: params[:search_by],id: organization.id) %>" class="card01">
-      <div class="card01__tag">
-        <p> <%=organization.nickname%> </p>
-      </div>
-      <div class="card01__content">
-        <div class="logo"> 
-          <%if organization.logo.attached?%>
-            <%=image_tag(organization.logo)%> 
-          <%elsif organization.logo_url%>
-            <%=image_tag(organization.logo_url)%>
-          <%end%>
-        </div>
-        <main>
-          <h1> <%=organization.name%> </h1>
-          <h2> <%=organization.status.name%> </h2> 
-          <p> <%=organization.description%> </p> 
-        </main>
-      </div>
-    </a>
-  </div>
+  <% @organizations.each do |organization| %>
   
-<%end%>
+    <div class="row my-4">
+      <%=link_to(organization_path(search_by: params[:search_by],id: organization.id)) do%>
+        <div class="card01 hoverable">
+          <main>
+            <div class="card01__logo"> 
+              <%if organization.logo.attached?%>
+                <%=image_tag(organization.logo)%> 
+              <%elsif organization.logo_url%>
+                <%=image_tag(organization.logo_url)%>
+              <%end%>
+            </div>
+            <div class="card01__content">
+              <h1> <%=organization.name%> </h1>
+              <h2> <%=organization.status.name%> </h2> 
+              <p> <%=organization.description%> </p> 
+            </div>
+          </main>
+        </div>
+      <%end%>
+    </div>
+    
+  <%end%>
 </div>
 
 

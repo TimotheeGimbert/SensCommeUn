@@ -14,7 +14,7 @@ class OrganizationsController < ApplicationController
         @organizations = Organization.where(external_stakeholders: ExternalStakeholder.find_by(user: current_user))
     end
 
-    @view_title = "Toutes les organisations"
+    @view_title = "Liste de toutes les organisations"
     sidebar_organizations()
   end
 
