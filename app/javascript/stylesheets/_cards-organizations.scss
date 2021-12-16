@@ -57,7 +57,7 @@
     text-align: center;
     
     .codes {
-      flex: 30%;
+      flex: 20%;
       display: flex;
       flex-flow: column nowrap;
       justify-content: center;
@@ -150,29 +150,12 @@
         text-align: end;
       }
     }
-    &--executives {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center;
-      h1 {
-        font-size: 2em;
-        color: $txt-white--strong;
-      }
-      p {
-        font-size: 1.1em;
-      }
-    }
   }
 
   &:hover {
     background-color: $txt-white--strong;
-    h1, h2 {
+    h1, h2, h3 {
       color: rgb(47, 47, 47);
-    }
-    h3, hr { 
-      color: $txt-dark; 
     }
     p { 
       color: $txt-grey--strong; 
