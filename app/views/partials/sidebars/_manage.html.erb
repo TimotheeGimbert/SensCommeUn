@@ -9,8 +9,8 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <% current_user.managed_organizations.each do |organization| %>
-        <li class="nav-item" style="font-size:smaller">
-            <%= link_to "#{organization.name}", organization_path(id: organization.id, organization_managed_id: organization.id), class:"sidebar-item text-secondary text-decoration-none" %>
+        <li class="nav-item">
+            <%= link_to "#{organization.name}", organization_path(id: organization.id, organization_managed_id: organization.id), class:"sidebar-item text-secondary text-decoration-none m-3" %>
         </li>
       <% end %>
     </ul>
