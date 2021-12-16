@@ -1,9 +1,15 @@
+html {box-sizing: border-box;}
+*, *:before, *:after {box-sizing: inherit;}
+img {box-sizing: content-box;}
+
 .body {
   height: 100vh;
   color: white;
   background-color: rgba(0, 0, 0, 0.74);;
 }
 
-.bg-overdark {
-  background-color: rgba(8, 11, 12, 0.158);
+a { 
+  &:link {text-decoration: none !important;}
+  &:visited {text-decoration: none !important;}
+  &:active {text-decoration: none !important;}
 }

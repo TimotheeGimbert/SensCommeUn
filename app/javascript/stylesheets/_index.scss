@@ -21,3 +21,23 @@
     padding: 11px 66px;
   }
 }
+
+.row.p-4.pb-0.pe-lg-0.pt-lg-5.align-items-center.rounded-3.border.shadow-lg {
+  text-align: center;
+  box-shadow: 12px 12px 2px 1px rgba(3, 3, 3, 0.44);
+  border-radius: 77px;
+}
+.row.g-4.py-5.row-cols-1.row-cols-lg-3 {
+  justify-content: center;
+
+  p{
+    color: rgba(160, 156, 156, 0.774);
+  }
+}
+.pb-2.border-bottom {
+  color: gray;
+}
+
+.icon-link {
+  color: rgba(27, 27, 27, 0.719);
+}

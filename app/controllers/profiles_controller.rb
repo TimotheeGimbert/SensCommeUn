@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
   before_action :has_user_rights?, only: %i[ new create update edit ]
-  before_action :has_admin_rights?, only: %i[ destroy ]
+  before_action :has_admin_rights?, only: %i[index destroy ]
   before_action :current_user_profile?, only: %i[ update ]
 
   # GET /profiles or /profiles.json
@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: "Profile was successfully created." }
+        format.html { redirect_to @profile, success: "Profile was successfully created." }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,10 +41,10 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to user_dashboards_index_path(clicked_link: "Editer mon profil"), notice: "Profile was successfully updated." }
+        format.html { redirect_back fallback_location: root_path, success: "Votre profil a été modifié" }
         format.json { render :show, status: :ok, location: @profile }
       else
-        format.html { render user_dashboards_index_path(clicked_link: "Editer mon profil"), status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end

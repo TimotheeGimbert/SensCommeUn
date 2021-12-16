@@ -4,7 +4,14 @@ class ExternalStakeholdersController < ApplicationController
 
   # GET /external_stakeholders or /external_stakeholders.json
   def index
-    @external_stakeholders = ExternalStakeholder.all
+    @organization = Organization.find_by(id: session[:organization_managed_id])
+    # puts "*" * 50
+    # puts session[:organization_managed_id]
+    # puts "*" * 50
+    @all_external_stakeholders = ExternalStakeholder.where(organization_id: session[:organization_managed_id])
+    @stakeholder_requests = @organization.stakeholder_requests.where(validation: 0)
+    @external_stakeholders_category = StakeholderCategory.all.sort {|a, b| a.name <=> b.name}
+    @external_stakeholder = ExternalStakeholder.new()
   end
 
   # GET /external_stakeholders/1 or /external_stakeholders/1.json
@@ -26,12 +33,13 @@ class ExternalStakeholdersController < ApplicationController
 
     respond_to do |format|
       if @external_stakeholder.save
-        format.html { redirect_to user_dashboards_organizations_legalreps_path(organization_managed: @external_stakeholder.organization,clicked_link: "Parties prenantes"), notice: "External stakeholder was successfully created." }
+        format.html { redirect_to @external_stakeholder, notice: "External stakeholder was successfully created." }
         format.json { render :show, status: :created, location: @external_stakeholder }
       else
-        format.html {redirect_to user_dashboards_organizations_legalreps_path(organization_managed: @external_stakeholder.organization,clicked_link: "Parties prenantes"), status: :unprocessable_entity }
+        format.html {render :new, status: :unprocessable_entity }
         format.json { render json: @external_stakeholder.errors, status: :unprocessable_entity }
       end
+      puts @external_stakeholder.errors
     end
   end
 
@@ -39,10 +47,10 @@ class ExternalStakeholdersController < ApplicationController
   def update
     respond_to do |format|
       if @external_stakeholder.update(external_stakeholder_params)
-        format.html { redirect_to user_dashboards_organizations_legalreps_path(clicked_link: "Parties prenantes", organization_managed: @external_stakeholder.organization.id), notice: "External stakeholder was successfully updated." }
+        format.html { redirect_to @external_stakeholder, notice: "External stakeholder was successfully updated." }
         format.json { render :show, status: :ok, location: @external_stakeholder }
       else
-        format.html { render user_dashboards_organizations_legalreps_path(clicked_link: "Parties prenantes", organization_managed: @external_stakeholder.organization.id, stakeholder_id: @external_stakeholder.id), status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @external_stakeholder.errors, status: :unprocessable_entity }
       end
     end
@@ -50,10 +58,9 @@ class ExternalStakeholdersController < ApplicationController
 
   # DELETE /external_stakeholders/1 or /external_stakeholders/1.json
   def destroy
-    organization_id = @external_stakeholder.organization.id
     @external_stakeholder.destroy
     respond_to do |format|
-      format.html { redirect_to user_dashboards_organizations_legalreps_path(clicked_link: "Parties prenantes", organization_managed: organization_id), notice: "External stakeholder was successfully destroyed." }
+      format.html { redirect_to external_stakeholders_url, notice: "External stakeholder was successfully destroyed." }
       format.json { head :no_content }
     end
   end

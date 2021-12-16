@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   resources :profiles
   resources :cities
   root "pages#index"
+  get 'pages/index'
   get 'pages/presentation'
   get 'pages/contact'
+  get 'pages/news'
 
   devise_for :user, controllers: { registrations: 'user/registrations' }
   devise_for :admin
@@ -25,8 +27,6 @@ Rails.application.routes.draw do
       namespace :user do
         root "dashboards#index"
         get 'dashboards/index', as: :dashboards_index
-        get 'dashboards/organizations', as: :dashboards_organizations
-        get 'dashboards/organizations_legalreps', as: :dashboards_organizations_legalreps
       end
     end
   end

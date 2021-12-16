@@ -1,84 +1,107 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
 
-<p>
-  <strong>Name:</strong>
-  <%= @organization.name %>
-</p>
+  <div class="row my-4">
+    <section class="card01">
+      <div class="card01__tag">
+        <p> <%=@organization.nickname%> </p>
+      </div>
+      <div class="card01__content">
+        <div class="logo"> 
+          <%if @organization.logo.attached?%>
+            <%=image_tag(@organization.logo)%> 
+          <%elsif @organization.logo_url%>
+            <%=image_tag(@organization.logo_url)%>
+          <%end%>
+        </div>
+        <main>
+          <h1> <%=@organization.name%> </h1>
+          <h2> <%=@organization.status.name%> </h2> 
+          <p> <%=@organization.description%> </p> 
+        </main>
+      </div>
+    </section>
+  </div>
 
-<p>
-  <strong>Nickname:</strong>
-  <%= @organization.nickname %>
-</p>
+  <div class="row my-4">
+    <section class="card01">
+      <div class="card01__tag">
+        <p> Informations </p>
+      </div>
+      <div class="card01__infos">
+        <div class="codes">
+          <h3> Secteur d'activité </h3> 
+          <p> <%=@organization.activity_sector.name%> </p>
+        </div>
+        <div class="codes">
+          <h3> SIREN </h3> 
+          <p> <%=@organization.siren%> </p>
+        </div>
+        <div class="codes">
+          <h3> NAF/APE </h3>
+          <p> <%=@organization.naf_ape%> </p>
+        </div>
+        <div class="codes">
+          <h2> Dirigeants </h2>
+          <% @organization.managers.each do |manager|%>
+            <p> <%=manager.email%> </p>
+          <%end%>
+        </div>
+      </div>
+    </section>
+  </div>
 
-<p>
-  <strong>Creation date:</strong>
-  <%= @organization.creation_date %>
-</p>
+  <div class="row my-4">
+    <section class="card01">
+      <div class="card01__tag">
+        <p> Contacts </p>
+      </div>
+      <div class="card01__infos">
+        <div class="codes">
+          <h3> Site internet </h3> 
+          <a href="<%= @organization.website_url %>" target="_blank"> <p> <%= @organization.website_url %> </p> </a>
+        </div>
+        <div class="codes">
+          <h3> Téléphone </h3>
+          <p> <%=@organization.phone_number%> </p>
+        </div>
+        <div class="codes">
+          <h3> Adresse </h3>
+          <p> <%=@organization.address%> </p>
+        </div>
+        <div class="codes">
+          <h2> Email </h2> 
+          <p> <%=@organization.email%> </p>
+        </div>
+      </div>
+    </section>
+  </div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @organization.address %>
-</p>
+  <div class="row">
+    <%card = {
+    header: "ORGANISATION", 
+    title: @organization.nickname, 
+    subtitle: "Créée le #{format_date(@organization.creation_date)}", 
+    svg_text: @organization.name, 
+    text: @organization.description,
+    list: [{label: "Secteur d'activité", data: @organization.activity_sector.name, type:"primary"},
+          {label: "Statut", data: @organization.status.name, type:"primary"},
+          {label: "SIREN", data: @organization.siren, type:"primary"},
+          {label: "NAF/APE", data: @organization.naf_ape, type:"primary"}
+          ],
+    footer: "#{@organization.external_stakeholders.length} parties prenantes connectées"
+    }%>
 
-<p>
-  <strong>Address complement:</strong>
-  <%= @organization.address_complement %>
-</p>
+  <%if admin_signed_in?%>
 
-<p>
-  <strong>Zip code:</strong>
-  <%= @organization.zip_code %>
-</p>
+  <%elsif @organization.managers.include?(current_user)%>
+    <% card[:actions] = [{label: "Éditer les informations", path: edit_organization_path(id: @organization.id, clicked_link: "Éditer les informations"), type:"success"}] %>
+  <%elsif @organization.users_stakeholders.include?(current_user)%>
+    <% card[:actions] = [{label: "Vous êtes partie prenante de cette organization", path: "", type:"success disabled"}] %><h3 class="tex-info"></h3>
+  <%elsif current_user.stakeholder_requests.where(organization: @organization).empty?%>
+    <%card[:actions] = [{label: "Demander à devenir partie prenante", path: organization_path(id: @organization.id, search_by: params[:search_by], categ_id: params[:categ_id],show: "StakeholderRequest"), type:"success"}]%>
+  <%else %>
+    <%card[:actions] = [{label: "Votre demande de participation n'a pas encore été acceptée", path: "", type:"secondary disabled"},{label: "Refaire une demande", path: organization_path(id: @organization.id,show: "StakeholderRequest"), type:"success"} ]%>
+  <%end%>
+  </div>
 
-<p>
-  <strong>City:</strong>
-  <%= @organization.city_id %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @organization.email %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @organization.phone_number %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @organization.status_id %>
-</p>
-
-<p>
-  <strong>Siren:</strong>
-  <%= @organization.siren %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @organization.description %>
-</p>
-
-<p>
-  <strong>Activity sector:</strong>
-  <%= @organization.activity_sector_id %>
-</p>
-
-<p>
-  <strong>Naf ape:</strong>
-  <%= @organization.naf_ape %>
-</p>
-
-<p>
-  <strong>Logo url:</strong>
-  <%= @organization.logo_url %>
-</p>
-
-<p>
-  <strong>Website url:</strong>
-  <%= @organization.website_url %>
-</p>
-
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
-<%= link_to 'Back', organizations_path %>
+</div>

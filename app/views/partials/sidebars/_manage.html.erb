@@ -1,0 +1,18 @@
+<div class="d-flex flex-column">
+  <hr class="mt-5 mb-3">
+  <h5 class="text-info">Organisations gérées</h5>
+  <hr class="mt-2">
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Sélectionner
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <% current_user.managed_organizations.each do |organization| %>
+        <li class="nav-item">
+            <%= link_to "#{organization.name}", organization_path(id: organization.id, organization_managed_id: organization.id), class:"sidebar-item text-secondary text-decoration-none m-3" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
