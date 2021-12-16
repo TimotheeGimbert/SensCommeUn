@@ -14,24 +14,30 @@
 
     <%=render "partials/navbars/navbar"%>
 
-    <div class="d-flex">
-      <%if user_signed_in? %>
-        <%=render "partials/sidebars/sidebar_user"%>
-      <%elsif admin_signed_in?%>
-        <%=render "partials/sidebars/sidebar_admin"%>
-      <%end%>
-      
-      <div class="d-flex flex-column" style="width:100%">
+    <div class="container-fluid">
+
+      <div class="row">
         <% flash.each do |type, msg| %>
           <div class="alert alert-<%=type%>">
-            <%= msg %>
+              <%= msg %>
           </div>
         <% end %>
-        <div class="d-flex flex-column m-5">
+      </div>
+
+      <div class="row">
+        <div class="col-2">
+          <%if user_signed_in? %>
+            <%=render "partials/sidebars/sidebar_user"%>
+          <%elsif admin_signed_in?%>
+            <%=render "partials/sidebars/sidebar_admin"%>
+          <%end%>
+        </div>
+        <div class="col-10">
           <%= yield %>
         </div>
       </div>
 
-    </div> 
+    </div>
+
   </body>
 </html>
