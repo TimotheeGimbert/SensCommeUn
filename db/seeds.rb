@@ -46,7 +46,7 @@ PrivateMessage.all.each do |message|
   end
 end
 
-statuses = ['Association','fondation','Société anonyme','Société à responsabilité limitée','Société par actions simplifiée','Non-déterminé']
+statuses = ['Association','Fondation','Société anonyme','Société à responsabilité limitée','Société par actions simplifiée','Non-déterminé']
 statuses.each do |status|
   Status.create(name: status)
 end 
