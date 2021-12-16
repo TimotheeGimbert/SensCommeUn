@@ -13,3 +13,9 @@ a {
   &:visited {text-decoration: none !important;}
   &:active {text-decoration: none !important;}
 }
+
+.check-boxes-container {
+  width: auto;
+  height: 110px;
+  overflow: scroll;
+}

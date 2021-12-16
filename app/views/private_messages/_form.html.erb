@@ -7,9 +7,13 @@
     <%= f.input :object %>
     <%= f.input :content %>
     <h5>Faites control+click pour en sélectionner plusieurs</h5>
-    <%= f.select :recipients_user_ids, User.all.collect {|x| [x.email, x.id]}, {}, :multiple => true %>
+    <%= f.collection_check_boxes :recipients_user_ids, User.all, :id, :email ,  {:item_wrapper_class => 'checkbox_container'} %>
+    <div class="check-boxes-container">
+      <%= f.association :recipients_user, label: false, label_method: :email, value_method: :id, include_blank: false, as: :check_boxes%>
+    </div>
     <br>
-    <%= f.select :recipients_admin_ids, Admin.all.collect {|x| [x.email, x.id]}, {}, :multiple => true %>
+    <%= f.select :recipients_admin_ids, Admin.all.collect {|x| [x.email, x.id]}, {}, :multiple => true%>
+    <%= f.collection_check_boxes :recipients_admin_ids, Admin.all, :id, :email %>
 
     <%if user_signed_in?%>
       <%= f.hidden_field :author_id , value: current_user.id %>
