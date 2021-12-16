@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :profiles
   resources :cities
   root "pages#index"
+  get 'pages/index'
   get 'pages/presentation'
   get 'pages/contact'
   get 'pages/news'
