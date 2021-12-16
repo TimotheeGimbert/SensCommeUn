@@ -1,7 +1,9 @@
-<h3 class="text-light text-start my-5 ms-5"> <%= @view_title %> </h3>
+<%unless request.path_info.to_s=="/pages/news"%>
+  <h3 class="text-light text-start my-5 ms-5"><%=@view_title%></h3>
+<%end%>
 
 <div class="container-fluid px-5">
-  <% @organizations.each do |organization| %>
+  <%@organizations.each do |organization|%>
   
     <div class="row my-4">
       <%=link_to(organization_path(search_by: params[:search_by],id: organization.id)) do%>
@@ -15,9 +17,9 @@
               <%end%>
             </div>
             <div class="card01__content">
-              <h1> <%=organization.name%> </h1>
-              <h2> <%=organization.status.name%> </h2> 
-              <p> <%=organization.description%> </p> 
+              <h1><%=organization.name%></h1>
+              <h2><%=organization.status.name%></h2> 
+              <p><%=organization.description%></p> 
             </div>
           </main>
         </div>
@@ -28,49 +30,6 @@
 </div>
 
 
-
-<table class="table table-dark table-hover mt-4 mb-5">
-  <thead>
-    <tr>
-      <th>Raison sociale</th>
-      <th>Date de création</th>
-      <th>Adresse</th>
-      <th>Email</th>
-      <th>Phone number</th>
-      <th>Status</th>
-      <th>Description</th>
-      <th>Activity sector</th>
-      <th>Website url</th>
-      <th>Show</th>
-      <%if admin_signed_in?%>
-        <th>Delete</th>
-      <%end%>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @organizations.each do |organization| %>
-      <tr>
-        <% if organization.logo.attached?%>
-          <td><span class="bg-white d-flex justify-content-center"><%= image_tag(organization.logo, size: "24") %></span><%= organization.name %><br><%= organization.nickname %></td>
-        <% elsif organization.logo_url%>
-          <td><span class="bg-white d-flex justify-content-center"><%= image_tag(organization.logo_url, size: "24") %></span><%= organization.name %><br><%= organization.nickname %></td>
-        <%else%>
-          <td></td>
-        <%end%>
-        <td><%= format_date(organization.creation_date) %></td>
-        <td><%= organization.address %><br><%= organization.address_complement %><br><%= organization.zip_code %> <%= organization.city.name %></td>
-        <td><%= organization.email %></td>
-        <td><%= organization.phone_number %></td>
-        <td><%= organization.status_id %></td>
-        <td><%= organization.description %></td>
-        <td><%= organization.activity_sector_id %></td>
-        <td><a href="<%= organization.website_url %>" target="_blank">site web</a></td>
-        <td><%= link_to ("<i class='fas fa-eye fa-lg text-success m-2'> </i>").html_safe, organization_path(search_by: params[:search_by],id: organization.id) %></td>
-        <%if admin_signed_in?%>
-          <td><%= link_to ("<i class='fas fa-trash-alt fa-lg text-danger m-2'> </i>").html_safe, organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%if admin_signed_in?%>
+  <%# link_to ("<i class='fas fa-trash-alt fa-lg text-danger m-2'> </i>").html_safe, organization, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%end%>

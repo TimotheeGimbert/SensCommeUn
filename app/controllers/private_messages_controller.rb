@@ -6,7 +6,7 @@ class PrivateMessagesController < ApplicationController
   # GET /private_messages or /private_messages.json
   def index
     # Gets messages of the current user, then renders the appropriate partial
-      @view_title = "Mes messages"
+      @view_title = "Messagerie"
       if user_signed_in?
         @sent_messages = current_user.sent_messages
         @received_messages = current_user.received_messages
