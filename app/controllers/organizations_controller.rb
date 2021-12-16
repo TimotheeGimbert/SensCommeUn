@@ -14,7 +14,7 @@ class OrganizationsController < ApplicationController
         @organizations = Organization.where(external_stakeholders: ExternalStakeholder.find_by(user: current_user))
     end
 
-    @view_title = "Toutes les organisations"
+    @view_title = "Liste de toutes les organisations"
     sidebar_organizations()
   end
 
@@ -29,6 +29,7 @@ class OrganizationsController < ApplicationController
       # puts session[:organization_managed_id]
       # puts "*" * 50
     end
+    @view_title = "Organisation sélectionnée"
     sidebar_organizations()
   end
 
@@ -113,7 +114,7 @@ class OrganizationsController < ApplicationController
             City.all.each { |city| @sidebar_links.push( {id:city.id, label:city.name} ) }
             if params[:categ_id]
               @organizations = Organization.all.reject{|organization| organization.city.id != params[:categ_id].to_i}
-              @view_title = City.find_by(id: params[:categ_id]).name
+              @view_title = "Organisations situées vers " + City.find_by(id: params[:categ_id]).name
             end
           when "sectors"
             @sidebar_title = "Secteurs d'activité"

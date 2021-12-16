@@ -1,33 +1,32 @@
-<div class="container-fluid">
+<h3 class="text-light text-start my-5 ms-5"> <%= @view_title %> </h3>
+
+<div class="container-fluid px-5">
 
   <div class="row my-4">
-    <section class="card01">
-      <div class="card01__tag">
-        <p> <%=@organization.nickname%> </p>
-      </div>
-      <div class="card01__content">
-        <div class="logo"> 
+    <div class="card01">
+      <main>
+        <div class="card01__logo"> 
           <%if @organization.logo.attached?%>
             <%=image_tag(@organization.logo)%> 
           <%elsif @organization.logo_url%>
             <%=image_tag(@organization.logo_url)%>
           <%end%>
         </div>
-        <main>
+        <div class="card01__content">
           <h1> <%=@organization.name%> </h1>
           <h2> <%=@organization.status.name%> </h2> 
           <p> <%=@organization.description%> </p> 
-        </main>
-      </div>
-    </section>
+        </div>
+      </main>
+    </div>
   </div>
 
   <div class="row my-4">
-    <section class="card01">
-      <div class="card01__tag">
+    <section class="card02">
+      <div class="card02__tag">
         <p> Informations </p>
       </div>
-      <div class="card01__infos">
+      <div class="card02__infos">
         <div class="codes">
           <h3> Secteur d'activité </h3> 
           <p> <%=@organization.activity_sector.name%> </p>
@@ -51,11 +50,11 @@
   </div>
 
   <div class="row my-4">
-    <section class="card01">
-      <div class="card01__tag">
+    <section class="card02">
+      <div class="card02__tag">
         <p> Contacts </p>
       </div>
-      <div class="card01__infos">
+      <div class="card02__infos">
         <div class="codes">
           <h3> Site internet </h3> 
           <a href="<%= @organization.website_url %>" target="_blank"> <p> <%= @organization.website_url %> </p> </a>
