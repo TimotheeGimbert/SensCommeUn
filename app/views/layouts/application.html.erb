@@ -16,7 +16,7 @@
 
     <div class="container-fluid">
 
-      <div class="row">
+      <div class="row text-end">
         <% flash.each do |type, msg| %>
           <div class="alert alert-<%=type%>">
               <%= msg %>
@@ -25,16 +25,21 @@
       </div>
 
       <div class="row">
-        <div class="col-2">
-          <%if user_signed_in? %>
-            <%=render "partials/sidebars/sidebar_user"%>
-          <%elsif admin_signed_in?%>
-            <%=render "partials/sidebars/sidebar_admin"%>
+        <%unless request.path_info.to_s=="/" || request.path_info.to_s=="/pages/contact"%>
+          <%if (user_signed_in? || admin_signed_in?) %>
+            <div class="col-2">
+              <%if user_signed_in? %>
+                <%=render "partials/sidebars/sidebar_user"%>
+              <%elsif admin_signed_in?%>
+                <%=render "partials/sidebars/sidebar_admin"%>
+              <%end%>
+            </div>
           <%end%>
-        </div>
-        <div class="col-10">
+        <%end%>
+        <div class="col">
           <%= yield %>
         </div>
+
       </div>
 
     </div>
