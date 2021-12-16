@@ -76,7 +76,6 @@ class StakeholderRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stakeholder_request_params
-      puts "#"*100
       organization_id = params[:stakeholder_request][:organization_id]
       if current_user.managed_organizations.include?(Organization.find_by(id: organization_id.to_i))
         params.require(:stakeholder_request).permit(:validation, :organization_id,:stakeholder_category )
