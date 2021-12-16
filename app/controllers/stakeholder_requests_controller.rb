@@ -49,11 +49,7 @@ class StakeholderRequestsController < ApplicationController
         
         ExternalStakeholder.create(user:@stakeholder_request.user, email: @stakeholder_request.user.email, stakeholder_category_id: stakeholder_category_id, organization: @stakeholder_request.organization)
 
-<<<<<<< HEAD
-        format.html {redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: @stakeholder_request.organization.id), success: "La demande de participation a été acceptée" }
-=======
         format.html {redirect_to external_stakeholders_path(organization_managed_id: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully updated." }
->>>>>>> develop
         format.json { render :show, status: :ok, location: @stakeholder_request }
       else
         format.html { redirect_to  external_stakeholders_path(organization_managed_id: @stakeholder_request.organization.id), status: :unprocessable_entity }
@@ -80,7 +76,6 @@ class StakeholderRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stakeholder_request_params
-      puts "#"*100
       organization_id = params[:stakeholder_request][:organization_id]
       if current_user.managed_organizations.include?(Organization.find_by(id: organization_id.to_i))
         params.require(:stakeholder_request).permit(:validation, :organization_id,:stakeholder_category )
