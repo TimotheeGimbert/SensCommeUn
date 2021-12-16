@@ -12,13 +12,13 @@
 
   <body>
 
-    <%=render "partials/navbar"%>
+    <%=render "partials/navbars/navbar"%>
 
     <div class="d-flex">
       <%if user_signed_in? %>
-        <%=render "user/partials/sidebars/sidebar"%>
+        <%=render "partials/sidebars/sidebar_user"%>
       <%elsif admin_signed_in?%>
-        <%=render "admin/partials/sidebars/sidebar"%>
+        <%=render "partials/sidebars/sidebar_admin"%>
       <%end%>
       
       <div class="d-flex flex-column" style="width:100%">
