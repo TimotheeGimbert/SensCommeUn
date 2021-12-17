@@ -71,6 +71,8 @@ class ProfilesController < ApplicationController
     end
 
     def current_user_profile?
-      redirect_back fallback_location: root_path unless current_user.profile.id == @profile.id
+      unless admin_signed_in?
+       redirect_back fallback_location: root_path unless current_user.profile.id == @profile.id
+      end
     end
 end
