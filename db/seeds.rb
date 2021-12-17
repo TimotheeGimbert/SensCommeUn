@@ -156,7 +156,7 @@ sens_commun = Organization.create(
   activity_sector: ActivitySector.all.sample(1).first, 
   naf_ape: "AAAA4", 
   logo_url: Faker::Company.logo, 
-  website_url: Faker::Internet.url
+  website_url: "https://sens-commun.herokuapp.com/"
 )
 puts sens_commun
 

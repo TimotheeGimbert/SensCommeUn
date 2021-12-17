@@ -8,7 +8,7 @@ class OrganizationsController < ApplicationController
   def index
     @organizations = Organization.all
     sidebar_organizations()
-    @view_title = "Liste de toutes les organisations"
+    @view_title = "Organisations"
     case params[:selected]
       when "organizations_participation"
         # Gets organizations where the current user is a stakeholder, then renders the appropriate partial
