@@ -36,7 +36,7 @@ class ExternalStakeholdersController < ApplicationController
     redirect_back fallback_location: root_path unless @external_stakeholder.organization.managers.include?(current_user)
     respond_to do |format|
       if @external_stakeholder.save
-        format.html { redirect_to @external_stakeholder, success: "External stakeholder was successfully created." }
+        format.html { redirect_to external_stakeholders_path, success: "External stakeholder was successfully created." }
         format.json { render :show, status: :created, location: @external_stakeholder }
       else
         format.html {render :new, status: :unprocessable_entity }
@@ -50,7 +50,7 @@ class ExternalStakeholdersController < ApplicationController
   def update
     respond_to do |format|
       if @external_stakeholder.update(external_stakeholder_params)
-        format.html { redirect_to @external_stakeholder, success: "External stakeholder was successfully updated." }
+        format.html { redirect_to external_stakeholders_path, success: "External stakeholder was successfully updated." }
         format.json { render :show, status: :ok, location: @external_stakeholder }
       else
         format.html { render :edit, status: :unprocessable_entity }
