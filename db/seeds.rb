@@ -33,19 +33,17 @@ User.all.each do |user|
 end
 
 10.times do 
-  pm = PrivateMessage.create(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: User.all.sample(1).first)
-  puts pm
-end
-
-PrivateMessage.all.each do |message|
+  pm = PrivateMessage.new(object: Faker::Lorem.word , content: Faker::Lorem.paragraph(sentence_count: 2) , author: User.all.sample(1).first)
   1..4.times do
-    jm = JoinMessagesRecipient.create(private_message: message, recipient:User.all.sample(1).first)
+    jm = JoinMessagesRecipient.create(private_message: pm, recipient:User.all.sample(1).first)
     puts jm
   end
    0..1.times do 
-    jm = JoinMessagesRecipient.create(private_message: message, recipient:Admin.all.sample(1).first)
+    jm = JoinMessagesRecipient.create(private_message: pm, recipient:Admin.all.sample(1).first)
     puts jm
   end
+  pm.save
+  puts pm
 end
 
 statuses = ['non déterminé','Association','Fondation','Société anonyme','Société à responsabilité limitée','Société par actions simplifiée']
