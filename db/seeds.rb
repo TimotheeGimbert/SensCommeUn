@@ -1,6 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
+VisitorMessage.destroy_all
 PrivateMessage.destroy_all
 Activity.destroy_all
 ExternalStakeholder.destroy_all
@@ -8,6 +9,7 @@ StakeholderCategory.destroy_all
 LegalRep.destroy_all
 Organization.destroy_all
 ActivitySector.destroy_all
+Status.destroy_all
 Profile.destroy_all
 City.destroy_all
 User.destroy_all
@@ -20,13 +22,13 @@ puts "ALL ENTRIES IN THE DATABASE HAS BEEN DESTROYED"
   puts user
 end
 
-['non déterminée','Paris', 'Marseille', 'Bordeaux', 'Nice', 'Montréal'].each do |city| 
+['undefined','Paris', 'Marseille', 'Bordeaux', 'Nice', 'Montréal'].each do |city| 
   city = City.create(name: city)
   puts city
 end
 
 User.all.each do |user|
-  profile = Profile.create( user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "00#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)}")
+  profile = Profile.create( user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "0#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)}")
   puts profile
 end
 
@@ -46,13 +48,13 @@ PrivateMessage.all.each do |message|
   end
 end
 
-statuses = ['Association','Fondation','Société anonyme','Société à responsabilité limitée','Société par actions simplifiée','Non-déterminé']
+statuses = ['non déterminé','Association','Fondation','Société anonyme','Société à responsabilité limitée','Société par actions simplifiée']
 statuses.each do |status|
   Status.create(name: status)
 end 
 puts "Statut créés"
 
-activity_sectors = ['Action sociale, crèches, petite enfance','Agriculture, agro-alimentaire','Commerce, commerce équitable, réparation de véhicules','Construction, BTP et activités immobilières','Culture','Enseignement, formation','Environnement, développement durable','Hébergement, restauration','Industrie, sous-traitance industrielle','Production artisanale, textile','Recyclage des déchets','Services à la personne','Services aux entreprises','Non-déterminé']
+activity_sectors = ['non déterminé','Action sociale, crèches, petite enfance','Agriculture, agro-alimentaire','Commerce, commerce équitable, réparation de véhicules','Construction, BTP et activités immobilières','Culture','Enseignement, formation','Environnement, développement durable','Hébergement, restauration','Industrie, sous-traitance industrielle','Production artisanale, textile','Recyclage des déchets','Services à la personne','Services aux entreprises']
 activity_sectors.each do |activity_sectors|
   ActivitySector.create(name: activity_sectors)
 end 

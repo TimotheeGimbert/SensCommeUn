@@ -5,7 +5,7 @@ class ActivitySectorsController < ApplicationController
 
   # GET /activity_sectors or /activity_sectors.json
   def index
-    @activity_sectors = ActivitySector.all
+    @activity_sectors = ActivitySector.all.reject{|activity| activity.name == "non déterminé"}
   end
 
   # GET /activity_sectors/1 or /activity_sectors/1.json
@@ -51,6 +51,9 @@ class ActivitySectorsController < ApplicationController
 
   # DELETE /activity_sectors/1 or /activity_sectors/1.json
   def destroy
+    # Organization.where(activity_sector_id: @activity_sector.id).each do |organization|
+    #   organization.activity_sector_id = ActivitySector.find_by(name: "non déterminé").id
+    # end
     @activity_sector.destroy
     respond_to do |format|
       format.html { redirect_to activity_sectors_url, success: "Activity sector was successfully destroyed." }

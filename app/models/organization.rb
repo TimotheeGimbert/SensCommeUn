@@ -10,7 +10,7 @@ class Organization < ApplicationRecord
 
   belongs_to :city
   belongs_to :status
-  belongs_to :activity_sector
+  belongs_to :activity_sector, optional: true
   has_many :legal_reps, dependent: :destroy
   has_many :managers, through: :legal_reps, source: :user
   has_many :external_stakeholders, dependent: :destroy
