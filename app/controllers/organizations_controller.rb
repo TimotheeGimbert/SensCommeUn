@@ -6,8 +6,8 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations
   def index
-    sidebar_organizations()
     @organizations = Organization.all
+    sidebar_organizations()
     @view_title = "Liste de toutes les organisations"
     case params[:selected]
       when "organizations_participation"
