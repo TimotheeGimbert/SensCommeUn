@@ -22,32 +22,30 @@
   }
 }
 
-.row.p-4.pb-0.pe-lg-0.pt-lg-5.align-items-center.rounded-3.border.shadow-lg {
+
+
+.card03 {
   text-align: center;
   border-radius: 77px;
-}
-.row.g-4.py-5.row-cols-1.row-cols-lg-3 {
-  justify-content: center;
-
-  p{
-    color: rgba(160, 156, 156, 0.774);
-  }
-}
-.pb-2.border-bottom {
-  color: gray;
-}
-
-.icon-link {
-  color: rgba(27, 27, 27, 0.719);
-}
-
-
-.container.my-5 {
   background-color: rgb(214, 212, 212);
   border-radius: 70px;
   box-shadow: 10px 5px 5px rgba(26, 25, 25, 0.548);
-}
 
-.container.my-5:hover {
-  box-shadow: 18px 18px 4px 2px rgba(15, 15, 15, 0.418);
+  &__bloc {
+    justify-content: center;
+  }
+
+  h1 {
+    color: $txt-dark--medium;
+    font-size: 2em;
+    font-weight: 600;
+  }
+  h2 {
+    color: $txt-grey--strong;
+    font-size: 1.4em;
+  }
+  p {
+    color: $txt-grey--medium;
+    font-size: 1em;
+  }
 }
