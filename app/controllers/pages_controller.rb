@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_action :has_user_rights?, only: %i[ news ]
 
   def index
   end

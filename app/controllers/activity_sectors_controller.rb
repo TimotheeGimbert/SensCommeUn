@@ -27,7 +27,7 @@ class ActivitySectorsController < ApplicationController
 
     respond_to do |format|
       if @activity_sector.save
-        format.html { redirect_to @activity_sector, notice: "Activity sector was successfully created." }
+        format.html { redirect_to @activity_sector, success: "Activity sector was successfully created." }
         format.json { render :show, status: :created, location: @activity_sector }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class ActivitySectorsController < ApplicationController
   def update
     respond_to do |format|
       if @activity_sector.update(activity_sector_params)
-        format.html { redirect_to @activity_sector, notice: "Activity sector was successfully updated." }
+        format.html { redirect_to @activity_sector, success: "Activity sector was successfully updated." }
         format.json { render :show, status: :ok, location: @activity_sector }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class ActivitySectorsController < ApplicationController
   def destroy
     @activity_sector.destroy
     respond_to do |format|
-      format.html { redirect_to activity_sectors_url, notice: "Activity sector was successfully destroyed." }
+      format.html { redirect_to activity_sectors_url, success: "Activity sector was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -13,3 +13,15 @@ a {
   &:visited {text-decoration: none !important;}
   &:active {text-decoration: none !important;}
 }
+
+.check-boxes-container {
+  width: auto;
+  height: 150px;
+  overflow: auto;
+  border: 4px inset #62c462;
+  padding: auto;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+}

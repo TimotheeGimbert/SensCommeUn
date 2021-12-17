@@ -1,21 +1,20 @@
-<div class="d-flex flex-column mb-5">
   <%if session[:organization_managed_id] %>
-    <h3 class="mt-3 mb-3"><%= organization = Organization.find_by(id: session[:organization_managed_id].to_i).name%></h3>
+    <h3 class="mt-3 mb-3 text-info"><%= organization = Organization.find_by(id: session[:organization_managed_id].to_i).name%></h3>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item"> 
         <%= link_to "Parties prenantes", external_stakeholders_path(), class:"nav-link sidebar-item" %>
       </li>
+      <br>
       <li class="nav-item"> 
         <%= link_to "Activités",root_path(), class:"nav-link sidebar-item disabled" %>
       </li>
+      <br>
       <li class="nav-item"> 
         <%= link_to "Documents",root_path(), class:"nav-link sidebar-item disabled" %>
       </li>
+      <br>
       <li class="nav-item"> 
         <%= link_to "Présentations",root_path(), class:"nav-link sidebar-item disabled" %>
       </li>
     </ul>
-  <%else%>
-    <p><i>Sélectionnez une organisation</i></p>
   <%end%>
-</div>

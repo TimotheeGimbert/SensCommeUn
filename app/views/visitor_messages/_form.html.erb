@@ -1,15 +1,17 @@
+<% if admin_signed_in? %>
 
-<% if user_signed_in? %>
-  <p> Accedez a votre messagerie pour nous contacter </p>
-  <%= link_to "ma messagerie", new_private_message_path, class:"btn btn-primary mb-3" %>
+<% elsif user_signed_in? %>
+  <h3 class="text-black"> Accédez a votre messagerie pour nous contacter </h3>
+  <%= link_to "Ma messagerie", new_private_message_path, class:"btn btn-primary mb-3" %>
 <% else %>
   <%= simple_form_for(@visitor_message) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     
     <div class="form-inputs text-center">
-      <%= f.input :email %>
-      <%= f.input :message %>
+      <%= f.input :email , placeholder: "Votre email", label: false%>
+      <br>
+      <%= f.input :message, placeholder: "Votre message", label: false %>
       <div class="action my-3">
         <%= f.submit "Envoyer votre message", class:"btn btn-primary" %>
       </div>

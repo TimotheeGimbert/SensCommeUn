@@ -1,28 +1,36 @@
-<h1 class="text-light text-center"> <%= @view_title %> </h1>
-  
-<h3 class="text-info align-self-start"> Messages reçus</h3>
 
-<table class="table table-dark table-hover mt-4 mb-5">
-  <thead>
-    <tr>
-      <th>Objet</th>
-      <th>Auteur</th>
-      <th>Date de réception</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @received_messages.reverse_each do |pm| %>
+<% if @received_messages%>
+  <%unless request.path_info.to_s=="/pages/news"%>
+    <h2 class="text-success text-center mt-5 "><%=@view_title%></h2>
+    <div class="d-flex justify-content-end">
+    <%= link_to "Nouveau Message", new_private_message_path(), class: "btn btn-success px-10 mx-5" %>
+    </div>
+    <h3 class="text-info align-self-start">Messages reçus</h3>
+  <%end%>
+
+  <table class="table table-dark table-hover mt-4 mb-5">
+    <thead>
       <tr>
-        <td><%= pm.object %></td>
-        <td><%= pm.author.email %></td>
-        <td><%= format_date_with_hour(pm.created_at) %></td>
-        <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm" %></td>
+        <th>Objet</th>
+        <th>Auteur</th>
+        <th>Date de réception</th>
+        <th>Afficher</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @received_messages.reverse_each do |pm| %>
+        <tr>
+          <td><%= pm.object %></td>
+          <td><%= pm.author.email %></td>
+          <td><%= format_date_with_hour(pm.created_at) %></td>
+          <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%end%>
 
 <% if @sent_messages%>
 
@@ -33,8 +41,8 @@
       <tr>
         <th>Objet</th>
         <th>Auteur</th>
-        <th>Date de réception</th>
-        <th colspan="3"></th>
+        <th>Date d'envoi</th>
+        <th>Afficher</th>
       </tr>
     </thead>
 
@@ -44,12 +52,11 @@
           <td><%= pm.object %></td>
           <td><%= pm.author.email %></td>
           <td><%= format_date_with_hour(pm.created_at) %></td>
-          <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm" %></td>
+          <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm " %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <%= link_to "Nouveau Message", new_private_message_path(), class: "btn btn-success px-5 align-self-center" %>
 
 <%end%>

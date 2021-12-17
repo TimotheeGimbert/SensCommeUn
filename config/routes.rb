@@ -14,12 +14,13 @@ Rails.application.routes.draw do
   resources :profiles
   resources :cities
   root "pages#index"
+  get 'pages/index'
   get 'pages/presentation'
   get 'pages/contact'
   get 'pages/news'
 
   devise_for :user, controllers: { registrations: 'user/registrations' }
-  devise_for :admin
+  devise_for :admin, controllers: { registrations: 'admin/registrations' }
 
   devise_scope :user do
     authenticated :user do

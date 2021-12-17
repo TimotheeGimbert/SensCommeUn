@@ -6,7 +6,7 @@ class PrivateMessagesController < ApplicationController
   # GET /private_messages or /private_messages.json
   def index
     # Gets messages of the current user, then renders the appropriate partial
-      @view_title = "Mes messages"
+      @view_title = "Messagerie"
       if user_signed_in?
         @sent_messages = current_user.sent_messages
         @received_messages = current_user.received_messages
@@ -71,7 +71,7 @@ class PrivateMessagesController < ApplicationController
   def update
     respond_to do |format|
       if @private_message.update(private_message_params)
-        format.html { redirect_to @private_message, notice: "Private message was successfully updated." }
+        format.html { redirect_to @private_message, success: "Private message was successfully updated." }
         format.json { render :show, status: :ok, location: @private_message }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -84,7 +84,7 @@ class PrivateMessagesController < ApplicationController
   def destroy
     @private_message.destroy
     respond_to do |format|
-      format.html { redirect_to private_messages_url, notice: "Private message was successfully destroyed." }
+      format.html { redirect_to private_messages_url, success: "Private message was successfully destroyed." }
       format.json { head :no_content }
     end
   end

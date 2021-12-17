@@ -27,7 +27,7 @@ class StakeholderCategoriesController < ApplicationController
 
     respond_to do |format|
       if @stakeholder_category.save
-        format.html { redirect_to @stakeholder_category, notice: "Stakeholder category was successfully created." }
+        format.html { redirect_to @stakeholder_category, success: "Stakeholder category was successfully created." }
         format.json { render :show, status: :created, location: @stakeholder_category }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class StakeholderCategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @stakeholder_category.update(stakeholder_category_params)
-        format.html { redirect_to @stakeholder_category, notice: "Stakeholder category was successfully updated." }
+        format.html { redirect_to @stakeholder_category, success: "Stakeholder category was successfully updated." }
         format.json { render :show, status: :ok, location: @stakeholder_category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class StakeholderCategoriesController < ApplicationController
   def destroy
     @stakeholder_category.destroy
     respond_to do |format|
-      format.html { redirect_to stakeholder_categories_url, notice: "Stakeholder category was successfully destroyed." }
+      format.html { redirect_to stakeholder_categories_url, success: "Stakeholder category was successfully destroyed." }
       format.json { head :no_content }
     end
   end
