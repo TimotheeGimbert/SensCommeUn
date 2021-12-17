@@ -7,7 +7,7 @@
   <thead>
     <tr>
       <th>Nom</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -17,7 +17,6 @@
         <td><%= activity_sector.name %></td>
         <td><%= link_to 'Show', activity_sector %></td>
         <td><%= link_to 'Edit', edit_activity_sector_path(activity_sector) %></td>
-        <td><%= link_to 'Destroy', activity_sector, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

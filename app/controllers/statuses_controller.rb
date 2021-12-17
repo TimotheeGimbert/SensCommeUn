@@ -5,7 +5,7 @@ class StatusesController < ApplicationController
 
   # GET /statuses or /statuses.json
   def index
-    @statuses = Status.all
+    @statuses = Status.all.reject{|status| status.name == "non déterminé"}
   end
 
   # GET /statuses/1 or /statuses/1.json
