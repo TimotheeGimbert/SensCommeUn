@@ -53,7 +53,7 @@ class VisitorMessagesController < ApplicationController
   def destroy
     @visitor_message.destroy
     respond_to do |format|
-      format.html { redirect_to visitor_messages_url, notice: "Visitor message was successfully destroyed." }
+      format.html { redirect_to visitor_messages_url, success: "Visitor message was successfully destroyed." }
       format.json { head :no_content }
     end
   end

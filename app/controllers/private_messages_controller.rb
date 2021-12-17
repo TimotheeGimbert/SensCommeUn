@@ -71,7 +71,7 @@ class PrivateMessagesController < ApplicationController
   def update
     respond_to do |format|
       if @private_message.update(private_message_params)
-        format.html { redirect_to @private_message, notice: "Private message was successfully updated." }
+        format.html { redirect_to @private_message, success: "Private message was successfully updated." }
         format.json { render :show, status: :ok, location: @private_message }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -84,7 +84,7 @@ class PrivateMessagesController < ApplicationController
   def destroy
     @private_message.destroy
     respond_to do |format|
-      format.html { redirect_to private_messages_url, notice: "Private message was successfully destroyed." }
+      format.html { redirect_to private_messages_url, success: "Private message was successfully destroyed." }
       format.json { head :no_content }
     end
   end
