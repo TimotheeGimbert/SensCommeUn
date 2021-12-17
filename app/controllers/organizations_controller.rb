@@ -90,9 +90,6 @@ class OrganizationsController < ApplicationController
 
     def has_legal_rep_organization_rights?
       redirect_back fallback_location: root_path unless Organization.find_by(id: params[:id]).managers.include?(current_user)
-      puts "*" * 50
-      puts Organization.find_by(id: session[:organization_managed_id]).managers.include?(current_user)
-      puts "*" * 50
     end
 
     # Only allow a list of trusted parameters through.

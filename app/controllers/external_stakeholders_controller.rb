@@ -1,6 +1,7 @@
 class ExternalStakeholdersController < ApplicationController
   before_action :set_external_stakeholder, only: %i[ show edit update destroy ]
-  before_action :has_legal_rep_rights?, only: %i[ index show new edit create update destroy]
+  before_action :has_user_rights?, only: %i[ index  ]
+  before_action :has_current_user_rights?, only: %i[ show new edit update destroy]
 
   # GET /external_stakeholders or /external_stakeholders.json
   def index
@@ -16,6 +17,7 @@ class ExternalStakeholdersController < ApplicationController
 
   # GET /external_stakeholders/1 or /external_stakeholders/1.json
   def show
+    
   end
 
   # GET /external_stakeholders/new
@@ -29,8 +31,9 @@ class ExternalStakeholdersController < ApplicationController
 
   # POST /external_stakeholders or /external_stakeholders.json
   def create
+   
     @external_stakeholder = ExternalStakeholder.new(external_stakeholder_params)
-
+    redirect_back fallback_location: root_path unless @external_stakeholder.organization.managers.include?(current_user)
     respond_to do |format|
       if @external_stakeholder.save
         format.html { redirect_to @external_stakeholder, success: "External stakeholder was successfully created." }
@@ -74,5 +77,9 @@ class ExternalStakeholdersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def external_stakeholder_params
       params.require(:external_stakeholder).permit(:organization_id, :name, :email, :stakeholder_category_id)
+    end
+
+    def has_current_user_rights?
+      redirect_back fallback_location: root_path unless ExternalStakeholder.find_by(id: params[:id]).organization.managers.include?(current_user)
     end
 end
