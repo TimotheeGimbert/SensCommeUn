@@ -41,7 +41,7 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_back fallback_location: root_path, success: "Votre profil a été modifié" }
+        format.html { redirect_to edit_profile_path(@profile), success: "Votre profil a été modifié" }
         format.json { render :show, status: :ok, location: @profile }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -71,6 +71,8 @@ class ProfilesController < ApplicationController
     end
 
     def current_user_profile?
-      redirect_back fallback_location: root_path unless current_user.profile.id == @profile.id
+      unless admin_signed_in?
+       redirect_back fallback_location: root_path unless current_user.profile.id == @profile.id
+      end
     end
 end

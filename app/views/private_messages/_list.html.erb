@@ -2,7 +2,7 @@
 
 <% if @received_messages%>
   <%unless request.path_info.to_s=="/pages/news"%>
-    <h2 class="text-success text-center mt-5 "><%=@view_title%></h2>
+    <h1 class="mt-5"><%=@view_title%></h1>
     <div class="d-flex justify-content-end">
     <%= link_to "Nouveau Message", new_private_message_path(), class: "btn btn-success px-10 mx-5" %>
     </div>
@@ -14,6 +14,7 @@
       <tr>
         <th>Objet</th>
         <th>Auteur</th>
+        <th>Destinataires</th>
         <th>Date de réception</th>
         <th>Afficher</th>
       </tr>
@@ -23,7 +24,14 @@
       <% @received_messages.reverse_each do |pm| %>
         <tr>
           <td><%= pm.object %></td>
-          <td><%= pm.author.email %></td>
+          <td><span class="badge rounded-pill bg-secondary"><%= pm.author.email %></span></td>
+          <td>
+            <% pm.recipients.each do |recipient|%>
+              <%unless recipient == current_user || recipient == current_admin%>
+                <span class="badge rounded-pill bg-secondary"><%=recipient.email %></span>
+              <%end%>
+            <%end%>
+          </td>
           <td><%= format_date_with_hour(pm.created_at) %></td>
           <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm" %></td>
         </tr>
@@ -40,7 +48,7 @@
     <thead>
       <tr>
         <th>Objet</th>
-        <th>Auteur</th>
+        <th>Destinataires</th>
         <th>Date d'envoi</th>
         <th>Afficher</th>
       </tr>
@@ -50,7 +58,11 @@
       <% @sent_messages.reverse_each do |pm| %>
         <tr>
           <td><%= pm.object %></td>
-          <td><%= pm.author.email %></td>
+          <td>
+            <% pm.recipients.each do |recipient|%>
+              <span class="badge rounded-pill bg-secondary"><%=recipient.email %></span>
+            <%end%>
+          </td>
           <td><%= format_date_with_hour(pm.created_at) %></td>
           <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm " %></td>
         </tr>
