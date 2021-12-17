@@ -1,7 +1,6 @@
 class PrivateMessage < ApplicationRecord
   validates :object, :content, presence: true
   validates :object, length: {maximum: 140 }
-  validates :recipients, presence: true
 
   belongs_to :author, polymorphic: true
 
