@@ -16,7 +16,7 @@ Admin.destroy_all
 puts "ALL ENTRIES IN THE DATABASE HAS BEEN DESTROYED"
 
 10.times do
-  user = User.create(email: Faker::Internet.unique.email, password: Faker::Lorem.characters(number: 10))
+  user = User.create(confirmation_token: "test", confirmed_at: DateTime.now, email: Faker::Internet.unique.email, password: Faker::Lorem.characters(number: 10))
   puts user
 end
 
@@ -26,7 +26,7 @@ end
 end
 
 User.all.each do |user|
-  profile = Profile.create(user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "00#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)}")
+  profile = Profile.create( user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "00#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)}")
   puts profile
 end
 
@@ -127,12 +127,12 @@ puts "Représentant légaux créés"
 # Seeds dedicated to application tests and demo dashboard
 ###############################################
 
-basic_user = User.create(email: "user@user.com", password: "azerty")
+basic_user = User.create(email: "user@user.com", password: "azerty",confirmation_token: "test", confirmed_at: DateTime.now)
   puts basic_user
   profile = Profile.create(user: basic_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "0139402356")
   puts profile
 
-legrep_user = User.create(email: "legalrep@legalrep.com", password: "azerty")
+legrep_user = User.create(email: "legalrep@legalrep.com", password: "azerty" ,confirmation_token: "test", confirmed_at: DateTime.now)
   puts legrep_user
   profile = Profile.create(user: legrep_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "0739402356")
   puts profile
