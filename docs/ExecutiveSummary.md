@@ -8,7 +8,7 @@
 
 ### Business Model 
 - Comment vous comptez rémunérer l'organisation
-  - hebergement securisee des donnes via la solution
+  - hebergement securise des donnes via la solution
   - aide au pilotage / integrations
   - formation a l'utilisation et l'optimisation
   - support et maintenance
@@ -28,3 +28,4 @@ Organisations du secteur de l'economie Sociale et Solidaire
 Aucun car le produit est en phase de pilote
 ### Résultats escomptés dans trois ans
 - Dites ce que vous comptez faire
+work in progress
