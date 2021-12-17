@@ -6,8 +6,8 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations
   def index
-    sidebar_organizations()
     @organizations = Organization.all
+    sidebar_organizations()
     @view_title = "Liste de toutes les organisations"
     case params[:selected]
       when "organizations_participation"
@@ -20,7 +20,6 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   def show
     sidebar_organizations()
-    @view_title = "Organisation sélectionnée"
     if params[:show] && params[:show] == "StakeholderRequest"
       @stakeholder_request = StakeholderRequest.new()
     end
