@@ -11,18 +11,9 @@
 
 <div id="index-presentation" class="px-4 py-5 my-5 text-center">
   <div class="px-4 py-5 my-5 text-center rounded">
-    <h1 class="display-5 fw-bold ">Découvrez Nos Organisations</h1>
+    <h1 class="display-5 fw-bold ">Qui sommes nous ?</h1>
     <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4"> Parcourez les organisations par secteurs d'activités et par zones géographiques </p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <% if user_signed_in? %>
-          <%= link_to "Voir la liste des organisations", organizations_path, class: "btn btn-primary btn-lg px-4 gap-3" %> 
-        <% elsif admin_signed_in? %>
-          <%= link_to "Voir la liste des organisations", organizations_path, class: "btn btn-primary btn-lg px-4 gap-3" %> 
-        <% else %>
-          <%= link_to "Voir la liste des organisations", new_user_session_path, class: "btn btn-primary btn-lg px-4 gap-3" %> 
-        <%end%>
-      </div>
+      <p class="lead mb-4"> Sens•Commun est un outil CRM destine aux acteurs de l'Economie Sociale et Solidaire. On centralise et uniformise differents outils en un seul tout en restant adaptable et modulable selon les besoins de chacun. Centralisez les informations (documents,statuts,actualites,messages) de vos organisations et donnez en l'acces a votre communaute. </p>
     </div>
   </div>
   
