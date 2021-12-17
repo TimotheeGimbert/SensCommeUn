@@ -1,5 +1,6 @@
+<% if admin_signed_in? %>
 
-<% if user_signed_in? %>
+<% elsif user_signed_in? %>
   <p> Accedez a votre messagerie pour nous contacter </p>
   <%= link_to "Ma messagerie", new_private_message_path, class:"btn btn-primary mb-3" %>
 <% else %>
