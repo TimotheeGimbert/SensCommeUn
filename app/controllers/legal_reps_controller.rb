@@ -28,7 +28,7 @@ class LegalRepsController < ApplicationController
 
     respond_to do |format|
       if @legal_rep.save
-        format.html { redirect_to @legal_rep, notice: "Legal rep was successfully created." }
+        format.html { redirect_to @legal_rep, success: "Legal rep was successfully created." }
         format.json { render :show, status: :created, location: @legal_rep }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class LegalRepsController < ApplicationController
   def update
     respond_to do |format|
       if @legal_rep.update(legal_rep_params)
-        format.html { redirect_to @legal_rep, notice: "Legal rep was successfully updated." }
+        format.html { redirect_to @legal_rep, success: "Legal rep was successfully updated." }
         format.json { render :show, status: :ok, location: @legal_rep }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class LegalRepsController < ApplicationController
   def destroy
     @legal_rep.destroy
     respond_to do |format|
-      format.html { redirect_to legal_reps_url, notice: "Legal rep was successfully destroyed." }
+      format.html { redirect_to legal_reps_url, success: "Legal rep was successfully destroyed." }
       format.json { head :no_content }
     end
   end

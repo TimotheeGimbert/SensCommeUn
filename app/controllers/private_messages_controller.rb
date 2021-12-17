@@ -46,23 +46,26 @@ class PrivateMessagesController < ApplicationController
   # POST /private_messages or /private_messages.json
   def create
     @private_message = PrivateMessage.new(private_message_params)
-    
-    respond_to do |format|
-      if @private_message.save
-        # puts "it's working"
-        # params[:recipients_user].each do |recipients_user|
-        #   recipients_user = JoinMessagesRecipient.new(:recipients_user_id => recipients_user, :post_id => @private_message.id)
-        #   if recipients_user.valid?
-        #     recipients_user.save
-        #   else
-        #     @errors += recipients_user.errors
-        #   end
-        # end
-        format.html { redirect_to @private_message, success: "Private message was successfully created." }
-        format.json { render :show, status: :created, location: @private_message }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @private_message.errors, status: :unprocessable_entity }
+    if @private_message.recipients.empty?
+      redirect_to new_private_message_path(@private_message), danger: "No recipients ?"
+    else
+      respond_to do |format|
+        if @private_message.save
+          # puts "it's working"
+          # params[:recipients_user].each do |recipients_user|
+          #   recipients_user = JoinMessagesRecipient.new(:recipients_user_id => recipients_user, :post_id => @private_message.id)
+          #   if recipients_user.valid?
+          #     recipients_user.save
+          #   else
+          #     @errors += recipients_user.errors
+          #   end
+          # end
+          format.html { redirect_to @private_message, success: "Private message was successfully created." }
+          format.json { render :show, status: :created, location: @private_message }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @private_message.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -71,7 +74,7 @@ class PrivateMessagesController < ApplicationController
   def update
     respond_to do |format|
       if @private_message.update(private_message_params)
-        format.html { redirect_to @private_message, notice: "Private message was successfully updated." }
+        format.html { redirect_to @private_message, success: "Private message was successfully updated." }
         format.json { render :show, status: :ok, location: @private_message }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -84,7 +87,7 @@ class PrivateMessagesController < ApplicationController
   def destroy
     @private_message.destroy
     respond_to do |format|
-      format.html { redirect_to private_messages_url, notice: "Private message was successfully destroyed." }
+      format.html { redirect_to private_messages_url, success: "Private message was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -99,4 +102,5 @@ class PrivateMessagesController < ApplicationController
     def private_message_params
       params.require(:private_message).permit(:object, :content, :author_id, :author_type, recipients_user_ids: [], recipients_admin_ids: [])
     end
+
 end

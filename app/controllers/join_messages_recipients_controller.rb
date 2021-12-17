@@ -27,7 +27,7 @@ class JoinMessagesRecipientsController < ApplicationController
 
     respond_to do |format|
       if @join_messages_recipient.save
-        format.html { redirect_to @join_messages_recipient, notice: "Join messages recipient was successfully created." }
+        format.html { redirect_to @join_messages_recipient, success: "Join messages recipient was successfully created." }
         format.json { render :show, status: :created, location: @join_messages_recipient }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class JoinMessagesRecipientsController < ApplicationController
   def update
     respond_to do |format|
       if @join_messages_recipient.update(join_messages_recipient_params)
-        format.html { redirect_to @join_messages_recipient, notice: "Join messages recipient was successfully updated." }
+        format.html { redirect_to @join_messages_recipient, success: "Join messages recipient was successfully updated." }
         format.json { render :show, status: :ok, location: @join_messages_recipient }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class JoinMessagesRecipientsController < ApplicationController
   def destroy
     @join_messages_recipient.destroy
     respond_to do |format|
-      format.html { redirect_to join_messages_recipients_url, notice: "Join messages recipient was successfully destroyed." }
+      format.html { redirect_to join_messages_recipients_url, success: "Join messages recipient was successfully destroyed." }
       format.json { head :no_content }
     end
   end

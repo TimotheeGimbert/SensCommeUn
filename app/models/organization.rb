@@ -1,4 +1,6 @@
 class Organization < ApplicationRecord
+  attr_accessor :add_manager
+  
   validates :name, :creation_date, :email, :siren, :description, :naf_ape, :phone_number, presence: true
   validates :nickname, length: {maximum: 12}
   validates :phone_number, format: { with: /\A(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})\z/, message: "Numéro non valide en France" } 
@@ -8,12 +10,12 @@ class Organization < ApplicationRecord
 
   belongs_to :city
   belongs_to :status
-  belongs_to :activity_sector
+  belongs_to :activity_sector, optional: true
   has_many :legal_reps, dependent: :destroy
   has_many :managers, through: :legal_reps, source: :user
   has_many :external_stakeholders, dependent: :destroy
   has_many :users_stakeholders, through: :external_stakeholders, source: :user
-  has_many :activities
+  has_many :activities, dependent: :destroy
   has_many :stakeholder_requests, dependent: :destroy
   has_many :stakeholder_demands, through: :stakeholder_requests, source: :user
   has_one_attached :logo

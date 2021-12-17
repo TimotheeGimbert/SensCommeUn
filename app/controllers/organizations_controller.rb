@@ -6,9 +6,9 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations
   def index
-    sidebar_organizations()
     @organizations = Organization.all
-    @view_title = "Liste de toutes les organisations"
+    sidebar_organizations()
+    @view_title = "Organisations"
     case params[:selected]
       when "organizations_participation"
         # Gets organizations where the current user is a stakeholder, then renders the appropriate partial
@@ -30,6 +30,7 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/new
   def new
+    @users = User.all
     @organization = Organization.new
   end
 
@@ -40,10 +41,12 @@ class OrganizationsController < ApplicationController
   # POST /organizations
   def create
     @organization = Organization.new(organization_params)
-
+    legal_rep_associated = organization_params[:add_manager]
+    organization_params.delete('add_manager')
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to @organization, notice: "Organization was successfully created." }
+        LegalRep.create(organization: @organization, user: User.find_by(id: legal_rep_associated.to_i))
+        format.html { redirect_to @organization, success: "Organization was successfully created." }
         format.json { render :show, status: :created, location: @organization }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,7 +62,7 @@ class OrganizationsController < ApplicationController
     end
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to @organization , notice: "Organization was successfully updated." }
+        format.html { redirect_to @organization , success: "Organization was successfully updated." }
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -72,7 +75,7 @@ class OrganizationsController < ApplicationController
   def destroy
     @organization.destroy
     respond_to do |format|
-      format.html { redirect_to organizations_url, notice: "Organization was successfully destroyed." }
+      format.html { redirect_to organizations_url, success: "Organization was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -90,14 +93,11 @@ class OrganizationsController < ApplicationController
 
     def has_legal_rep_organization_rights?
       redirect_back fallback_location: root_path unless Organization.find_by(id: params[:id]).managers.include?(current_user)
-      puts "*" * 50
-      puts Organization.find_by(id: session[:organization_managed_id]).managers.include?(current_user)
-      puts "*" * 50
     end
 
     # Only allow a list of trusted parameters through.
     def organization_params
-      params.require(:organization).permit(:name, :nickname, :creation_date, :address, :address_complement, :zip_code, :city_id, :email, :phone_number, :status_id, :siren, :description, :activity_sector_id, :naf_ape, :logo_url, :website_url, :logo)
+      params.require(:organization).permit(:name, :nickname, :creation_date, :address, :address_complement, :zip_code, :city_id, :email, :phone_number, :status_id, :siren, :description, :activity_sector_id, :naf_ape, :logo_url, :website_url, :logo, :add_manager)
     end
     def sidebar_organizations()
       if params[:search_by]

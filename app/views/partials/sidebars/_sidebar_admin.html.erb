@@ -1,24 +1,44 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-center">
   <h3><%=link_to "CONSOLE ADMINISTRATEUR", "#", class:"mb-3 text-warning text-decoration-none"%></h3>
-
-  <hr>
   <div class="d-flex flex-column">
     <ul class="nav nav-pills flex-column mb-auto">
+        <h4 class="text-info text-decoration-none mt-3">Communication</h4>
+        <hr class="mt-2">
         <li class="nav-item">
-          <%= link_to "Gestions des Utilisateurs", profiles_path, class:"nav-link sidebar-item" %>
+          <%= link_to "Messagerie interne", private_messages_path, class:"nav-link sidebar-item" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Gestions des Organisations", organizations_path, class:"nav-link sidebar-item" %>
+          <%= link_to "Messages des visiteurs", visitor_messages_path, class:"nav-link sidebar-item" %>
         </li>
+        <h4 class="text-info text-decoration-none mt-4">Utilisateurs</h4>
+        <hr class="mt-2">
         <li class="nav-item">
-          <%= link_to "Création d'une Organisation", new_organization_path, class:"nav-link sidebar-item" %>
+          <%= link_to "Liste des utilisateurs", profiles_path, class:"nav-link sidebar-item" %>
         </li>
+        <br>
+        <h4 class="text-info text-decoration-none  mt-4">Organisations</h4>
+        <hr class="mt-2">
         <li class="nav-item">
-          <%= link_to "Messagerie", private_messages_path, class:"nav-link sidebar-item" %>
+          <%= link_to "Liste", organizations_path, class:"nav-link sidebar-item" %>
         </li>
+        <br>
+        <li class="nav-item">
+          <%= link_to "Création", new_organization_path, class:"nav-link sidebar-item" %>
+        </li>
+        <br>
+        <br>
+        <h4 class="text-info text-decoration-none  mt-4">Gestion des listes</h4>
+        <hr class="mt-2">
+        <li class="nav-item">
+          <%= link_to "Secteurs d'activité", activity_sectors_path, class:"nav-link sidebar-item" %>
+        </li>
+        <br>
+        <li class="nav-item">
+          <%= link_to "Statuts", statuses_path, class:"nav-link sidebar-item" %>
+        </li>
+        <br>
     </ul>
   </div>
-  <hr>
 
-  
+
 </div>

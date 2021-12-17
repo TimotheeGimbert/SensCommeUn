@@ -15,8 +15,8 @@
         <%if external_stakeholder.user%>
           <td><%= external_stakeholder.name %></td>
           <td><%= external_stakeholder.user.email %></td>
-          <%if external_stakeholder.user.profile %>
-            <td><%= external_stakeholder.user.profile.first_name + " " + external_stakeholder.user.profile.last_name%></td>
+          <%if external_stakeholder.user.profile && external_stakeholder.user.profile.first_name && external_stakeholder.user.profile.last_name %>
+              <td><%= external_stakeholder.user.profile.first_name + " " + external_stakeholder.user.profile.last_name%></td>
           <%else%>
             <td>Profil non renseigné</td>
           <%end%>
