@@ -98,3 +98,16 @@ Après comment travailler sur chacun des remote(exemple sur heroku-develop):
 - heroku run rails db:migrate --remote heroku-develop
 - heroku run rails db:seed --remote heroku-develop
 - ...autre commande 
+
+### COMPTES TEST PLATEFORME
+- utilisateur : 
+  - identifiants : user@user.com
+  - mdp : azerty
+
+- representant legal :
+  - id : legalrep@legalrep.com
+  - mdp : azerty
+
+- administrateur :
+  - id : admin@admin.com
+  - mdp : azerty
