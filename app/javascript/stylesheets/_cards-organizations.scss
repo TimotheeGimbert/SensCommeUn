@@ -1,0 +1,85 @@
+.card01 {
+  background-color: $txt-white--strong;
+  border-radius: $border-radius;
+  border: 2px solid $bg-dark;
+  padding: 1% 6%;
+  display: flex;
+  main {
+    flex: 100%;
+    gap: 1%;
+    display: flex;
+  }
+  &__logo {
+    flex: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    img {
+      width: 100%;
+    }
+  }
+  &__content {
+    flex: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    h1 {
+      font-size: 2.2em;
+      color: black;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: $txt-grey--strong; 
+    }
+    p {
+      font-size: 1.1em;
+      color: $txt-dark;
+    }
+  }
+}
+
+.hoverable {
+  &:hover {
+    background-color: $bg-dark;
+    h1 {
+      color: $txt-white--strong;
+    }
+    p {
+      color: $txt-grey--medium;
+    }   
+    h2 {
+      color: $txt-white--soft;
+    }
+  }
+}
+
+.card02 {
+  background-color: $txt-white--soft;
+  border-radius: $border-radius;
+  border: 2px solid $bg-dark;
+  padding: 1% 3%;
+  gap: 6%;
+  display: flex;  
+  &__infos {
+    flex: 100%;
+    gap: 3%;
+    display: flex;
+    flex-flow: row nowrap;
+    text-align: center;
+    .codes {
+      flex: 20%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      color: black;
+      h3, h2 {
+        font-size: 1.6em;
+        color: $txt-grey--strong;
+      }
+    }
+  }
+}

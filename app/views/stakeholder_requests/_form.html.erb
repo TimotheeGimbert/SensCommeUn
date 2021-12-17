@@ -1,9 +1,9 @@
-<%if current_user.managed_organizations.include?(Organization.find_by(id: params[:organization_managed].to_i))%>
+<%if current_user.managed_organizations.include?(Organization.find_by(id: session[:organization_managed_id].to_i))%>
   <div class="d-flex flex-row">
     <%= simple_form_for(stakeholder_request, wrapper: :inline_form, html: { class: "row row-cols-lg-auto g-3 align-items-center" }) do |f| %>
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-        <%= f.hidden_field :organization_id, value: params[:organization_managed]%>
+        <%= f.hidden_field :organization_id, value: session[:organization_managed_id]%>
         <%= f.hidden_field :validation, value: 1%>
         <%= f.input :stakeholder_category, collection: @external_stakeholders_category, priority: @external_stakeholders_category.last %>
         <%= button_tag type: 'submit', class: "btn btn-success btn-sm" do %>
@@ -24,7 +24,7 @@
       <%= simple_form_for(@stakeholder_request) do |f| %>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-        <%= f.hidden_field :organization_id, value: params[:organization_id]%>
+        <%= f.hidden_field :organization_id, value: @organization.id%>
         
         <div class="form-inputs">
           <%= f.input :message %>

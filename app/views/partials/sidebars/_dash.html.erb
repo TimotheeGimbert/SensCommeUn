@@ -1,0 +1,16 @@
+<hr class="mb-3">
+<h4><%=link_to "TABLEAU DE BORD", pages_news_path(), class:"text-warning text-decoration-none"%></h4>
+<hr class="mt-2">
+
+<ul class="nav nav-pills flex-column mb-auto">
+  <li class="nav-item"> 
+    <%= link_to "Mes participations", organizations_path(selected:"organizations_participation"), class:"nav-link sidebar-item" %>
+  </li>
+  <li class="nav-item"> 
+    <%= link_to "Les dernières actualités", pages_news_path(), class:"nav-link sidebar-item" %>
+  </li>
+  <li class="nav-item"> 
+    <%= link_to "Messagerie", private_messages_path(), class:"nav-link sidebar-item" %>
+  </li>
+</ul>
+

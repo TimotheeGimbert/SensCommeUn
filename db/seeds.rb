@@ -16,7 +16,7 @@ Admin.destroy_all
 puts "ALL ENTRIES IN THE DATABASE HAS BEEN DESTROYED"
 
 10.times do
-  user = User.create(email: Faker::Internet.unique.email, password: Faker::Lorem.characters(number: 10))
+  user = User.create(confirmation_token: "test", confirmed_at: DateTime.now, email: Faker::Internet.unique.email, password: Faker::Lorem.characters(number: 10))
   puts user
 end
 
@@ -26,7 +26,7 @@ end
 end
 
 User.all.each do |user|
-  profile = Profile.create(user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  profile = Profile.create( user: user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "00#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)} #{rand(1..9)}#{rand(1..9)}")
   puts profile
 end
 
@@ -46,7 +46,7 @@ PrivateMessage.all.each do |message|
   end
 end
 
-statuses = ['Association','fondation','Société anonyme','Société à responsabilité limitée','Société par actions simplifiée','Non-déterminé']
+statuses = ['Association','Fondation','Société anonyme','Société à responsabilité limitée','Société par actions simplifiée','Non-déterminé']
 statuses.each do |status|
   Status.create(name: status)
 end 
@@ -65,7 +65,7 @@ puts "Secteur d'activités créés"
     creation_date: Faker::Date.in_date_period, 
     address: Faker::Address.street_address, 
     address_complement: Faker::Address.secondary_address, 
-    zip_code: Faker::Address.zip_code, 
+    zip_code: "00000", 
     city: City.all.sample(1).first, 
     email: Faker::Internet.email, 
     phone_number: "06 25 47 13 09", 
@@ -73,13 +73,13 @@ puts "Secteur d'activités créés"
     siren: Faker::Company.french_siren_number, 
     description: Faker::Lorem.paragraph(sentence_count: 5), 
     activity_sector: ActivitySector.all.sample(1).first, 
-    naf_ape: "a completer", 
+    naf_ape: ["AZED5","AHUI8","MLOP5","KILI2","AOLI8","BFSI3"].sample(1).first ,
     logo_url: Faker::Company.logo, 
-    website_url: Faker::Internet.url
+    website_url: "https://motherfuckingwebsite.com/"
   )
   puts organization
 end 
-puts "30 organisations créées"
+
 
 10.times do 
   activity = Activity.create(
@@ -127,14 +127,14 @@ puts "Représentant légaux créés"
 # Seeds dedicated to application tests and demo dashboard
 ###############################################
 
-basic_user = User.create(email: "user@user.com", password: "azerty")
+basic_user = User.create(email: "user@user.com", password: "azerty",confirmation_token: "test", confirmed_at: DateTime.now)
   puts basic_user
-  profile = Profile.create(user: basic_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  profile = Profile.create(user: basic_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "0139402356")
   puts profile
 
-legrep_user = User.create(email: "legalrep@legalrep.com", password: "azerty")
+legrep_user = User.create(email: "legalrep@legalrep.com", password: "azerty" ,confirmation_token: "test", confirmed_at: DateTime.now)
   puts legrep_user
-  profile = Profile.create(user: legrep_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "REGEX !!!")
+  profile = Profile.create(user: legrep_user, city: City.all.sample(1).first, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: "0739402356")
   puts profile
 
 admin = Admin.create(email: "admin@admin.com", password: "azerty")
@@ -146,7 +146,7 @@ sens_commun = Organization.create(
   creation_date: DateTime.new(2021,12,11,23,11,0), 
   address: Faker::Address.street_address, 
   address_complement: Faker::Address.secondary_address, 
-  zip_code: Faker::Address.zip_code, 
+  zip_code: "75010", 
   city: City.all.sample(1).first, 
   email: "sens@sens.com", 
   phone_number: "01 11 11 11 11", 
@@ -154,7 +154,7 @@ sens_commun = Organization.create(
   siren: Faker::Company.french_siren_number, 
   description: "This company instance is serving a demonstration purpose, in order to test our app manually", 
   activity_sector: ActivitySector.all.sample(1).first, 
-  naf_ape: "11111111", 
+  naf_ape: "AAAA4", 
   logo_url: Faker::Company.logo, 
   website_url: Faker::Internet.url
 )
@@ -181,6 +181,12 @@ puts user_stakeholder
 legalrep = LegalRep.create(
   user: User.find_by(email: "legalrep@legalrep.com"), 
   organization: sens_commun
+)
+puts legalrep
+
+legalrep = LegalRep.create(
+  user: User.find_by(email: "legalrep@legalrep.com"), 
+  organization: Organization.first
 )
 puts legalrep
 

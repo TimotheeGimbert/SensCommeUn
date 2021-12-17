@@ -25,13 +25,13 @@ class StakeholderRequestsController < ApplicationController
   def create
     @stakeholder_request = StakeholderRequest.new(stakeholder_request_params)
     @stakeholder_request.user = current_user
-
+    @stakeholder_request.validation = 0
     respond_to do |format|
         if @stakeholder_request.save
-          format.html { redirect_to user_dashboards_organizations_path(organization_id: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully created." }
+          format.html { redirect_to organization_path(id:@stakeholder_request.organization.id ,organization_managed_id: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully created." }
           format.json { render :show, status: :created, location: @stakeholder_request }
         else
-          format.html { redirect_to user_dashboards_organizations_path(organization_id: @stakeholder_request.organization.id), status: :unprocessable_entity }
+          format.html { redirect_to organization_path(organization_managed_id: @stakeholder_request.organization.id), status: :unprocessable_entity }
           format.json { render json: @stakeholder_request.errors, status: :unprocessable_entity }
         end
     end
@@ -40,16 +40,19 @@ class StakeholderRequestsController < ApplicationController
   # PATCH/PUT /stakeholder_requests/1 or /stakeholder_requests/1.json
   def update
     stakeholder_category_id = stakeholder_request_params[:stakeholder_category].to_i
+    if stakeholder_category_id == 0
+      stakeholder_category_id = StakeholderCategory.find_by(name:"non déterminé").id
+    end
     stakeholder_request_params.delete("stakeholder_category") 
     respond_to do |format|
       if @stakeholder_request.update(stakeholder_request_params)
         
         ExternalStakeholder.create(user:@stakeholder_request.user, email: @stakeholder_request.user.email, stakeholder_category_id: stakeholder_category_id, organization: @stakeholder_request.organization)
 
-        format.html {redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully updated." }
+        format.html {redirect_to external_stakeholders_path(organization_managed_id: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully updated." }
         format.json { render :show, status: :ok, location: @stakeholder_request }
       else
-        format.html { redirect_to  user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: @stakeholder_request.organization.id), status: :unprocessable_entity }
+        format.html { redirect_to  external_stakeholders_path(organization_managed_id: @stakeholder_request.organization.id), status: :unprocessable_entity }
         format.json { render json: @stakeholder_request.errors, status: :unprocessable_entity }
       end
     end
@@ -60,7 +63,7 @@ class StakeholderRequestsController < ApplicationController
     organization_id = @stakeholder_request.organization.id
     @stakeholder_request.destroy
     respond_to do |format|
-      format.html { redirect_to user_dashboards_organizations_legalreps_path(clicked_link:"Parties prenantes", organization_managed: organization_id), notice: "Stakeholder request was successfully destroyed." }
+      format.html { redirect_to organization_path(organization_managed_id: @stakeholder_request.organization.id), notice: "Stakeholder request was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -73,7 +76,6 @@ class StakeholderRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stakeholder_request_params
-      puts "#"*100
       organization_id = params[:stakeholder_request][:organization_id]
       if current_user.managed_organizations.include?(Organization.find_by(id: organization_id.to_i))
         params.require(:stakeholder_request).permit(:validation, :organization_id,:stakeholder_category )

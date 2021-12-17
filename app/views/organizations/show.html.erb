@@ -1,84 +1,90 @@
-<p id="notice"><%= notice %></p>
+<h3 class="text-light text-start my-5 ms-5"> <%= @view_title %> </h3>
 
-<p>
-  <strong>Name:</strong>
-  <%= @organization.name %>
-</p>
+<div class="container-fluid px-5">
 
-<p>
-  <strong>Nickname:</strong>
-  <%= @organization.nickname %>
-</p>
+  <div class="row my-4">
+    <div class="card01">
+      <main>
+        <div class="card01__logo"> 
+          <%if @organization.logo.attached?%>
+            <%=image_tag(@organization.logo)%> 
+          <%elsif @organization.logo_url%>
+            <%=image_tag(@organization.logo_url)%>
+          <%end%>
+        </div>
+        <div class="card01__content">
+          <h1> <%=@organization.name%> </h1>
+          <h2> <%=@organization.status.name%> </h2> 
+          <p> <%=@organization.description%> </p> 
+        </div>
+      </main>
+    </div>
+  </div>
 
-<p>
-  <strong>Creation date:</strong>
-  <%= @organization.creation_date %>
-</p>
+  <div class="row my-4">
+    <section class="card02">
+      <div class="card02__infos">
+        <div class="codes">
+          <h3> Secteur d'activité </h3> 
+          <p> <%=@organization.activity_sector.name%> </p>
+        </div>
+        <div class="codes">
+          <h3> SIREN </h3> 
+          <p> <%=@organization.siren%> </p>
+        </div>
+        <div class="codes">
+          <h3> NAF/APE </h3>
+          <p> <%=@organization.naf_ape%> </p>
+        </div>
+        <div class="codes">
+          <h2> Dirigeants </h2>
+          <% @organization.managers.each do |manager|%>
+            <p> <%=manager.email%> </p>
+          <%end%>
+        </div>
+      </div>
+    </section>
+  </div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @organization.address %>
-</p>
+  <div class="row my-4">
+    <section class="card02">
+      <div class="card02__infos">
+        <div class="codes">
+          <h3>Site internet</h3> 
+          <%=link_to(@organization.website_url, class:"text-dark", target: "_blank") do %> 
+            <p><%=@organization.website_url%></p>
+          <%end%>
+        </div>
+        <div class="codes">
+          <h3>Téléphone</h3>
+          <p><%=@organization.phone_number%></p>
+        </div>
+        <div class="codes">
+          <h3>Adresse</h3>
+          <p><%=@organization.address%></p>
+        </div>
+        <div class="codes">
+          <h2>Email</h2> 
+          <p><%=@organization.email%></p>
+        </div>
+      </div>
+    </section>
+  </div>
 
-<p>
-  <strong>Address complement:</strong>
-  <%= @organization.address_complement %>
-</p>
-
-<p>
-  <strong>Zip code:</strong>
-  <%= @organization.zip_code %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @organization.city_id %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @organization.email %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @organization.phone_number %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @organization.status_id %>
-</p>
-
-<p>
-  <strong>Siren:</strong>
-  <%= @organization.siren %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @organization.description %>
-</p>
-
-<p>
-  <strong>Activity sector:</strong>
-  <%= @organization.activity_sector_id %>
-</p>
-
-<p>
-  <strong>Naf ape:</strong>
-  <%= @organization.naf_ape %>
-</p>
-
-<p>
-  <strong>Logo url:</strong>
-  <%= @organization.logo_url %>
-</p>
-
-<p>
-  <strong>Website url:</strong>
-  <%= @organization.website_url %>
-</p>
-
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
-<%= link_to 'Back', organizations_path %>
+  <div class="row text-center my-5">
+    <%if @organization.managers.include?(current_user)%>
+        <%=link_to "Éditer les informations", edit_organization_path(id: @organization.id), class: "btn btn-danger"%>
+      <%elsif @organization.users_stakeholders.include?(current_user)%>
+        <h3><span class="badge bg-success">Vous êtes partie prenante de cette organisation</span></h3>
+      <%elsif current_user.stakeholder_requests.where(organization: @organization).empty?%>
+        <% if params[:show] == "StakeholderRequest"%>
+          <%=render "stakeholder_requests/form"%>
+        <%else%>
+          <%=link_to "Demander à devenir partie prenante", organization_path(id: @organization.id, search_by: params[:search_by], categ_id: params[:categ_id],show: "StakeholderRequest"), class: "btn btn-info"%>
+        <%end%>
+      <%else %>
+        <h3><span class="badge bg-warning">Votre demande de participation est en attente de validation</span></h3>
+    <%end%>
+  </div>
+  
+</div>

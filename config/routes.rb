@@ -14,18 +14,19 @@ Rails.application.routes.draw do
   resources :profiles
   resources :cities
   root "pages#index"
+  get 'pages/index'
   get 'pages/presentation'
   get 'pages/contact'
+  get 'pages/news'
 
-  devise_for :user
+  devise_for :user, controllers: { registrations: 'user/registrations' }
   devise_for :admin
 
   devise_scope :user do
     authenticated :user do
       namespace :user do
+        root "dashboards#index"
         get 'dashboards/index', as: :dashboards_index
-        get 'dashboards/organizations', as: :dashboards_organizations
-        get 'dashboards/organizations_legalreps', as: :dashboards_organizations_legalreps
       end
     end
   end
@@ -33,11 +34,11 @@ Rails.application.routes.draw do
   devise_scope :admin do
     authenticated :admin do
       namespace :admin do
+        root "dashboards#index"
         get 'dashboards/index', as: :authenticated_root
       end
     end
   end
 
-  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

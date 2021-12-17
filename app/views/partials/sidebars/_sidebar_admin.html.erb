@@ -1,0 +1,24 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-center">
+  <h3><%=link_to "CONSOLE ADMINISTRATEUR", "#", class:"mb-3 text-warning text-decoration-none"%></h3>
+
+  <hr>
+  <div class="d-flex flex-column">
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <%= link_to "Gestions des Utilisateurs", profiles_path, class:"nav-link sidebar-item" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Gestions des Organisations", organizations_path, class:"nav-link sidebar-item" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Création d'une Organisation", new_organization_path, class:"nav-link sidebar-item" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Messagerie", private_messages_path, class:"nav-link sidebar-item" %>
+        </li>
+    </ul>
+  </div>
+  <hr>
+
+  
+</div>

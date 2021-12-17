@@ -1,0 +1,27 @@
+html {box-sizing: border-box;}
+*, *:before, *:after {box-sizing: inherit;}
+img {box-sizing: content-box;}
+
+.body {
+  height: 100vh;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.74);;
+}
+
+a { 
+  &:link {text-decoration: none !important;}
+  &:visited {text-decoration: none !important;}
+  &:active {text-decoration: none !important;}
+}
+
+.check-boxes-container {
+  width: auto;
+  height: 150px;
+  overflow: auto;
+  border: 4px inset #62c462;
+  padding: auto;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+}

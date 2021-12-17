@@ -1,25 +1,56 @@
-<h2 class="text-success text-center"> <%= @view_title %> </h2>
+<%unless request.path_info.to_s=="/pages/news"%>
+  <h3 class="text-light text-start my-5 ms-5"><%=@view_title%></h3>
+  <h4 class="text-info align-self-start">Messages reçus</h4>
+<%end%>
 
 <table class="table table-dark table-hover mt-4 mb-5">
   <thead>
     <tr>
-      <th>Object</th>
-      <th>Content</th>
-      <th>Author</th>
+      <th>Objet</th>
+      <th>Auteur</th>
+      <th>Date de réception</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @private_messages.each do |pm| %>
+    <% @received_messages.reverse_each do |pm| %>
       <tr>
         <td><%= pm.object %></td>
-        <td><%= pm.content %></td>
-        <td><%= pm.author_id %></td>
-        <td><%= link_to 'Show', pm %></td>
-        <td><%= link_to 'Edit', edit_private_message_path(pm) %></td>
-        <td><%= link_to 'Destroy', pm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= pm.author.email %></td>
+        <td><%= format_date_with_hour(pm.created_at) %></td>
+        <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<% if @sent_messages%>
+
+  <h3 class="text-info align-self-start"> Messages envoyés</h3>
+
+  <table class="table table-dark table-hover mt-4 mb-5">
+    <thead>
+      <tr>
+        <th>Objet</th>
+        <th>Auteur</th>
+        <th>Date de réception</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @sent_messages.reverse_each do |pm| %>
+        <tr>
+          <td><%= pm.object %></td>
+          <td><%= pm.author.email %></td>
+          <td><%= format_date_with_hour(pm.created_at) %></td>
+          <td><%= link_to ("<i class='far fa-eye'></i>").html_safe, private_message_path(pm.id), class: "btn btn-success btn-sm" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to "Nouveau Message", new_private_message_path(), class: "btn btn-success px-5 align-self-center" %>
+
+<%end%>
