@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Statuses</h1>
+<h1>Statuts <%= link_to 'Ajouter', new_status_path, class:"btn btn-success btn-sm" %></h1>
 
-<table>
+<table class="table table-dark table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Status', new_status_path %>
+
