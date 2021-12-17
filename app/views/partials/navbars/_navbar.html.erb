@@ -18,7 +18,12 @@
           </li>
         <% end %>
       </ul>
-
+      <% flash.each do |type, msg| %>
+        <div class="alert alert-<%=type%>">
+          <%= msg %>
+        </div>
+      <% end %>
+      
       <% if user_signed_in? || admin_signed_in? %>
         <div class="d-flex">
           <span class="nav-item">
