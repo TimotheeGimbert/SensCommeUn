@@ -16,14 +16,6 @@
 
     <div class="container-fluid">
 
-      <div class="row text-end">
-        <% flash.each do |type, msg| %>
-          <div class="alert alert-<%=type%>">
-              <%= msg %>
-          </div>
-        <% end %>
-      </div>
-
       <div class="row">
         <%unless request.path_info.to_s=="/" || (request.path_info.to_s.include? "/pages/index") || request.path_info.to_s=="/pages/contact"%>
           <%if (user_signed_in? || admin_signed_in?) %>

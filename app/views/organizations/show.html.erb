@@ -73,14 +73,18 @@
 
   <div class="row text-center my-5">
     <%if @organization.managers.include?(current_user)%>
-      <%=link_to "Editer les informations de l'organisaiton", edit_organization_path(id: @organization.id, clicked_link: "Éditer les informations"), class: "btn btn-warning"%>
-    <%elsif @organization.users_stakeholders.include?(current_user)%>
-      <h3><span class="badge bg-success">Vous êtes partie prenante de cette organisation</span></h3>
-    <%elsif current_user.stakeholder_requests.where(organization: @organization).empty?%>
-      <%=link_to "Demander à devenir partie prenante de cette organisation", organization_path(id: @organization.id, search_by: params[:search_by], categ_id: params[:categ_id], show: "StakeholderRequest"), class: "btn btn-outline-info"%>
-    <%else%>    
-      <h3><span class="badge bg-warning">Votre demande de participation est en attente de validation</span></h3>
+        <%=link_to "Éditer les informations", edit_organization_path(id: @organization.id), class: "btn btn-danger"%>
+      <%elsif @organization.users_stakeholders.include?(current_user)%>
+        <h3><span class="badge bg-success">Vous êtes partie prenante de cette organisation</span></h3>
+      <%elsif current_user.stakeholder_requests.where(organization: @organization).empty?%>
+        <% if params[:show] == "StakeholderRequest"%>
+          <%=render "stakeholder_requests/form"%>
+        <%else%>
+          <%=link_to "Demander à devenir partie prenante", organization_path(id: @organization.id, search_by: params[:search_by], categ_id: params[:categ_id],show: "StakeholderRequest"), class: "btn btn-info"%>
+        <%end%>
+      <%else %>
+        <h3><span class="badge bg-warning">Votre demande de participation est en attente de validation</span></h3>
     <%end%>
   </div>
-
+  
 </div>
