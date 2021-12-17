@@ -27,7 +27,7 @@ class ActivitySectorsController < ApplicationController
 
     respond_to do |format|
       if @activity_sector.save
-        format.html { redirect_to @activity_sector, success: "Activity sector was successfully created." }
+        format.html { redirect_to activity_sectors_path, success: "Activity sector was successfully created." }
         format.json { render :show, status: :created, location: @activity_sector }
       else
         format.html { render :new, status: :unprocessable_entity }
