@@ -20,7 +20,6 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   def show
     sidebar_organizations()
-    @view_title = "Organisation sélectionnée"
     if params[:show] && params[:show] == "StakeholderRequest"
       @stakeholder_request = StakeholderRequest.new()
     end
