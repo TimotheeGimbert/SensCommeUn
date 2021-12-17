@@ -1,5 +1,9 @@
 <h3 class="text-light text-start my-5 ms-5"> <%= @view_title %> </h3>
-
+<%if admin_signed_in?%>
+  <div class="row align-items-center">
+    <%=link_to "destroy", organization_path(id: @organization.id), method: :delete, class:"btn btn-danger"%>
+  </div>
+<%end%>
 <div class="container-fluid px-5">
 
   <div class="row my-4">
