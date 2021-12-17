@@ -43,7 +43,7 @@ class OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to @organization, notice: "Organization was successfully created." }
+        format.html { redirect_to @organization, success: "Organization was successfully created." }
         format.json { render :show, status: :created, location: @organization }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,7 +59,7 @@ class OrganizationsController < ApplicationController
     end
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to @organization , notice: "Organization was successfully updated." }
+        format.html { redirect_to @organization , success: "Organization was successfully updated." }
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -72,7 +72,7 @@ class OrganizationsController < ApplicationController
   def destroy
     @organization.destroy
     respond_to do |format|
-      format.html { redirect_to organizations_url, notice: "Organization was successfully destroyed." }
+      format.html { redirect_to organizations_url, success: "Organization was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -90,9 +90,6 @@ class OrganizationsController < ApplicationController
 
     def has_legal_rep_organization_rights?
       redirect_back fallback_location: root_path unless Organization.find_by(id: params[:id]).managers.include?(current_user)
-      puts "*" * 50
-      puts Organization.find_by(id: session[:organization_managed_id]).managers.include?(current_user)
-      puts "*" * 50
     end
 
     # Only allow a list of trusted parameters through.

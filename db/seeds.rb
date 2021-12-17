@@ -20,7 +20,7 @@ puts "ALL ENTRIES IN THE DATABASE HAS BEEN DESTROYED"
   puts user
 end
 
-['Paris', 'Marseille', 'Bordeaux', 'Nice', 'Montréal'].each do |city| 
+['non déterminé','Paris', 'Marseille', 'Bordeaux', 'Nice', 'Montréal'].each do |city| 
   city = City.create(name: city)
   puts city
 end

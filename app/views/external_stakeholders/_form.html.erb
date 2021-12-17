@@ -5,7 +5,7 @@
 
   <div class="form-inputs">
     <%= f.hidden_field :organization_id, :value => session[:organization_managed_id] %>
-    <%= f.input :name %>
+    <%= f.input :name, label: "Nom" %>
     <%= f.input :email %>
     <%= f.association :stakeholder_category %>
   </div>
