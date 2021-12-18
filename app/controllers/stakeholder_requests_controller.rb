@@ -31,7 +31,7 @@ class StakeholderRequestsController < ApplicationController
           format.html { redirect_to organization_path(id:@stakeholder_request.organization.id ,organization_managed_id: @stakeholder_request.organization.id), success: "Stakeholder request was successfully created." }
           format.json { render :show, status: :created, location: @stakeholder_request }
         else
-          format.html { redirect_to organization_path(organization_managed_id: @stakeholder_request.organization.id), status: :unprocessable_entity }
+          format.html { redirect_to organization_path(id: @stakeholder_request.organization.id , organization_managed_id: @stakeholder_request.organization.id), danger: "Stakeholder request was denied."}
           format.json { render json: @stakeholder_request.errors, status: :unprocessable_entity }
         end
     end
