@@ -1,10 +1,12 @@
 <div class="container bg-overdark text-center mt-5 py-5">
   <% if request.path_info.to_s.include?('user') %>
     <h2 class="text-info">Connexion</h2>
+    <p class="text-warning mt-5">>>> Testez l'application avec user@user.com (mot de passe : azerty)</p>
   <% else %>
     <h2 class="text-danger">Administration</h2>
+    <p class="text-warning mt-5">>>> Testez l'application avec admin@admin.com (mot de passe : azerty)</p>
   <% end %>
-  <div class="row mt-5">
+  <div class="row mt-2">
 
     <div class="col-3 mx-auto">
 
