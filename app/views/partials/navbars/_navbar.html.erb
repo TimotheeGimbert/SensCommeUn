@@ -9,12 +9,12 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% if user_signed_in? %>
           <li class="nav-item my-auto">
-            <%= link_to "Découvrir les organisations", organizations_path(search_by: "all"), class:"btn btn-outline-light text-info mx-3" %>
+            <%= link_to "Découvrir les organisations", organizations_path(search_by: "all"), class:"btn btn-outline-success text-light mx-3" %>
           </li>
         <% end %>
         <% unless admin_signed_in? %>
           <li class="nav-item my-auto">
-            <%= link_to "Infos & Contact", pages_contact_path, class: "btn btn-outline-light text-secondary mx-3" %>
+            <%= link_to "Infos & Contact", pages_contact_path, class: "btn btn-outline-secondary text-light mx-3" %>
           </li>
         <% end %>
       </ul>
@@ -47,7 +47,7 @@
         <%# </div> %>
         <div class="d-flex">
           <span class="nav-item">
-            <%= link_to "Connexion", new_user_session_path, class: "btn btn-outline-info mx-3" %> 
+            <%= link_to "Connexion", new_user_session_path, class: "btn btn-outline-warning mx-3" %> 
           </span>
         </div>
       <% end %>
