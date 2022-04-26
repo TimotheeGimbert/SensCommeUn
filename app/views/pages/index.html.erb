@@ -4,32 +4,34 @@
 <div class="container-fluid p-0">
   <div class="row hero">
     <div class="col-8 call bg-overdark text-center m-auto p-5">
-      <h1 class="my-3">Prenez part à l'économie sociale et solidaire !</h1>
-      <p class="text-light mt-4">Vous êtes chez SENS·COMMUN</p>
-      <%= link_to "Découvrir", pages_index_path(anchor: "index-presentation"), class: "btn btn-outline-info mt-4" %>
+      <p class="text-light mt-5">Vous êtes chez SENS·COMMUN</p>
+      <h1 class="my-3">Réseau de l'économie sociale et solidaire</h1>
+      <%= link_to "Découvrir", pages_index_path(anchor: "index-presentation"), class: "btn btn-outline-info my-3" %>
     </div>
   </div>
 </div>
 
 
-<div id="index-presentation" class="px-4 py-5 my-5 text-center">
-  <div class="px-4 py-5 my-5 text-center rounded">
+<div id="index-presentation" class="px-4 text-center">
+  <div class="px-4 py-5 my-5 text-center">
     <h1 class="display-5 fw-bold ">Qui sommes nous ?</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="mb-4"> Sens•Commun est un outil CRM destine aux acteurs de l'Economie Sociale et Solidaire. On centralise et uniformise differents outils en un seul tout en restant adaptable et modulable selon les besoins de chacun. Centralisez les informations (documents,statuts,actualites,messages) de vos organisations et donnez en l'acces a votre communaute. </p>
+    <div class="col-lg-7 mx-auto mt-4">
+      <p> Sens•Commun est un outil CRM destiné aux acteurs de l'Economie Sociale et Solidaire. </p>
+      <p> Notre application, modulable selon vos besoins, centralise et uniformise differents outils pour vous faciliter la vie. </p>
+      <p> Vous pourrez gérer facilement les informations de vos organisations et en personnaliser l'accès par votre communauté. </p>
     </div>
   </div>
   
 
   <div class="container card03 px-3 py-5 mb-5">
-    <h1 class="display-5 fw-bold text-black-50">Parties Prenantes</h1>
+    <h1 class="display-5 fw-bold text-black-50 mt-3">Vous êtes participant? </h1>
     <div class="row card03__bloc g-4 py-5 row-cols-1 row-cols-lg-3">
-      <div class="col my-5">
+      <div class="col mt-5">
         <h2 class="display-7 text-black-50">Devenez partie prenante</h2>
         <i class="fas fa-handshake fa-7x py-4"></i>
         <p class="text-black-50">Effectuez des demandes de participations auprès de vos organisations favorites.</p>
       </div>
-      <div class="col my-5">
+      <div class="col mt-5">
         <h2 class="display-7 text-black-50">Accédez aux données</h2>
         <i class="fas fa-database fa-7x py-4"></i>
         <p class="text-black-50">Accédez aux informations des organisations auxquelles vous participez.</p>
@@ -39,33 +41,34 @@
 
 
   <div class="container card03 px-4 py-5">
-    <h1 class="display-5 fw-bold text-black-50">Dirigeants d'Organisations </h1>
+    <h1 class="display-5 fw-bold text-black-50 mt-3">Vous êtes dirigeant? </h1>
     <div class="row card03__bloc g-4 py-5 row-cols-1 row-cols-lg-3">
-      <div class="col my-5">
+      <div class="col mt-5">
         <h2 class="display-7 text-black-50">Gérez vos organisations</h2>
         <i class="fas fa-columns fa-7x py-4"></i>
         <p class="text-black-50">Un tableau de bord vous permet de centraliser les données de vos organisations.</p>
       </div>
-      <div class="col my-5">
+      <div class="col mt-5">
         <h2 class="display-7 text-black-50">Gagnez en visibilité</h2> 
         <i class="far fa-eye fa-7x py-4"></i>
-        <p class="text-black-50">Sens•Commun vous permet de partager des informations sur votre organisation. </p>
+        <p class="text-black-50">Partager les informations pertinentes de votre organisation comme vous le souhaitez. </p>
       </div>
-      <div class="col my-5">
+      <div class="col mt-5">
         <h2 class="display-7 text-black-50">Communiquez simplement </h2>
         <i class="fas fa-key fa-7x py-4"></i>
-        <p class="text-black-50">Donnez l'accès a vos données aux parties prenantes de vos organisations.</p>
+        <p class="text-black-50">Définissez l'accès de vos données aux parties prenantes de vos organisations.</p>
       </div>
     </div>
   </div>
   
-  <div class="py-5">
-    <h1 class="display-5 fw-bold text-white"> Rejoignez nous</h1>
+  <div class="py-5 mt-5">
+    <h1 class="display-5 fw-bold text-white mb-5"> Rejoignez nous !</h1>
     <div class="col-lg-6 mx-auto">
-      <p class="fs-5 mb-4">Vous avez encore des doutes sur l'utilité de notre application ? contactez-nous afin d'en savoir plus sur notre fonctionnement et les services proposés. Sinon pensez a vous inscrire, c'est gratuit !! </p>
+      <p class="fs-5 mb-2">Contactez-nous afin d'en savoir plus sur le fonctionnement de nos les services.</p>
+      <p class="fs-5 mb-4"> Et n'hésitez pas à tester notre application avec le compte démo, c'est simple et gratuit ! </p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <%= link_to "Contactez nous", pages_contact_path, class: "btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" %>
-        <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-outline-light btn-lg px-4" %>
+        <%= link_to "Connectez-vous", new_user_session_path, class: "btn btn-outline-light btn-lg px-4" %>
       </div>
     </div>
   </div>
